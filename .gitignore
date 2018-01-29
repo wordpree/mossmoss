@@ -1,0 +1,57 @@
+#ignore everything under the wp directory except wp-content folder 
+#and wp-config.php file
+/*
+!wp-content/
+!wp-config.php
+
+#ignore everything in wp-content folder other than plugins,themes and workflow
+wp-content/*
+!wp-content/plugins
+!wp-content/themes
+!wp-content/workflow
+
+#ignore node modules and cash files in workflow
+wp-content/workflow/node_modules 
+wp-content/workflow/.sass-cache
+
+#ignore specific themes
+wp-content/themes/twenty*
+
+#tracking gitignore and readme files
+!.gitignore
+!README.md
+
+#ignore os system files
+ethumbs.db
+.DS_Store
+Thumbs.db
+
+#ignore sublime files
+*.sublime-project
+*.sublime-workspace
+*.tmlanguage.cache
+*.tmPreferences.cache
+*.stTheme.cache
+
+# ignore log files and databases
+*.log
+*.sql
+*.sqlite
+
+# ignore compiled files
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+# ignore packaged files
+*.7z
+*.dmg
+*.gz
+*.iso
+*.jar
+*.rar
+*.tar
+*.zip

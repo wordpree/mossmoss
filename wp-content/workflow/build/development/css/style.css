@@ -1,0 +1,12 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+html h1, body h1 {
+  font-size: 2em;
+  color: #321278;
+  border: 5px solid #A12813;
+}
+
+/*# sourceMappingURL=style.css.map */
