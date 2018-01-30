@@ -4,15 +4,14 @@
 !wp-content/
 !wp-config.php
 
-#ignore everything in wp-content folder other than plugins,themes and workflow
+#ignore everything in wp-content folder other than plugins,themes
 wp-content/*
 !wp-content/plugins
 !wp-content/themes
-!wp-content/workflow
 
 #ignore node modules and cash files in workflow
-wp-content/workflow/node_modules 
-wp-content/workflow/.sass-cache
+wp-content/themes/workflow/node_modules 
+wp-content/themes/workflow/.sass-cache
 
 #ignore specific themes
 wp-content/themes/twenty*
