@@ -19,11 +19,11 @@ function storefront_child_scripts_enqueue(){
 	wp_enqueue_style('storefront-child-style',get_stylesheet_directory_uri().'/style.css',array('storefront-style'),'v8.04');
 	wp_enqueue_style('fancyslider-style',get_stylesheet_directory_uri().'/assets/fancyslider.css',array(),'v9.19');
 	
-	wp_enqueue_script('storefront-child-jquery',get_stylesheet_directory_uri().'/assets/jquery-3.2.1.min.js');
+	wp_enqueue_script('storefront-child-jquery',get_stylesheet_directory_uri().'/assets/js/jquery-3.2.1.min.js');
 	wp_enqueue_script('fancySlider',
-					  get_stylesheet_directory_uri().'/assets/jquery.fancyslider.js',array('jquery'),'v0907',false);
+					  get_stylesheet_directory_uri().'/assets/js/jquery.fancyslider.js',array('jquery'),'v0907',false);
 	
-	wp_enqueue_script('storefront-child-frontpage',get_stylesheet_directory_uri().'/assets/storefront-child-frontpage.js',array('jquery'),'v0908',true);
+	wp_enqueue_script('storefront-child-frontpage',get_stylesheet_directory_uri().'/assets/js/storefront-child-frontpage.js',array('jquery'),'v0908',true);
 }
 add_action('wp_enqueue_scripts','storefront_child_scripts_enqueue',21);
 
@@ -119,7 +119,7 @@ function storefront_child_customizer_live_preview()
 {
 	wp_enqueue_script( 
 		  'storefront-child-themecustomizer',			//Give the script an ID
-		  get_stylesheet_directory_uri().'/customizer/storefront-child-customizer.js',//Point to file
+		  get_stylesheet_directory_uri().'/assets/js/storefront-child-customizer.js',//Point to file
 		  array( 'jquery','customize-preview' ),	//Define dependencies
 		  'v0925',						//Define a version (optional) 
 		  true						//Put script in footer?

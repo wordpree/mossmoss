@@ -5,5 +5,5 @@ Instead, it is loaded in addition to the parent’s functions.php.
 require 'inc/storefront-child-functions.php';
 require 'inc/storefront-child-template-hooks.php';
 require 'inc/storefront-child-template-functions.php';
-require 'customizer/class-storefront-child-cusomizer.php';
+require 'inc/class-storefront-child-customizer.php';
 //require 'inc/woocommerce/class-storefront-woocommerce.php';
