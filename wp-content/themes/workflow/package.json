@@ -1,7 +1,7 @@
 {
   "name": "workflow",
   "version": "0.0.1",
-  "description": "gulp workflow for online store of yee",
+  "description": "gulp workflow for storefront child theme developing",
   "main": "index.php",
   "dependencies": {},
   "devDependencies": {
@@ -12,7 +12,6 @@
     "gulp-jslint": "^1.0.10",
     "gulp-livereload": "^3.8.1",
     "gulp-rename": "^1.2.2",
-    "gulp-sass": "^3.1.0",
     "gulp-sourcemaps": "^2.6.2",
     "gulp-uglify": "^3.0.0",
     "gulp-util": "^3.0.8"
@@ -22,7 +21,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/wordpree/gulp-workflow-yee.git"
+    "url": "git+https://github.com/wordpree/mossmoss.git"
   },
   "keywords": [
     "wordpress",
@@ -33,7 +32,7 @@
   "author": "Hai",
   "license": "GPL-2.0+",
   "bugs": {
-    "url": "https://github.com/wordpree/gulp-workflow-yee/issues"
+    "url": "https://github.com/wordpree/mossmoss/issues"
   },
-  "homepage": "https://github.com/wordpree/gulp-workflow-yee#readme"
+  "homepage": "https://github.com/wordpree/mossmoss#readme"
 }
