@@ -106,7 +106,7 @@ gulp.task('build',['build:css','build:js']);
 
 /*delete unwanted folders*/
 gulp.task('delete',function(){
-	return del.sync([src,dev,dist]);
+	return gulpDel.sync([path.src,path.dev,path.dist],{force:true});
 });
 
 
