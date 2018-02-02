@@ -1,0 +1,22 @@
+html, body {
+  margin: 0;
+  padding: 0;
+  color: #fff;
+}
+
+html h1, body h1 {
+  font-size: 2em;
+  color: red;
+  border: 4px solid purple;
+}
+
+html h2, body h2 {
+  -webkit-transition: 1s all;
+  transition: 1s all;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  background-position: cover;
+}
+
+/*# sourceMappingURL=maps/style.css.map */

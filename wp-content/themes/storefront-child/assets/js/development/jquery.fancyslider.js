@@ -13,12 +13,12 @@
 *<html structural require>
 *<div class="fancy-panel-wrapper customized class">
    <div class="fancy-panel">
-      <div class="slider-bg-img"/>
-	  <div class="slider-caption"/>
+		<div class="slider-bg-img"/>
+		<div class="slider-caption"/>
    </div>
    <div class="fancy-panel customized class">
-      <div class="slider-bg-img"/>
-	  <div class="slider-caption"/>
+   		<div class="slider-bg-img"/>
+   		<div class="slider-caption"/>
    </div>
 *</div>
 *
