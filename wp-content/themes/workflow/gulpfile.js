@@ -26,26 +26,33 @@ var path ={
 var dir = (process.env.NODE_ENV=='development') ? 'development' : 'production';
 
 /* loading plugins */
-var gulp         = require('gulp'),
-    gulpIf       = require('gulp-if'),
-    gUtil        = require('gulp-util'),
-    gulpNotify   = require('gulp-notify'),
-    sourcemaps   = require('gulp-sourcemaps'),
-    gulpSass     = require('gulp-sass'),
-    gulpCleanCss = require('gulp-clean-css'),
-    gulpJshint   = require('gulp-jshint'),
-    gulpUglify   = require('gulp-uglify'),
-    gulpCat      = require('gulp-concat'),
-    gulpPrefix   = require('autoprefixer'),
-    gulpPcss     = require('gulp-postcss'),
-    gulpDel      = require('del'),
-    gulpRename   = require('gulp-rename');
+var gulp            = require('gulp'),
+    gulpIf          = require('gulp-if'),
+    gUtil           = require('gulp-util'),
+    gulpNotify      = require('gulp-notify'),
+    sourcemaps      = require('gulp-sourcemaps'),
+    gulpSass        = require('gulp-sass'),
+    gulpCleanCss    = require('gulp-clean-css'),
+    gulpJshint      = require('gulp-jshint'),
+    gulpUglify      = require('gulp-uglify'),
+    gulpCat         = require('gulp-concat'),
+    gulpPrefix      = require('autoprefixer'),
+    gulpPcss        = require('gulp-postcss'),
+    gulpDel         = require('del'),
+    gulpBrowserSync = require('browser-sync').create(),
+    gulpRunSeq      = require('run-sequence'),
+    gulpRename      = require('gulp-rename');
     
 /*
 * gulp tasks: 
 */
 
-/*source pipe into development/debug version*/
+gulp.task('browser-sync',function(){
+      gulpBrowserSync.init({
+      	proxy:"localhost:8888"
+      });
+});
+
 gulp.task('sass:dev',function(){
 	return gulp.src(path.styleSrc + 'style.scss')
 	       .pipe(sourcemaps.init())
@@ -54,7 +61,8 @@ gulp.task('sass:dev',function(){
 	       }).on('error',gulpSass.logError))
 	       .pipe(gulpPcss([gulpPrefix('last 2 versions','> 2%')]))
 	       .pipe(sourcemaps.write('./maps'))
-	       .pipe(gulp.dest(path.styleDev));
+	       .pipe(gulp.dest(path.styleDev))
+	       .pipe(gulpBrowserSync.stream());
 });
 
 gulp.task('jshint:dev',function(){
@@ -66,10 +74,11 @@ gulp.task('jshint:dev',function(){
 
 gulp.task('js:dev',function(){
 	return gulp.src(path.jsSrc +'**.js')
-	   .pipe(gulp.dest(path.jsDev));
+	   .pipe(gulp.dest(path.jsDev))
+	   .pipe(gulpBrowserSync.stream());;
 });
 
-gulp.task('dev',['sass:dev','jshint:dev','js:dev']);
+gulp.task('dev',gulpRunSeq('sass:dev','jshint:dev','js:dev'));
 
 /*dev pipe into production/release version*/
 gulp.task('css:dist',function(){
@@ -86,11 +95,9 @@ gulp.task('js:dist',function(){
 	    .pipe(gulp.dest(path.jsDist));
 });
 
-gulp.task('dist',['css:dist','js:dist,']);
+gulp.task('dist',['css:dist','js:dist']);
 
-/*copy assets to reference directory depending on either development or production environment 
- *npm run gulp-dev/gulp-prod @see package.json:srcipt
- */
+/*copy assets to reference directory depending on either development or production environment */
 gulp.task('build:css',['css:dist'],function(){
 	return gulp.src(path.css + dir + '/**.css')
 	    .pipe(gulp.dest(path.css));
@@ -109,6 +116,9 @@ gulp.task('delete',function(){
 	return gulpDel.sync([path.src,path.dev,path.dist],{force:true});
 });
 
+gulp.task('watch',['browser-sync'],function(){
+    gulp.watch(path.styleSrc + '*.scss',gulpRunSeq('sass:dev','build:css'));
+    gulp.watch(path.jsSrc + '*.js',gulpRunSeq('jshint:dev','js:dev','build:js'));
+});
 
-
-gulp.task('default',['dev','dist']);
+gulp.task('default',gulpRunSeq('dev','dist','build','watch'));
