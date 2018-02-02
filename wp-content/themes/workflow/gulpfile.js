@@ -22,11 +22,10 @@ var path ={
     js   : projectRoot + 'assets/js/'
 };
 
-var DEV_DIST  = process.env.NODE_ENV;
-var dir = DEV_DIST ? 'production' : 'development';
-/*
-* loading plugins
-*/
+/*environment variable*/
+var dir = (process.env.NODE_ENV=='development') ? 'development' : 'production';
+
+/* loading plugins */
 var gulp         = require('gulp'),
     gulpIf       = require('gulp-if'),
     gUtil        = require('gulp-util'),
@@ -90,12 +89,12 @@ gulp.task('js:dist',function(){
 gulp.task('dist',['css:dist','js:dist,']);
 
 /*copy assets to reference directory depending on either development or production environment*/
-gulp.task('build:css','css:dist',function(){
+gulp.task('build:css',['css:dist'],function(){
 	return gulp.src(path.css + dir + '/**.css')
 	    .pipe(gulp.dest(path.css));
 });
 
-gulp.task('build:js','js:dist',function(){
+gulp.task('build:js',['js:dist'],function(){
 	return gulp.src(path.js + dir + '/**.js')
 	    .pipe(gulp.dest(path.js));
 });
