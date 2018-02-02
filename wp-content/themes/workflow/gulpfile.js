@@ -16,7 +16,7 @@ var path ={
 
     dist      : projectRoot + 'assets/**/production/',
 	styleDist : projectRoot + 'assets/sass/production/',
-    jsDist    : projectRoot + 'assets/js/production/'.
+    jsDist    : projectRoot + 'assets/js/production/',
 
     css  : projectRoot + 'assets/sass/',
     js   : projectRoot + 'assets/js/'
@@ -88,7 +88,9 @@ gulp.task('js:dist',function(){
 
 gulp.task('dist',['css:dist','js:dist,']);
 
-/*copy assets to reference directory depending on either development or production environment*/
+/*copy assets to reference directory depending on either development or production environment 
+ *npm run gulp-dev/gulp-prod @see package.json:srcipt
+ */
 gulp.task('build:css',['css:dist'],function(){
 	return gulp.src(path.css + dir + '/**.css')
 	    .pipe(gulp.dest(path.css));
