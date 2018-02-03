@@ -16,4 +16,4 @@
 		} );
 	} );
 })(jQuery);
-//# sourceMappingURL=maps/storefront-child-customizer.js.map
+//# sourceMappingURL=../maps/storefront-child-customizer.js.map

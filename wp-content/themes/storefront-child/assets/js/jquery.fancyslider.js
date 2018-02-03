@@ -218,4 +218,4 @@
 	
 	
 }(jQuery));
-//# sourceMappingURL=maps/jquery.fancyslider.js.map
+//# sourceMappingURL=../maps/jquery.fancyslider.js.map
