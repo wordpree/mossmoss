@@ -19,7 +19,7 @@ function storefront_child_scripts_enqueue(){
 	wp_enqueue_style('storefront-child-style',get_stylesheet_directory_uri().'/style.css',array('storefront-style'),'v8.04');
 	wp_enqueue_style('fancyslider-style',get_stylesheet_directory_uri().'/assets/fancyslider.css',array(),'v9.19');
 	
-	wp_enqueue_script('storefront-child-jquery',get_stylesheet_directory_uri().'/assets/js/jquery-3.2.1.min.js');
+	wp_enqueue_script('storefront-child-jquery',get_stylesheet_directory_uri().'/dist/js/vendor/jquery-3.2.1.min.js');
 	wp_enqueue_script('fancySlider',
 					  get_stylesheet_directory_uri().'/assets/js/jquery.fancyslider.js',array('jquery'),'v0907',false);
 	

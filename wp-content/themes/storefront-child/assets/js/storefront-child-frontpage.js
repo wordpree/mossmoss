@@ -146,3 +146,4 @@ function recent_post_slider(){
 $('.newly-products-wrapper').fancySlider(args);
 
 }
+//# sourceMappingURL=maps/storefront-child-frontpage.js.map

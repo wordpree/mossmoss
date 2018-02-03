@@ -16,8 +16,8 @@ wp-content/themes/workflow/.sass-cache
 #ignore specific themes
 wp-content/themes/twenty*
 
-#ignore images in assets folder
-wp-content/themes/storefront-child/assets/img 
+#ignore maps folders under sass or js folders
+wp-content/themes/storefront-child/assets/**/maps/ 
 
 #tracking gitignore and readme files
 !.gitignore

@@ -6,8 +6,8 @@ var name        = 'storefront-child';
 var projectRoot = '../' + name + '/';
 
 var path ={
-	style: [projectRoot + 'dist/sass/*.*',projectRoot + 'assets/sass/',projectRoot + 'dist/sass/'],
-	js:    [projectRoot + 'dist/js/*.*',projectRoot + 'assets/js/',projectRoot + 'dist/js/']
+	style: [projectRoot + 'assets/sass/*.*',projectRoot + 'sources/sass/',projectRoot + 'assets/sass/'],
+	js:    [projectRoot + 'assets/js/*.*',projectRoot + 'sources/js/',projectRoot + 'assets/js/']
 };
 
 /*environment variable*/
@@ -57,11 +57,13 @@ gulp.task('sass',function(){
 
 gulp.task('js',function(){
 	return gulp.src(path.js[1]+'*.js')
+	       .pipe(sourcemaps.init())
 	       .pipe(gulpJshint())
 	       .pipe(gulpJshint.reporter('jshint-stylish',{ verbose: true }))
 	       .pipe(gulpJshint.reporter('fail'))
 	       .pipe(gulpIf(flag === 'production',gulpUglify()))
 	       .pipe(gulpIf(flag === 'production',gulpRename({suffix:'.min'})))
+	       .pipe(sourcemaps.write('./maps'))
 	       .pipe(gulp.dest(path.js[2]))
 	       .pipe(gulpBrowserSync.stream());
 });
