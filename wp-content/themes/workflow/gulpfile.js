@@ -1,82 +1,89 @@
 
-/*
-* project configuration :setting parth requirements 
-*/
-var name        = 'storefront-child';
-var projectRoot = '../' + name + '/';
-
-var path ={
-	style: [projectRoot + 'assets/sass/*.*',projectRoot + 'sources/sass/',projectRoot + 'assets/sass/'],
-	js:    [projectRoot + 'assets/js/*.*',projectRoot + 'sources/js/',projectRoot + 'assets/js/']
-};
 
 /*environment variable*/
 var flag = (process.env.NODE_ENV=='development') ? 'development' : 'production';
+var status = (flag === 'development') ? true :false;
 
 /* loading plugins */
-var gulp            = require('gulp'),
-    gulpDel         = require('del'),
-    gulpIf          = require('gulp-if'),
-    gUtil           = require('gulp-util'),
-    gulpNotify      = require('gulp-notify'),
-    sourcemaps      = require('gulp-sourcemaps'),
-    gulpSass        = require('gulp-sass'),
-    gulpCleanCss    = require('gulp-clean-css'),
-    gulpJshint      = require('gulp-jshint'),
-    gulpUglify      = require('gulp-uglify'),
-    gulpCat         = require('gulp-concat'),
-    gulpPrefix      = require('autoprefixer'),
-    gulpPcss        = require('gulp-postcss'),
-    gulpBrowserSync = require('browser-sync').create(),
-    gulpRunSeq      = require('run-sequence'),
-    gulpRename      = require('gulp-rename');
-    
+var gulp        = require('gulp'),
+    del         = require('del'),
+    dir         = require('path'),
+    gIf         = require('gulp-if'),
+    util        = require('gulp-util'),
+    notify      = require('gulp-notify'),
+    sourcemaps  = require('gulp-sourcemaps'),
+    sass        = require('gulp-compass'),
+    cleanCss    = require('gulp-clean-css'),
+    jshint      = require('gulp-jshint'),
+    uglify      = require('gulp-uglify'),
+    concat      = require('gulp-concat'),
+    prefix      = require('autoprefixer'),
+    postcss     = require('gulp-postcss'),
+    browserSync = require('browser-sync').create(),
+    runSeq      = require('run-sequence'),
+    rename      = require('gulp-rename');
+
+/*
+* setting parth requirements 
+*/
+var name        = 'storefront-child';
+var projectRoot = dir.dirname(__dirname) + '/' + name + '/';
+var path        = {
+	                style: [projectRoot + 'assets/sass/*.*',projectRoot + 'sources/sass/',projectRoot + 'assets/sass/'],
+	                js:    [projectRoot + 'assets/js/*.*',projectRoot + 'sources/js/',projectRoot + 'assets/js/']
+                  };
+
 /*
 * gulp tasks: 
 */
 
 gulp.task('browser-sync',function(){
-      gulpBrowserSync.init({
+      browserSync.init({
       	proxy:"localhost:8888"
       });
 });
 
 gulp.task('sass',function(){
 	return gulp.src(path.style[1] + 'style.scss')
-	       .pipe(sourcemaps.init())
-	       .pipe(gulpSass({
-	       	outputStyle: 'expanded'
-	       }).on('error',gulpSass.logError))
-	       .pipe(gulpPcss([gulpPrefix('last 2 versions','> 2%')]))
-	       .pipe(gulpIf(flag === 'production',gulpCleanCss()))
-	       .pipe(gulpIf(flag === 'production',gulpRename({suffix:'.min'})))
-	       .pipe(sourcemaps.write('./maps'))
+	       .pipe(sass({
+	       	   project:projectRoot,
+               sass:'sources/sass',
+               css:'assets/sass',
+	       	   style: 'expanded',
+	       	   sourcemap:status
+	       }).on('error',util.log))
+	       .pipe(postcss([prefix('last 2 versions','> 2%')]))
+	       .pipe(gIf(flag === 'production',cleanCss()))
+	       .pipe(gIf(flag === 'production',rename({suffix:'.min'})))
 	       .pipe(gulp.dest(path.style[2]))
-	       .pipe(gulpBrowserSync.stream());
+	       .pipe(browserSync.stream());
 });
 
 gulp.task('js',function(){
 	return gulp.src(path.js[1]+'*.js')
 	       .pipe(sourcemaps.init())
-	       .pipe(gulpJshint())
-	       .pipe(gulpJshint.reporter('jshint-stylish',{ verbose: true }))
-	       .pipe(gulpJshint.reporter('fail'))
-	       .pipe(gulpIf(flag === 'production',gulpUglify()))
-	       .pipe(gulpIf(flag === 'production',gulpRename({suffix:'.min'})))
-	       .pipe(sourcemaps.write('./maps'))
+	       .pipe(jshint())
+	       .pipe(jshint.reporter('jshint-stylish',{ verbose: true }))
+	       .pipe(jshint.reporter('fail'))
+	       .pipe(gIf(flag === 'production',uglify()))
+	       .pipe(gIf(flag === 'production',rename({suffix:'.min'})))
+	       .pipe(sourcemaps.write('../maps'))
 	       .pipe(gulp.dest(path.js[2]))
-	       .pipe(gulpBrowserSync.stream());
+	       .pipe(browserSync.stream());
 });
 
 
 gulp.task('clear',function(){
-	return gulpDel.sync([path.style[0],path.style[2]+'maps',path.js[0],path.js[2]+'maps'],{force:true});
+	return del.sync([path.style[0],path.js[0],projectRoot + 'assets/maps'],{force:true});
 });
 
 gulp.task('watch',['browser-sync'],function(){
-    gulp.watch(path.style[0] ,['sass']);
-    gulp.watch(path.js[0]    ,['js']);
+    gulp.watch(path.style[1] + '*.scss',['sass']);
+    gulp.watch(path.js[1] + '*.js',['js']);
 });
+
+gulp.task('default',['clear','sass','js','watch']);
+
 
 /*gulp.task('set-prod',function(){
 	return process.env.NODE_ENV='production';
@@ -89,5 +96,3 @@ gulp.task('set-dev',function(){
 gulp.task('dev',['set-dev','default']);
 
 gulp.task('prod',['set-prod','default']);*/
-
-gulp.task('default',['clear','sass','js','watch']);
