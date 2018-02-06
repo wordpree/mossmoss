@@ -28,12 +28,13 @@ var gulp        = require('gulp'),
 */
 var name        = 'storefront-child';
 var projectRoot = dir.dirname(__dirname) + '/' + name + '/';
-var path        = {
-	                style: [projectRoot + 'assets/sass/*.*'  ,projectRoot + 'sources/sass/'  ,projectRoot + 'assets/sass/'  ],
-	                js:    [projectRoot + 'assets/js/*.*'    ,projectRoot + 'sources/js/'    ,projectRoot + 'assets/js/'    ],
-	                fonts: [projectRoot + 'assets/fonts/*.*' ,projectRoot + 'sources/fonts/' ,projectRoot + 'assets/fonts/' ],
-	                img:   [projectRoot + 'assets/images/*.*',projectRoot + 'sources/images/',projectRoot + 'assets/images/']
-                  };
+var path        = 
+{
+	style: [projectRoot + 'sources/sass/'  ,projectRoot + 'assets/sass/*.*'  ,projectRoot + 'assets/sass/'  ],
+	js:    [projectRoot + 'sources/js/'    ,projectRoot + 'assets/js/*.*'    ,projectRoot + 'assets/js/'    ],
+	fonts: [projectRoot + 'sources/fonts/' ,projectRoot + 'assets/fonts/*.*' ,projectRoot + 'assets/fonts/' ],
+	img:   [projectRoot + 'sources/images/',projectRoot + 'assets/images/*.*',projectRoot + 'assets/images/']
+};
 
 /*
 * gulp tasks: 
@@ -46,7 +47,7 @@ gulp.task('browser-sync',function(){
 });
 
 gulp.task('sass',function(){
-	return gulp.src(path.style[1] + 'style.scss')
+	return gulp.src(path.style[0] + 'style.scss')
 	       .pipe(sass({
 	       	   project:projectRoot,
                sass:'sources/sass',
@@ -62,7 +63,7 @@ gulp.task('sass',function(){
 });
 
 gulp.task('js',function(){
-	return gulp.src(path.js[1]+'*.js')
+	return gulp.src(path.js[0]+'*.js')
 	       .pipe(sourcemaps.init())
 	       .pipe(jshint())
 	       .pipe(jshint.reporter('jshint-stylish',{ verbose: true }))
@@ -75,19 +76,19 @@ gulp.task('js',function(){
 });
 
 gulp.task('fonts',function(){
-    return gulp.src(path.fonts[1]+ '*.*')
+    return gulp.src(path.fonts[0]+ '*.*')
            .pipe(gulp.dest(path.fonts[2]))
            .pipe(browserSync.stream());
 });
 
 gulp.task('clear',function(){
-	return del.sync([path.style[0],path.js[0],projectRoot + 'assets/maps'],{force:true});
+	return del.sync([path.style[1],path.js[1],projectRoot + 'assets/maps'],{force:true});
 });
 
 gulp.task('watch',['browser-sync'],function(){
-    gulp.watch(path.style[0],['sass']);
-    gulp.watch(path.js[0]   ,['js']);
-    gulp.watch(path.fonts[0],['fonts']);
+    gulp.watch(path.style[0] + '**/*.scss',['sass']);
+    gulp.watch(path.js[0]    + '*.js'  ,['js']);
+    gulp.watch(path.fonts[0] + '*.*'   ,['fonts']);
 });
 
 gulp.task('default',['clear','fonts','sass','js','watch']);
