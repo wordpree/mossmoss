@@ -7,7 +7,7 @@
 ** notice :generally ,enqueue files are under assets folder located in theme directory
 ** modification record && time:
 **                      1.modified style enqueue path to new structure && 03-02-2018
-**                      2.
+**                      2.modified style enqueue path to new structure && 06-02-2018
 **                      3.
 **                      4.
 **                      5.
@@ -27,7 +27,7 @@ add_action('init','register_yee_menus');
 /*enqueue child style*/
 function storefront_child_scripts_enqueue(){
 	wp_enqueue_style('storefront-style',get_template_directory_uri().'/style.css');
-	wp_enqueue_style('storefront-child-style',get_stylesheet_directory_uri().'/style.css',array('storefront-style'),'v4.17');
+	wp_enqueue_style('storefront-child-style',get_stylesheet_directory_uri().'/assets/sass/style.css',array('storefront-style'),'v4.17');
 	wp_enqueue_style('storefront-child-main-style',get_stylesheet_directory_uri().'/assets/sass/style.css',array(''),'v2.18');
 	wp_enqueue_style('fancyslider-style',get_stylesheet_directory_uri().'/assets/fancyslider.css',array(),'v9.19');
 	
