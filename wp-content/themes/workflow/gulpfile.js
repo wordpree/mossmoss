@@ -42,7 +42,11 @@ var path        =
 
 gulp.task('browser-sync',function(){
       browserSync.init({
-      	proxy:"localhost:8888"
+      	proxy:"localhost:8888",
+      	ghostMode:{
+      		click:true,
+      		scroll:true
+      	}
       });
 });
 
