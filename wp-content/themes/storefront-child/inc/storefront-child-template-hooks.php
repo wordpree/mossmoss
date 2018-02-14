@@ -26,7 +26,7 @@ add_action( 'storefront_child_header', 'storefront_secondary_navigation',       
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper',         42 );
 add_action( 'storefront_child_header', 'storefront_child_primary_navigation',           50 );
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper_close',   68 );
-add_action( 'storefront_child_before_site' , 'storefront_child_mini_navigation');
+
 /**
 * wooecommerce header
 * @see storefront_product_search()
@@ -46,4 +46,3 @@ if ( $storefront_child_is_woocommerce_actived ) {
  */
 add_action( 'storefront_child_footer', 'storefront_child_credit',   20 );
 add_action( 'storefront_child_footer', 'storefront_footer_widgets', 10 );
-

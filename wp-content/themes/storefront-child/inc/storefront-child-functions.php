@@ -18,7 +18,6 @@ function register_yee_menus(){
 	  array(
 		'left'=>__('Left Menu','Storefront-Child'),
 		'right'=>__('Right Menu','Storefront-Child'),
-		'mini'=>__('Mini Menu','Storefront-Child')
 	  )
 	);
 }
