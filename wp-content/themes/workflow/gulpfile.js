@@ -93,6 +93,7 @@ gulp.task('watch',['browser-sync'],function(){
     gulp.watch(path.style[0] + '**/*.scss',['sass']);
     gulp.watch(path.js[0]    + '*.js'  ,['js']);
     gulp.watch(path.fonts[0] + '*.*'   ,['fonts']);
+    gulp.watch(projectRoot   + '**/*.php').on('change',browserSync.reload);
 });
 
 gulp.task('default',['clear','fonts','sass','js','watch']);
