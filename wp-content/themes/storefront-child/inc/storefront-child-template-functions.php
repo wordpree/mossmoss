@@ -1,4 +1,35 @@
 <?php
+if(! function_exists('storefront_child_svg_insert')){
+	/*
+	* insert icons as inline svgs
+	* create by Hai
+	* return void
+	*/
+	function storefront_child_svg_insert(){ ?>
+       <svg aria-hidden="true" style="position: absolute; width: 0; height: 0; overflow: hidden;" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+				<defs>
+					<symbol id="icon-home2" viewBox="0 0 32 32">
+						<title>home2</title>
+						<path d="M16 1l-16 16 3 3 3-3v13h8v-6h4v6h8v-13l3 3 3-3-16-16zM16 14c-1.105 0-2-0.895-2-2s0.895-2 2-2c1.105 0 2 0.895 2 2s-0.895 2-2 2z"></path>
+					</symbol>
+					<symbol id="icon-office" viewBox="0 0 32 32">
+						<title>office</title>
+						<path d="M0 32h16v-32h-16v32zM10 4h4v4h-4v-4zM10 12h4v4h-4v-4zM10 20h4v4h-4v-4zM2 4h4v4h-4v-4zM2 12h4v4h-4v-4zM2 20h4v4h-4v-4zM18 10h14v2h-14zM18 32h4v-8h6v8h4v-18h-14z"></path>
+					</symbol>
+					<symbol id="icon-cart" viewBox="0 0 32 32">
+						<title>cart</title>
+						<path d="M12 29c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+						<path d="M32 29c0 1.657-1.343 3-3 3s-3-1.343-3-3c0-1.657 1.343-3 3-3s3 1.343 3 3z"></path>
+						<path d="M32 16v-12h-24c0-1.105-0.895-2-2-2h-6v2h4l1.502 12.877c-0.915 0.733-1.502 1.859-1.502 3.123 0 2.209 1.791 4 4 4h24v-2h-24c-1.105 0-2-0.895-2-2 0-0.007 0-0.014 0-0.020l26-3.98z"></path>
+					</symbol>
+					<symbol id="icon-user-tie" viewBox="0 0 32 32">
+						<title>user-tie</title>
+						<path d="M10 6c0-3.314 2.686-6 6-6s6 2.686 6 6c0 3.314-2.686 6-6 6s-6-2.686-6-6zM24.002 14h-1.107l-6.222 12.633 2.327-11.633-3-3-3 3 2.327 11.633-6.222-12.633h-1.107c-3.998 0-3.998 2.687-3.998 6v10h24v-10c0-3.313 0-6-3.998-6z"></path>
+					</symbol>
+				</defs>
+	   </svg>
+	<?php }
+}
 
 if(! function_exists('storefront_child_toolbar_wrapper')){
 	/**
