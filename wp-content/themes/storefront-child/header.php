@@ -17,17 +17,16 @@
 <body <?php body_class(); ?>>
 
 <?php do_action( 'storefront_before_site' ); ?>
+
 <?php do_action( 'storefront_child_before_site' ); ?>
 <div id="page" class="hfeed site slide-out">
 	<?php do_action( 'storefront_before_header' ); ?>
 
 	<header id="masthead" class="site-header" role="banner" style="<?php storefront_header_styles(); ?>">
-	    <div class="site-header-toolbar">
-	        <?php
-			do_action('storefront_child_header_tool');
-			?>
-	    </div>
-		<div class="col-full">
+		<div class="site-header-container">
+		    	<?php
+				do_action('storefront_child_header_tool');
+				?>
 
 			<?php
 			/**

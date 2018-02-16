@@ -15,18 +15,16 @@
 /* remove the skip link in the header 
 *  @see storefront_skip_links()
 *  add_action( 'storefront_child_header', 'storefront_skip_links',                       0 );
-
-/* put the site brading in the middle of the homepage nav 
-*  @see storefront_child_primary_navigation
-*  add_action( 'storefront_child_header', 'storefront_site_branding',                    20 );
 */
+
 add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper',         32 );
 add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper_close',   42 );
 add_action( 'storefront_child_header', 'storefront_secondary_navigation',               30 );
+add_action( 'storefront_child_header','storefront_child_site_branding',                 31 );
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper',         42 );
 add_action( 'storefront_child_header', 'storefront_child_primary_navigation',           50 );
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper_close',   68 );
-add_action('storefront_child_before_site','storefront_child_svg_insert',                20);
+add_action( 'storefront_child_before_site','storefront_child_svg_insert',               20 );
 
 /**
 * wooecommerce header

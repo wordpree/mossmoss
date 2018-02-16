@@ -26,6 +26,10 @@ if(! function_exists('storefront_child_svg_insert')){
 						<title>user-tie</title>
 						<path d="M10 6c0-3.314 2.686-6 6-6s6 2.686 6 6c0 3.314-2.686 6-6 6s-6-2.686-6-6zM24.002 14h-1.107l-6.222 12.633 2.327-11.633-3-3-3 3 2.327 11.633-6.222-12.633h-1.107c-3.998 0-3.998 2.687-3.998 6v10h24v-10c0-3.313 0-6-3.998-6z"></path>
 					</symbol>
+					<symbol id="icon-heart" viewBox="0 0 32 32">
+						<title>heart</title>
+						<path d="M23.6 2c-3.363 0-6.258 2.736-7.599 5.594-1.342-2.858-4.237-5.594-7.601-5.594-4.637 0-8.4 3.764-8.4 8.401 0 9.433 9.516 11.906 16.001 21.232 6.13-9.268 15.999-12.1 15.999-21.232 0-4.637-3.763-8.401-8.4-8.401z"></path>
+					</symbol>
 				</defs>
 	   </svg>
 	<?php }
@@ -72,7 +76,23 @@ if ( ! function_exists( 'storefront_child_credit' ) ) {
 	}
 }
 
-if ( ! function_exists( 'storefront_primary_navigation' ) ) {
+if ( ! function_exists( 'storefront_child_site_branding' ) ) {
+	/**
+	 * Site branding wrapper and display
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	function storefront_child_site_branding() {
+		?>
+		<div class="site-branding">
+			<?php storefront_site_title_or_logo(); ?>
+		</div>
+		<?php
+	}
+}
+
+if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 	/**
 	 * Display Primary Navigation
 	 *
@@ -90,8 +110,6 @@ if ( ! function_exists( 'storefront_primary_navigation' ) ) {
 					'container_class'	=> 'primary-navigation-left',
 					)
 			);
-
-		    storefront_site_branding();
 
             wp_nav_menu(
 				array(
