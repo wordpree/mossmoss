@@ -100,6 +100,7 @@ if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 	 * @return void
 	 */
 	function storefront_child_primary_navigation() {
+		if (wp_is_mobile()) {
 		?>
 		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
 		<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
@@ -127,6 +128,6 @@ if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 			?>
 			
 		</nav><!-- #site-navigation -->
-		<?php
+		<?php }
 	}
 }
