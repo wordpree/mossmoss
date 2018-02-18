@@ -21,7 +21,8 @@ var gulp        = require('gulp'),
     postcss     = require('gulp-postcss'),
     browserSync = require('browser-sync').create(),
     runSeq      = require('run-sequence'),
-    rename      = require('gulp-rename');
+    rename      = require('gulp-rename'),
+    cache       = require('gulp-cache');
 
 /*
 * setting parth requirements 
@@ -43,11 +44,16 @@ var path        =
 gulp.task('browser-sync',function(){
       browserSync.init({
       	proxy:"localhost:8888",
+        open:false,
       	ghostMode:{
       		click:true,
       		scroll:true
       	}
       });
+});
+
+gulp.task('cleanCache',function(){
+      cache.clearAll();
 });
 
 gulp.task('sass',function(){
@@ -75,14 +81,20 @@ gulp.task('js',function(){
 	       .pipe(gIf(flag === 'production',uglify()))
 	       .pipe(gIf(flag === 'production',rename({suffix:'.min'})))
 	       .pipe(sourcemaps.write('../maps'))
-	       .pipe(gulp.dest(path.js[2]))
-	       .pipe(browserSync.stream());
+	       .pipe(gulp.dest(path.js[2]));
 });
 
 gulp.task('fonts',function(){
     return gulp.src(path.fonts[0]+ '*.*')
-           .pipe(gulp.dest(path.fonts[2]))
-           .pipe(browserSync.stream());
+           .pipe(gulp.dest(path.fonts[2]));
+});
+
+gulp.task('js-reload',['js'],function(){
+  browserSync.reload();
+});
+
+gulp.task('fonts-reload',['fonts'],function(){
+  browserSync.reload();
 });
 
 gulp.task('clear',function(){
@@ -91,12 +103,24 @@ gulp.task('clear',function(){
 
 gulp.task('watch',['browser-sync'],function(){
     gulp.watch(path.style[0] + '**/*.scss',['sass']);
-    gulp.watch(path.js[0]    + '*.js'  ,['js']);
-    gulp.watch(path.fonts[0] + '*.*'   ,['fonts']);
+    gulp.watch(path.js[0]    + '*.js'     ,['js-reload']);
+    gulp.watch(path.fonts[0] + '*.*'      ,['fonts-reload']);
     gulp.watch(projectRoot   + '**/*.php').on('change',browserSync.reload);
 });
 
 gulp.task('default',['clear','fonts','sass','js','watch']);
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 /*gulp.task('set-prod',function(){
