@@ -22,8 +22,9 @@ var gulp        = require('gulp'),
     browserSync = require('browser-sync').create(),
     runSeq      = require('run-sequence'),
     rename      = require('gulp-rename'),
-    cache       = require('gulp-cache');
-
+    cache       = require('gulp-cache'),
+    stats       = require('gulp-stats');
+stats(gulp);
 /*
 * setting parth requirements 
 */
