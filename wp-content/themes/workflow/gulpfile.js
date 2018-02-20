@@ -44,7 +44,7 @@ var path        =
 
 gulp.task('browser-sync',function(){
       browserSync.init({
-      	proxy:"localhost:8888",
+      	proxy:"localhost/mossmoss",
         open:false,
       	ghostMode:{
       		click:true,
