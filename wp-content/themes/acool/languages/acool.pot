@@ -1,0 +1,941 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: Acool\n"
+"POT-Creation-Date: 2016-07-22 15:56+0800\n"
+"PO-Revision-Date: 2016-07-22 15:59+0800\n"
+"Last-Translator: \n"
+"Language-Team: CooThemes.com <support@coothemes.com>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.7.4\n"
+"X-Poedit-Basepath: ..\n"
+"X-Poedit-WPHeader: style.css\n"
+"X-Poedit-SourceCharset: UTF-8\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"X-Poedit-SearchPath-0: .\n"
+"X-Poedit-SearchPathExcluded-0: *.js\n"
+
+#: comments.php:26
+#, php-format
+msgid "One Comment on \"%2$s\""
+msgid_plural "%1$s Comments on \"%2$s\""
+msgstr[0] ""
+
+#: comments.php:32 comments.php:52
+msgid "Comment navigation"
+msgstr ""
+
+#: comments.php:33 comments.php:53
+msgid "<- Older Comments"
+msgstr ""
+
+#: comments.php:34 comments.php:54
+msgid "Newer Comments ->"
+msgstr ""
+
+#: comments.php:59
+msgid "Comments are closed."
+msgstr ""
+
+#: footer.php:29
+#, php-format
+msgid ""
+"Powered by <a href=\"%s\">WordPress</a>. Designed by <a href=\"%s"
+"\">CooThemes.com</a>."
+msgstr ""
+
+#: front-page-content.php:65
+msgid "More Article..."
+msgstr ""
+
+#: includes/custom-functions.php:14
+#, php-format
+msgid "<cite class=\"fn\">%s</cite> <span class=\"says\"> on </span>"
+msgstr ""
+
+#: includes/custom-functions.php:15
+#, php-format
+msgid "%1$s at %2$s"
+msgstr ""
+
+#: includes/custom-functions.php:15
+msgid "(Edit)"
+msgstr ""
+
+#: includes/custom-functions.php:21
+msgid "Your comment is awaiting moderation."
+msgstr ""
+
+#: includes/custom-functions.php:50
+msgid "Upgrade To Pro &raquo;"
+msgstr ""
+
+#: includes/custom-functions.php:52
+msgid ""
+"Some settings might be missing or disorganized in this version of WordPress. "
+"So we suggest you to upgrade to version 4.0 or better."
+msgstr ""
+
+#: includes/custom-functions.php:193
+msgid "Page"
+msgstr ""
+
+#: includes/custom-functions.php:366
+msgid "Edit"
+msgstr ""
+
+#: includes/customize/customize.php:17
+msgid "Header Background Color"
+msgstr ""
+
+#: includes/customize/customize.php:32
+msgid "Content links color"
+msgstr ""
+
+#: includes/customize/customize.php:47
+msgid "Content links hover color"
+msgstr ""
+
+#: includes/customize/customize.php:62
+msgid "Other links color"
+msgstr ""
+
+#: includes/customize/customize.php:77
+msgid "Other links hover color"
+msgstr ""
+
+#: includes/customize/customize.php:96
+msgid "Fonts"
+msgstr ""
+
+#: includes/customize/customize.php:109
+msgid "Header Font"
+msgstr ""
+
+#: includes/customize/customize.php:126
+msgid "Menu Font"
+msgstr ""
+
+#: includes/customize/customize.php:142
+msgid "Title Font"
+msgstr ""
+
+#: includes/customize/customize.php:156
+msgid "Body Font"
+msgstr ""
+
+#: includes/customize/customize.php:168
+msgid "Theme Settings"
+msgstr ""
+
+#: includes/customize/customize.php:170
+msgid ""
+"1. Documentation for Acool can be found <a target=\"_blank\" href=\"https://"
+"www.coothemes.com/doc/acool-manual.php\">here</a>"
+msgstr ""
+
+#: includes/customize/customize.php:170
+msgid ""
+"2. A full theme demo can be found <a target=\"_blank\" href=\"https://www."
+"coothemes.com/themes/acool.php\">here</a>"
+msgstr ""
+
+#: includes/customize/customize.php:181
+msgid "Show Search Icon"
+msgstr ""
+
+#: includes/customize/customize.php:195
+msgid "Box Header Center"
+msgstr ""
+
+#: includes/customize/customize.php:213
+#: includes/pro/options-framework/options.php:129
+msgid "Enable Query Loader"
+msgstr ""
+
+#: includes/customize/customize.php:217
+msgid ""
+"For the following options you need to save and to refresh the display change!"
+msgstr ""
+
+#: includes/customize/customize.php:229
+#: includes/pro/options-framework/options.php:182
+msgid "Enable Featured Homepage"
+msgstr ""
+
+#: includes/customize/customize.php:233
+#: includes/pro/options-framework/options.php:183
+#, php-format
+msgid ""
+"Active featured homepage Layout.  The standardized way of creating Static "
+"Front Pages: <a href=\"%s\" target=\"_blank\">Creating a Static Front Page</"
+"a>"
+msgstr ""
+
+#: includes/customize/customize.php:247
+msgid "Fixed Header"
+msgstr ""
+
+#: includes/customize/customize.php:263
+msgid "Breadcrumb"
+msgstr ""
+
+#: includes/customize/customize.php:280
+#: includes/pro/options-framework/options.php:649
+msgid "Display Footer Widget Area"
+msgstr ""
+
+#: includes/customize/customize.php:296
+msgid "Hide Post Meta"
+msgstr ""
+
+#: includes/customize/customize.php:300
+msgid "Hide date, author, category...below blog title."
+msgstr ""
+
+#: includes/customize/customize.php:312
+msgid "Header Opacity"
+msgstr ""
+
+#: includes/customize/customize.php:323
+msgid "HomePage Banner"
+msgstr ""
+
+#: includes/customize/customize.php:325
+msgid ""
+"Must enable the Featured Homepage, and set up a Static Front Page, the "
+"banner will be displayed!"
+msgstr ""
+
+#: includes/customize/customize.php:330
+msgid "/images/banner1.jpg"
+msgstr ""
+
+#: includes/customize/customize.php:338
+msgid "Homepage Banner Images:"
+msgstr ""
+
+#: includes/customize/customize.php:347
+msgid ""
+"<h1>The jQuery slider that just slides.</h1><p class=\"ct_slider_text\">No "
+"fancy effects or unnecessary markup.</p><a class=\"btn\" href=\"#download"
+"\">Download</a>"
+msgstr ""
+
+#: includes/customize/customize.php:355
+msgid "Homepage Banner Text:"
+msgstr ""
+
+#: includes/customize/customize.php:366
+msgid "Footer text"
+msgstr ""
+
+#: includes/customize/customize.php:372
+msgid "Copyright 2015"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:72
+msgid "Save Changes"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:221
+msgid "Insert/edit link"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:222
+msgid "Update"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:223
+msgid "Add Link"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:224
+msgid "(no title)"
+msgstr ""
+
+#: includes/pro/nofollow/nofollow.php:225
+msgid "No matches found."
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-framework-admin.php:91
+#: includes/pro/options-framework/includes/class-options-framework-admin.php:92
+msgid "Theme Options"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-framework-admin.php:204
+msgid "Click OK to reset. Any theme settings will be lost!"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-framework-admin.php:236
+msgid "Default options restored."
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-framework-admin.php:290
+msgid "Options saved."
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:62
+msgid "No file selected"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:65
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:118
+msgid "Upload"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:67
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:119
+msgid "Remove"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:70
+msgid "Upgrade your version of WordPress for full media support."
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-media-uploader.php:94
+msgid "View File"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:316
+msgid "No Repeat"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:317
+msgid "Repeat Horizontally"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:318
+msgid "Repeat Vertically"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:319
+msgid "Repeat All"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:331
+msgid "Top Left"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:332
+msgid "Top Center"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:333
+msgid "Top Right"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:334
+msgid "Middle Left"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:335
+msgid "Middle Center"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:336
+msgid "Middle Right"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:337
+msgid "Bottom Left"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:338
+msgid "Bottom Center"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:339
+msgid "Bottom Right"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:351
+msgid "Scroll Normally"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:352
+msgid "Fixed in Place"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:424
+msgid "Normal"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:425
+msgid "Italic"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:426
+msgid "Bold"
+msgstr ""
+
+#: includes/pro/options-framework/includes/class-options-sanitization.php:427
+msgid "Bold Italic"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:125
+msgid "General Options"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:130
+msgid "Enable page query loader progress bar."
+msgstr ""
+
+#: includes/pro/options-framework/options.php:137
+msgid "Default featured image for front page "
+msgstr ""
+
+#: includes/pro/options-framework/options.php:138
+msgid "Recommended size: 475*313px;"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:145
+msgid "Show Previous And Next"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:145
+msgid ""
+"Show last article in the bottom of the page/post, \n"
+"\t\t\tnormal-images:Articles with slider,Priority(tags, Category, Recently "
+"Articles); cat:Displaying Category Latest Articles; normal:Show the last "
+"posts; No-display:No display "
+msgstr ""
+
+#: includes/pro/options-framework/options.php:146
+msgid "normal-images"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:146
+msgid "cat"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:146
+msgid "normal"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:146
+msgid "no-display"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:158
+msgid "404 Page Content"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:168
+msgid "Custom CSS"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:169
+msgid ""
+"The following css code will add to the header before the closing &lt;/"
+"head&gt; tag."
+msgstr ""
+
+#: includes/pro/options-framework/options.php:178
+msgid "Home Page"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:192
+msgid "Number of Sections"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:193
+msgid "Select number of sections"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:205
+msgid "Video Background Options"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:207
+msgid "Section Background Video"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:207
+msgid "YouTube Video ID"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:208
+msgid "Display Buttons"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:208
+msgid "Display video control buttons."
+msgstr ""
+
+#: includes/pro/options-framework/options.php:209
+msgid "Video Loop"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:209
+msgid "Play video loop."
+msgstr ""
+
+#: includes/pro/options-framework/options.php:211
+msgid "Default Volum"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:212
+msgid "Seeks To"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:212
+msgid "Seeks to a specified time in the video ( number of seconds )."
+msgstr ""
+
+#: includes/pro/options-framework/options.php:214
+msgid "No video background"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:214
+msgid "Secion 1"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:224
+msgid "Video Background Section"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:228
+#: includes/pro/options-framework/options.php:627
+#: includes/pro/options-framework/options.php:679
+#: includes/pro/options-framework/options.php:689
+#: includes/pro/options-framework/options.php:696
+#: includes/pro/options-framework/options.php:703
+#: includes/pro/options-framework/options.php:710
+msgid "</div>"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:231
+msgid "Section 1 Content"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:231
+msgid "Video"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:231
+msgid "Slider"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:572
+msgid "Delete"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:572
+msgid "Delete this section"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:581
+#: includes/pro/options-framework/options.php:593
+msgid "Select Content Template for this section"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:610
+msgid "Title Color"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:612
+msgid "Content Color"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:616
+msgid "Blog List Link"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:619
+msgid "Section Background"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:621
+msgid "100% Width Background Image"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:623
+msgid "Full Width"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:624
+msgid "Section Css Class"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:625
+msgid "Section Content"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:647
+msgid "Footer"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:651
+msgid "Footer Widget Area Background"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:653
+msgid "Social Icon Color"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:654
+msgid "Social Icon Background Color"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:656
+msgid "Home Page Footer Background"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:657
+msgid "Single Page Footer Background"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:661
+#, php-format
+msgid "Social Icon #%s"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:662
+#, php-format
+msgid "Social Title #%s"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:663
+#, php-format
+msgid "Social Link #%s"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:668
+msgid "Homepage Slider"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:671
+msgid "Slideshow"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:673
+msgid "Slide One"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:673
+#: includes/pro/options-framework/options.php:683
+#: includes/pro/options-framework/options.php:691
+#: includes/pro/options-framework/options.php:698
+#: includes/pro/options-framework/options.php:705
+msgid "<div class=\"options-section\"><h3 class=\"groupTitle\">"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:675
+#: includes/pro/options-framework/options.php:685
+#: includes/pro/options-framework/options.php:692
+#: includes/pro/options-framework/options.php:699
+#: includes/pro/options-framework/options.php:706
+msgid "Image"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:677
+#: includes/pro/options-framework/options.php:687
+#: includes/pro/options-framework/options.php:694
+#: includes/pro/options-framework/options.php:701
+#: includes/pro/options-framework/options.php:708
+msgid "Text"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:683
+msgid "Slide Two"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:691
+msgid "Slide Three"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:698
+msgid "Slide Four"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:705
+msgid "Slide Five"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:712
+msgid "Slide Time"
+msgstr ""
+
+#: includes/pro/options-framework/options.php:712
+msgid ""
+"Milliseconds between the end of the sliding effect and the start of the nex "
+"one."
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:24
+msgid "Click here to learn more"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:99
+msgid "Add a Tooltip Text"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:188
+msgid "Caption"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:189
+msgid "Caption goes here"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:190
+msgid "Caption title goes here"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:194
+msgid "State"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:196
+msgid "Select between expanded and closed state"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:201
+#: includes/pro/shortcodes/shortcodes.php:217
+#: includes/pro/shortcodes/shortcodes.php:246
+#: includes/pro/shortcodes/shortcodes.php:326
+msgid "Content"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:202
+#: includes/pro/shortcodes/shortcodes.php:218
+#: includes/pro/shortcodes/shortcodes.php:304
+#: includes/pro/shortcodes/shortcodes.php:327
+msgid "Content goes here"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:203
+#: includes/pro/shortcodes/shortcodes.php:219
+#: includes/pro/shortcodes/shortcodes.php:248
+msgid "Content text or html"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:210
+#: includes/pro/shortcodes/shortcodes.php:232
+msgid "Type"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:212
+msgid "Type of the box"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:226
+msgid "Link"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:228
+msgid "URL"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:234
+msgid "Choose button type"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:239
+msgid "Color"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:241
+msgid "Choose button color"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:247
+msgid "Link text"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:252
+msgid "Icon"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:254
+msgid "Used for icon button type"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:259
+msgid "Open link in new window"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:261
+msgid "Select yes if the link should be opened in a new window"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:269
+msgid "Slider Type"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:271
+msgid "Select Slider Type here"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:276
+msgid "Effect"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:278
+msgid "Select Animation Effect"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:283
+msgid "Auto"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:285
+msgid "Choose yes if you want for automatic slider animation"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:290
+msgid "Auto Speed"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:292
+msgid "Automattic slider speed (works only if Auto is set to yes)"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:296
+msgid "Tab Text"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:303
+msgid "Tab Content"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:305
+msgid "Paste image url here, if you chose \"images\" slider type"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:313
+msgid "Image Url"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:315
+msgid "Author Image URL"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:319
+msgid "Use resizing"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:398
+msgid "+ Add One More Tab"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:561
+msgid "Image Height"
+msgstr ""
+
+#: includes/pro/shortcodes/shortcodes.php:562
+msgid "Image Width"
+msgstr ""
+
+#: includes/pro/theme-setup-pro.php:753
+msgid "Quick Links"
+msgstr ""
+
+#: includes/pro/theme-setup-pro.php:1004
+msgid "<div><h3>No Related Articles!</h3></div>"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:54
+msgid "List latest posts of your site with thumbnails"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:55
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:171
+msgid "Latest Posts"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:199
+msgid "Title"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:206
+msgid "Number of posts to show"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:213
+msgid "Sort by"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:228
+msgid "Reverse sort order (ascending)"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:236
+msgid "Show post excerpt"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:242
+msgid "Excerpt length (in words):"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:250
+msgid "Show number of comments"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:257
+msgid "Show post date"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:265
+msgid "Show post thumbnail"
+msgstr ""
+
+#: includes/pro/widgets/ct-recent-posts-widget/posts.php:270
+msgid "Thumbnail dimensions (in pixels)"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:18
+msgid "CT About Me Widget"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:19
+msgid "Displays About Me Information"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:99
+msgid "CT Adsense Widget"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:100
+msgid "Displays Adsense Ads(User Code)"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:165
+msgid "CT Advertisement Widget"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:166
+msgid "Displays Advertisements(User Images)"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:387
+msgid "CT Author Widget"
+msgstr ""
+
+#: includes/pro/widgets/custom-widgets.php:388
+msgid "Displays Author Information(To use only on \"After Content\" )"
+msgstr ""
+
+#: includes/theme-setup.php:37
+msgid "Primary Menu"
+msgstr ""
+
+#: includes/theme-setup.php:38
+msgid "Secondary Menu"
+msgstr ""
+
+#: includes/theme-setup.php:39
+msgid "footer Menu"
+msgstr ""
+
+#: search.php:42
+msgid "No Results"
+msgstr ""
+
+#: single.php:27
+msgid "Tags: "
+msgstr ""
