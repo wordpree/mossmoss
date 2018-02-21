@@ -21,6 +21,7 @@ add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper', 
 add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper_close',   42 );
 add_action( 'storefront_child_header', 'storefront_secondary_navigation',               30 );
 add_action( 'storefront_child_header','storefront_child_site_branding',                 31 );
+add_action( 'storefront_child_header','storefront_child_mobile_navigation',             32 );
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper',         42 );
 add_action( 'storefront_child_header', 'storefront_child_primary_navigation',           50 );
 add_action( 'storefront_child_header', 'storefront_primary_navigation_wrapper_close',   68 );

@@ -12,16 +12,7 @@
 **                      4.
 **                      5.
 */
-/*nav menu register*/
-function register_yee_menus(){
-	register_nav_menus(
-	  array(
-		'left'=>__('Left Menu','Storefront-Child'),
-		'right'=>__('Right Menu','Storefront-Child'),
-	  )
-	);
-}
-add_action('init','register_yee_menus');
+
 
 /*enqueue child style*/
 function storefront_child_scripts_enqueue(){

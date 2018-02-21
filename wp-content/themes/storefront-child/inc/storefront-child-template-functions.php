@@ -91,6 +91,27 @@ if ( ! function_exists( 'storefront_child_site_branding' ) ) {
 		<?php
 	}
 }
+if ( ! function_exists('storefront_child_mobile_navigation')) {
+	/**
+	* display mobile navi icon
+	* @return void
+	*/
+	function storefront_child_mobile_navigation(){
+		if (wp_is_mobile()) {
+	    ?>
+	    <div class="mobile-icon">
+	    	<?php  
+				wp_nav_menu(
+					array(
+						'theme_location'	=> 'mobile',
+						'container_class'	=> 'mobile-navigation',
+					)
+				);
+		    ?>
+	    </div>
+	    <?php }
+	}
+}
 
 if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 	/**
@@ -100,34 +121,36 @@ if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 	 * @return void
 	 */
 	function storefront_child_primary_navigation() {
-		if (wp_is_mobile()) {
+		
 		?>
 		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
 		<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
-			<?php
-			wp_nav_menu(
-				array(
-					'theme_location'	=> 'left',
-					'container_class'	=> 'primary-navigation-left',
+			<?php if (wp_is_mobile()) {
+			    
+				wp_nav_menu(
+					array(
+						'theme_location'	=> 'handheld',
+						'container_class'	=> 'handheld-navigation',
 					)
-			);
+				);
+		    } else {
+                wp_nav_menu(
+					array(
+						'theme_location'	=> 'left',
+						'container_class'	=> 'primary-navigation-left',
+						)
+					);
 
-            wp_nav_menu(
-				array(
-					'theme_location'	=> 'right',
-					'container_class'	=> 'primary-navigation-right',
-					)
-			);
-			wp_nav_menu(
-				array(
-					'theme_location'	=> 'handheld',
-					'container_class'	=> 'handheld-navigation',
-					)
-			);
-		    
+	            wp_nav_menu(
+					array(
+						'theme_location'	=> 'right',
+						'container_class'	=> 'primary-navigation-right',
+						)
+					);
+		    }
 			?>
 			
 		</nav><!-- #site-navigation -->
-		<?php }
+		<?php
 	}
 }
