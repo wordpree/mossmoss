@@ -42,7 +42,10 @@ if(! function_exists('storefront_child_toolbar_wrapper')){
 	* return void
 	*/
 	function storefront_child_toolbar_wrapper(){
-		echo '<div class="site-header-tool">';
+		if(! wp_is_mobile()){
+			 echo '<div class="site-header-tool">';
+		}
+		
 	}
 }
 
@@ -53,8 +56,10 @@ if(! function_exists('storefront_child_toolbar_wrapper_close')){
 	* return void
 	*/
 	function storefront_child_toolbar_wrapper_close(){
-		echo '</div>';
-	}
+		if(! wp_is_mobile()){
+			echo '</div>';
+		}
+    }
 }
 
 if ( ! function_exists( 'storefront_child_credit' ) ) {
@@ -91,26 +96,89 @@ if ( ! function_exists( 'storefront_child_site_branding' ) ) {
 		<?php
 	}
 }
-if ( ! function_exists('storefront_child_mobile_navigation')) {
+if ( ! function_exists('storefront_child_mobile_entry')) {
 	/**
 	* display mobile navi icon
 	* @return void
 	*/
-	function storefront_child_mobile_navigation(){
-		if (wp_is_mobile()) {
-	    ?>
-	    <div class="mobile-icon">
-	    	<?php  
-				wp_nav_menu(
-					array(
-						'theme_location'	=> 'mobile',
-						'container_class'	=> 'mobile-navigation',
-					)
+	function storefront_child_mobile_entry(){
+		if (wp_is_mobile()) { ?>
+		    <div class="mobile-icon">
+			    <?php
+				$entries = array(
+					'myaccount'=>'storefront_child_wc_account',
+					'cart'=>'storefront_child_wc_cart',
+					// 'wishlist'=>'storefront_child_wc_wishlist'			
 				);
-		    ?>
-	    </div>
+				foreach ($entries as $key => $value) {
+					if(wc_get_page_id($key) != -1){
+						$link =esc_url( get_permalink( wc_get_page_id($key) ));
+						echo '<li>';
+						call_user_func($entries[$key],$link);
+						echo '</li>';
+					}
+				}
+		        ?>
+		    </div>
 	    <?php }
 	}
+}
+
+if( ! function_exists('storefront_child_wc_account')) {
+	/**
+	* display mobile wc_account
+	* @return void
+	*/
+	function storefront_child_wc_account($link) { ?>
+		<a class="mobile-account" href="<?php echo $link;?>">
+			<svg class="icon icon-icon-user-tie"><use xlink:href="#icon-user-tie"></use></svg>
+		</a>
+	<?php }
+}
+
+if( ! function_exists('storefront_child_wc_cart')) {
+	/**
+	* display mobile wc_cart
+	* @return void
+	*/
+	function storefront_child_wc_cart($link) {
+		?>
+		<a class="mobile-cart" href="<?php echo $link;?>">
+			<span class="count"><?php echo wp_kses_data( WC()->cart->get_cart_contents_count() );?></span>
+			<svg class="icon icon-cart">
+				<use xlink:href="#icon-cart"></use>
+		    </svg>
+		</a>
+	<?php }
+}
+
+if( ! function_exists('storefront_child_wc_search')) {
+	/**
+	* display mobile wc_search
+	* @return void
+	*/
+	function storefront_child_wc_search() {
+	    if ( storefront_is_woocommerce_activated() ) { ?>
+			<div class="mobile-site-search">
+				<?php the_widget( 'WC_Widget_Product_Search', 'title=' ); ?>
+			</div>
+		<?php
+		}
+	}
+}
+
+if( ! function_exists('storefront_child_flexbox_open')) {
+
+    function storefront_child_flexbox_open() {
+        echo '<div class ="flexbox">';
+    }
+}
+
+if( ! function_exists('storefront_child_flexbox_close')) {
+
+	function storefront_child_flexbox_close() {
+    	echo '</div>';
+    }
 }
 
 if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
@@ -123,34 +191,36 @@ if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
 	function storefront_child_primary_navigation() {
 		
 		?>
-		<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
-		<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
-			<?php if (wp_is_mobile()) {
-			    
-				wp_nav_menu(
-					array(
-						'theme_location'	=> 'handheld',
-						'container_class'	=> 'handheld-navigation',
-					)
-				);
-		    } else {
-                wp_nav_menu(
-					array(
-						'theme_location'	=> 'left',
-						'container_class'	=> 'primary-navigation-left',
+		<div class="storefront-primary-navigation">
+			<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
+			<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
+				<?php if (wp_is_mobile()) {
+				    
+					wp_nav_menu(
+						array(
+							'theme_location'	=> 'handheld',
+							'container_class'	=> 'handheld-navigation',
 						)
 					);
+			    } else {
+	                wp_nav_menu(
+						array(
+							'theme_location'	=> 'left',
+							'container_class'	=> 'primary-navigation-left',
+							)
+						);
 
-	            wp_nav_menu(
-					array(
-						'theme_location'	=> 'right',
-						'container_class'	=> 'primary-navigation-right',
-						)
-					);
-		    }
-			?>
-			
-		</nav><!-- #site-navigation -->
+		            wp_nav_menu(
+						array(
+							'theme_location'	=> 'right',
+							'container_class'	=> 'primary-navigation-right',
+							)
+						);
+			    }
+				?>
+				
+			</nav><!-- #site-navigation -->
+		</div>
 		<?php
 	}
 }

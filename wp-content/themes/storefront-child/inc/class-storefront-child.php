@@ -11,8 +11,7 @@ if (!class_exists('storefront_child_class')){
 		public function storefront_child_register_menus(){
 			register_nav_menus( array(
                 'left'=>__('Left Menu','Storefront-Child'),
-				'right'=>__('Right Menu','Storefront-Child'),
-				'mobile'=>__('Mobile Menu','Storefront-Child')
+				'right'=>__('Right Menu','Storefront-Child')
 			) );
 		}
 	}
