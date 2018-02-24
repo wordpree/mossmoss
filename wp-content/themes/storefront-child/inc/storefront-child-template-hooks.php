@@ -22,9 +22,9 @@
 add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper',         32 );
 add_action( 'storefront_child_header_tool', 'storefront_child_toolbar_wrapper_close',   42 );
 add_action( 'storefront_child_header', 'storefront_child_flexbox_open',                 29 );
-add_action( 'storefront_child_header', 'storefront_child_mobile_entry',                 30 );
 add_action( 'storefront_child_header', 'storefront_secondary_navigation',               30 );
-add_action( 'storefront_child_header', 'storefront_child_site_branding',                31 );
+add_action( 'storefront_child_header', 'storefront_child_site_branding',                30 );
+add_action( 'storefront_child_header', 'storefront_child_mobile_entry',                 31 );
 add_action( 'storefront_child_header', 'storefront_child_flexbox_close',                32 );
 add_action( 'storefront_child_header', 'storefront_child_flexbox_open',                 49 );
 add_action( 'storefront_child_header', 'storefront_child_primary_navigation',           50 );
