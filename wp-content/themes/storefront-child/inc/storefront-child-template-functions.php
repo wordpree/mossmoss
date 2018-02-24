@@ -3,27 +3,20 @@
 if(! function_exists('storefront_child_toolbar_wrapper')){
 	/**
 	* Display the header toolbar wrapper
-	* create by hai
 	* return void
 	*/
 	function storefront_child_toolbar_wrapper(){
-		if(! wp_is_mobile()){
-			 echo '<div class="site-header-tool">';
-		}
-		
+		echo '<div class="site-header-tool">';	
 	}
 }
 
 if(! function_exists('storefront_child_toolbar_wrapper_close')){
 	/**
 	* Display the header toolbar wrapper
-	* create by hai
 	* return void
 	*/
 	function storefront_child_toolbar_wrapper_close(){
-		if(! wp_is_mobile()){
-			echo '</div>';
-		}
+		echo '</div>';
     }
 }
 
@@ -67,25 +60,25 @@ if ( ! function_exists('storefront_child_mobile_entry')) {
 	* @return void
 	*/
 	function storefront_child_mobile_entry(){
-		if (wp_is_mobile()) { ?>
-		    <div class="mobile-icon">
-			    <?php
-				$entries = array(
-					'myaccount'=>'storefront_child_wc_account',
-					'cart'=>'storefront_child_wc_cart',
-					// 'wishlist'=>'storefront_child_wc_wishlist'			
-				);
-				foreach ($entries as $key => $value) {
-					if(wc_get_page_id($key) != -1){
-						$link =esc_url( get_permalink( wc_get_page_id($key) ));
-						echo '<li>';
-						call_user_func($entries[$key],$link);
-						echo '</li>';
-					}
+		?>
+	    <div class="mobile-icon">
+		    <?php
+			$entries = array(
+				'myaccount'=>'storefront_child_wc_account',
+				'cart'=>'storefront_child_wc_cart',
+				// 'wishlist'=>'storefront_child_wc_wishlist'			
+			);
+			foreach ($entries as $key => $value) {
+				if(wc_get_page_id($key) != -1){
+					$link =esc_url( get_permalink( wc_get_page_id($key) ));
+					echo '<li>';
+					call_user_func($entries[$key],$link);
+					echo '</li>';
 				}
-		        ?>
-		    </div>
-	    <?php }
+			}
+	        ?>
+	    </div>
+	<?php
 	}
 }
 
@@ -158,46 +151,93 @@ if( ! function_exists('storefront_child_flexbox_close')) {
     }
 }
 
-if ( ! function_exists( 'storefront_child_primary_navigation' ) ) {
+if ( ! function_exists( 'storefront_child_primary_navigation_wrapper' ) ) {
 	/**
-	 * Display Primary Navigation
+	 * Display Primary wrapper
+	 *
+	 * @return void
+	 */
+	function storefront_child_primary_navigation_wrapper() { ?>
+		<div class="storefront-primary-navigation">
+			<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
+	<?php 
+	}
+}
+
+if ( ! function_exists( 'storefront_child_primary_navigation_wrapper_close' ) ) {
+	/**
+	 * Display Primary wrapper
+	 *
+	 * @return void
+	 */
+	function storefront_child_primary_navigation_wrapper_close() { ?>
+			</nav><!-- #site-navigation -->
+		</div>
+	<?php
+	}
+}
+
+if ( ! function_exists( 'storefront_child_primary_navigation_mini_menu' ) ) {
+	/**
+	 * Display Primary Navigation mini menu button
 	 *
 	 * @since  1.0.0
 	 * @return void
 	 */
-	function storefront_child_primary_navigation() {
-		
-		?>
-		<div class="storefront-primary-navigation">
-			<nav id="site-navigation" class="main-navigation" role="navigation" aria-label="<?php esc_html_e( 'Primary Navigation', 'Storefront-Child' ); ?>">
-			<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
-				<?php if (wp_is_mobile()) {
-				    
-					wp_nav_menu(
-						array(
-							'theme_location'	=> 'handheld',
-							'container_class'	=> 'handheld-navigation',
-						)
-					);
-			    } else {
-	                wp_nav_menu(
-						array(
-							'theme_location'	=> 'left',
-							'container_class'	=> 'primary-navigation-left',
-							)
-						);
+	function storefront_child_primary_navigation_mini_menu() { ?>
+		<button class="menu-toggle" aria-controls="site-navigation" aria-expanded="false"><span><?php echo esc_attr( apply_filters( 'storefront_menu_toggle_text', __( 'Menu', 'Storefront-Child' ) ) ); ?></span></button>
+	<?php
+	}
+}
 
-		            wp_nav_menu(
-						array(
-							'theme_location'	=> 'right',
-							'container_class'	=> 'primary-navigation-right',
-							)
-						);
-			    }
-				?>
-				
-			</nav><!-- #site-navigation -->
-		</div>
-		<?php
+
+if ( ! function_exists( 'storefront_child_primary_navigation_left' ) ) {
+	/**
+	 * Display Primary Navigation left
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	function storefront_child_primary_navigation_left() {
+		wp_nav_menu(
+			array(
+				'theme_location'	=> 'left',
+				'container_class'	=> 'primary-navigation-left',
+				)
+		);
+	}
+}
+
+if ( ! function_exists( 'storefront_child_primary_navigation_right' ) ) {
+	/**
+	 * Display Primary Navigation right
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	function storefront_child_primary_navigation_right() {
+		wp_nav_menu(
+			array(
+				'theme_location'	=> 'right',
+				'container_class'	=> 'primary-navigation-right',
+				)
+		);
+	}
+}
+
+if ( ! function_exists( 'storefront_child_primary_navigation_handheld' ) ) {
+	/**
+	 * Display Primary Navigation mini handheld
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	function storefront_child_primary_navigation_handheld() {
+		wp_nav_menu(
+			array(
+				'theme_location'	=> 'handheld',
+				'container_class'	=> 'handheld-navigation',
+			)
+		);
 	}
 }
