@@ -67,14 +67,14 @@ function header_cart_scoll(){
 /*====================================
               2 menu toggle
 ====================================*/
-var $toggle_menu =$('.primary-navigation-left,.primary-navigation-right');
-if(($('.menu-toggle').css('display'))!=='none'){
-	$toggle_menu.css({'display':'none'});
-}
-$('.menu-toggle').click(function(){
-	$('.slide-out').toggleClass('page-slide-out');
-	$('.mini-nav-container').toggleClass('mini-slider-in');
-});
+// var $toggle_menu =$('.primary-navigation-left,.primary-navigation-right');
+// if(($('.menu-toggle').css('display'))!=='none'){
+// 	$toggle_menu.css({'display':'none'});
+// }
+// $('.menu-toggle').click(function(){
+// 	$('.slide-out').toggleClass('page-slide-out');
+// 	$('.mini-nav-container').toggleClass('mini-slider-in');
+// });
 /*====================================
               3 slider effect
 ====================================*/
