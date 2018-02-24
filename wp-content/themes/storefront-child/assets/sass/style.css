@@ -1,3 +1,4 @@
+@charset "UTF-8";
 html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
@@ -56,13 +57,12 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
 
 @font-face {
   font-family: 'icomoon';
-  src: url("../fonts/icomoon.eot?53gwsw");
-  src: url("../fonts/icomoon.eot?53gwsw#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?53gwsw") format("truetype"), url("../fonts/icomoon.woff?53gwsw") format("woff"), url("..fonts/icomoon.svg?53gwsw#icomoon") format("svg");
+  src: url("../fonts/icomoon.eot?ujwbo4");
+  src: url("../fonts/icomoon.eot?ujwbo4#iefix") format("embedded-opentype"), url("../fonts/icomoon.ttf?ujwbo4") format("truetype"), url("../fonts/icomoon.woff?ujwbo4") format("woff"), url("../fonts/icomoon.svg?ujwbo4#icomoon") format("svg");
   font-weight: normal;
   font-style: normal;
 }
-.icomoon-fonts {
-  /* use !important to prevent issues with browser extensions that change fonts */
+i {
   font-family: 'icomoon' !important;
   speak: none;
   font-style: normal;
@@ -70,11 +70,8 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   font-variant: normal;
   text-transform: none;
   line-height: 1;
-  /* Better Font Rendering =========== */
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  display: block;
-  text-align: center;
 }
 
 * {
@@ -82,7 +79,33 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
   box-sizing: border-box;
 }
 
-.site-header-container {
+.mobile-header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0.5rem 1rem;
+}
+.mobile-header-container .flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding: 0.5em;
+}
+.mobile-header-container .flexbox .mobile-icon {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+.mobile-header-container .flexbox .mobile-icon li:nth-child(1) {
+  margin-right: 2em;
+}
+.mobile-header-container .flexbox .main-navigation {
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -91,26 +114,50 @@ article, aside, details, figcaption, figure, footer, header, hgroup, main, menu,
       -ms-flex-direction: column;
           flex-direction: column;
 }
-.site-header-container .flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
+.mobile-header-container .flexbox .storefront-primary-navigation {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 30%;
+          flex: 0 0 30%;
+}
+.mobile-header-container .flexbox .mobile-site-search {
+  -webkit-box-flex: 0;
+      -ms-flex: 0 0 65%;
+          flex: 0 0 65%;
+}
+
+.flexbox + .flexbox {
+  margin-top: 0.75rem;
 }
 
 .mobile-icon li {
   display: inline-block;
 }
 .mobile-icon span {
-  color: #000;
+  color: #fff;
+  display: block;
+  border-radius: 100%;
+  width: 1.45em;
+  height: 1.45em;
+  border: 1px solid #fff;
+  background-color: #4c3d3d;
+  text-align: center;
 }
-.mobile-icon .icon {
-  display: inline-block;
-  width: 2.5rem;
-  height: 2.5rem;
-  stroke-width: 0;
-  stroke: currentColor;
-  fill: currentColor;
+.mobile-icon .icon-user {
+  font-size: 2rem;
+}
+.mobile-icon .icon-user:before {
+  content: "";
+}
+.mobile-icon .icon-shopping-basket {
+  font-size: 2rem;
+  position: relative;
+}
+.mobile-icon .icon-shopping-basket:before {
+  content: "";
+}
+.mobile-icon .icon-shopping-basket .count {
+  font-size: 0.50em;
+  position: absolute;
+  top: -25%;
+  left: 60%;
 }

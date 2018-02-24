@@ -1,1 +1,9 @@
+@mixin unicode($icon){
+	&:before {
+		content: $icon;
+	}
+}
 
+@mixin flexbox(){
+	
+}
