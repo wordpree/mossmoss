@@ -18,7 +18,6 @@
 
 <?php do_action( 'storefront_before_site' ); ?>
 
-<?php do_action( 'storefront_child_before_site' ); ?>
 <div id="page" class="hfeed site slide-out">
 	<?php do_action( 'storefront_before_header' ); ?>
 
