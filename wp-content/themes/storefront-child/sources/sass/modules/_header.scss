@@ -7,66 +7,75 @@
     display: flex;
     justify-content:space-between;
     padding: 0.5em;
-    .mobile-icon {
-      align-self:center;
-      li:nth-child(1){
-        margin-right: 2em;
-      }
-    } //mobile-icon
+  } //flexbox
+  
+  .site-branding {
+    align-self:center;
+
+    .custom-logo {
+      width: 12.5em;
+      height: auto;
+    } //custom-logo
+
+  } //site-branding
+
+  .mobile-icon {
+    align-self:center;
+
+    .icon-user {
+      @include unicode($icon-user);
+      font-size: 2rem;
+    } //icon-user
+
+    .icon-shopping-basket {
+      @include unicode($icon-shopping-basket);
+      font-size: 2rem;
+      position: relative;
+    } //icon-shopping-basket
+
+    li{
+      display: inline-block;  
+    }//li
     
+    li:nth-child(1){
+      margin-right: 2em;
+    }//li 
+
+   .count {
+      color: #fff;
+      display: block;
+      border-radius: 100%;
+      width: 1.45em;
+      height: 1.45em;
+      border:1px solid #fff;
+      background-color: #4c3d3d;
+      text-align: center;
+      font-size: 0.50em;
+      position: absolute;
+      top:-25%;
+      left: 60%;
+    } //count
+
+  }//mobile-icon
+    
+  .storefront-primary-navigation{
+    flex:0 0 28%;
+
     .main-navigation{
       display: flex;
       flex-direction:column;
     } //main-navi
 
-    .storefront-primary-navigation{
-      flex:0 0 30%;
-    } //storefront-primary-navi
+  } //storefront-primary-navi
 
-    .mobile-site-search{
-      flex:0 0 65%;
-    } //mobile-site-search
+  .mobile-site-search{
+    flex:0 0 70%;
+  } //mobile-site-search
 
-  } //flexbox
 
-}// site-header-container
+  .flexbox + .flexbox {
+    margin-top: 0.75rem;
+  }//flexbox
 
-.flexbox + .flexbox {
-  margin-top: 0.75rem;
-}
 
-.mobile-icon {
-  li {
-    display: inline-block;
-  } //li
- 
-  span {
-        color: #fff;
-        display: block;
-        border-radius: 100%;
-        width: 1.45em;
-        height: 1.45em;
-        border:1px solid #fff;
-        background-color: #4c3d3d;
-        text-align: center;
-  } //span
-  
-  .icon-user {
-    @include unicode($icon-user);
-    font-size: 2rem;
-  } //icon-user
-
-  .icon-shopping-basket {
-    @include unicode($icon-shopping-basket);
-    font-size: 2rem;
-    position: relative;
-
-    .count {
-      font-size: 0.50em;
-      position: absolute;
-      top:-25%;
-      left: 60%;
-     
-    }
-  } //icon-shopping-basket
-}
+}//mobile-header-container
