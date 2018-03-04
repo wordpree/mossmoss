@@ -61,9 +61,12 @@ gulp.task('sass',function(){
 	return gulp.src(path.style[0] + 'style.scss')
 	       .pipe(sass({
 	       	   project:projectRoot,
-               sass:'sources/sass',
-               css:'assets/sass',
+             sass:'sources/sass',
+             css:'assets/sass',
 	       	   style: 'expanded',
+             image: 'assets/images',
+             font: 'assets/fonts',
+             javascript: 'assets/js/**/',
 	       	   sourcemap:status
 	       }).on('error',util.log))
 	       .pipe(postcss([prefix('last 2 versions','> 2%')]))
