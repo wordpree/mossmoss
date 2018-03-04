@@ -1,8 +1,6 @@
 
 //@import compass
-@import 'compass';
-@import 'compass/reset';
-@import 'compass/css3/box-sizing';
+@import "plugins/plugins";
 
 //@import partials;
 @import "variables";
@@ -10,13 +8,5 @@
 @import "mixins";
 @import "layout";
 
-@import "modules/header";
-@import "modules/header_widget";
-@import "modules/content";
-@import "modules/woocommerce";
-@import "modules/sliders";
-@import "modules/production";
-@import "modules/testimonials";
-@import "modules/intro";
-@import "modules/rctpst";
-@import "modules/social";
+//@import modules
+@import "modules/modules";
