@@ -1,8 +1,6 @@
 #ignore everything under the wp directory except wp-content folder 
-#and wp-config.php file
 /*
 !wp-content/
-!wp-config.php
 
 #ignore everything in wp-content folder other than plugins,themes
 wp-content/*
