@@ -60,7 +60,6 @@
 // 		    $(this).find('.widget_shopping_cart_content').slideUp('slow',function(){	
 		
 // 			});
-			
 // 		}
 // 	});
 //  }
@@ -88,6 +87,7 @@
 // 	speed:5000,	
 // 	};
 // $('.header-slider-wrapper').fancySlider(args);
+
 
 // }
 
