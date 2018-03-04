@@ -70,7 +70,6 @@ gulp.task('sass',function(){
 	       .pipe(gIf(flag === 'production',cleanCss()))
 	       .pipe(gIf(flag === 'production',rename({suffix:'.min'})))
 	       .pipe(gulp.dest(path.style[2]))
-	       .pipe(browserSync.stream());
 });
 
 gulp.task('js',function(){
@@ -90,6 +89,10 @@ gulp.task('fonts',function(){
            .pipe(gulp.dest(path.fonts[2]));
 });
 
+gulp.task('css-reload',['sass'],function(){
+  browserSync.reload();
+});
+
 gulp.task('js-reload',['js'],function(){
   browserSync.reload();
 });
@@ -103,7 +106,7 @@ gulp.task('clear',function(){
 });
 
 gulp.task('watch',['browser-sync'],function(){
-    gulp.watch(path.style[0] + '**/*.scss',['sass']);
+    gulp.watch(path.style[0] + '**/*.scss',['css-reload']);
     gulp.watch(path.js[0]    + '*.js'     ,['js-reload']);
     gulp.watch(path.fonts[0] + '*.*'      ,['fonts-reload']);
     gulp.watch(projectRoot   + '**/*.php').on('change',browserSync.reload);
