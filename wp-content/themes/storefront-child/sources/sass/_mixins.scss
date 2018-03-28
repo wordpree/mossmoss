@@ -4,6 +4,43 @@
 	}
 }
 
-@mixin flexbox(){
-	
+@mixin mobileIcon($fontSize:2rem,$margin:2em){
+  .mobile-icon {
+    align-self:center;
+
+    .icon-user {
+      @include unicode($icon-user);
+      font-size: $fontSize;
+    } //icon-user
+
+    .icon-shopping-basket {
+      @include unicode($icon-shopping-basket);
+      font-size: $fontSize;
+      position: relative;
+    } //icon-shopping-basket
+
+    li{
+      display: inline-block;  
+    }//li
+    
+    li:nth-child(1){
+      margin-right: $margin;
+    }//li 
+
+   .count {
+      color: #fff;
+      display: block;
+      border-radius: 100%;
+      width: 1.45em;
+      height: 1.45em;
+      border:1px solid #fff;
+      background-color: #4c3d3d;
+      text-align: center;
+      font-size: 0.50em;
+      position: absolute;
+      top:-25%;
+      left: 60%;
+    } //count
+
+  }//mobile-icon
 }

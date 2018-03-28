@@ -1,3 +1,5 @@
+/*header.scss*/
+// mobile header
 .mobile-header-container {
   display: flex;
   flex-direction:column;
@@ -19,44 +21,7 @@
 
   } //site-branding
 
-  .mobile-icon {
-    align-self:center;
-
-    .icon-user {
-      @include unicode($icon-user);
-      font-size: 2rem;
-    } //icon-user
-
-    .icon-shopping-basket {
-      @include unicode($icon-shopping-basket);
-      font-size: 2rem;
-      position: relative;
-    } //icon-shopping-basket
-
-    li{
-      display: inline-block;  
-    }//li
-    
-    li:nth-child(1){
-      margin-right: 2em;
-    }//li 
-
-   .count {
-      color: #fff;
-      display: block;
-      border-radius: 100%;
-      width: 1.45em;
-      height: 1.45em;
-      border:1px solid #fff;
-      background-color: #4c3d3d;
-      text-align: center;
-      font-size: 0.50em;
-      position: absolute;
-      top:-25%;
-      left: 60%;
-    } //count
-
-  }//mobile-icon
+ @include mobileIcon();
     
   .storefront-primary-navigation{
     flex:0 0 28%;
@@ -79,3 +44,70 @@
 
 
 }//mobile-header-container
+
+//tablet header
+.tablet-header-container {
+  display:flex;
+  flex-direction:column;
+  padding:0.5rem 1.25rem;
+
+  .site-branding {
+     text-align:center;
+     margin:0 auto;
+     margin-bottom:1em;
+     padding:0.5em;
+
+      .custom-logo {
+      width: 15em;
+      height: auto;
+    } //custom-logo
+  }//site-branding
+
+  .flexbox {
+    display:flex;
+    margin-top:1em;
+    padding:0.5em;
+    justify-content:space-between;
+    &>div {
+      &.storefront-primary-navigation{
+        margin:0;
+        padding: 0.5em;
+        flex:0 0 auto;
+      }//storefront-primary-navigation
+
+      .main-navigation {
+        width:auto;
+        float:none;
+        margin:0;
+      }
+      button {
+        display: block;
+        float:none;
+      }//button
+
+      .handheld-navigation{
+        display:block;
+        width:80%;
+        li:nth-child(1){
+          margin-left:0;
+        }//li
+
+        li{
+          border-bottom:1px solid #cccccc;
+          display:block;
+        }
+
+      }//handheld-navigation
+
+    } //div
+
+  }//flexbox
+  
+  @include mobileIcon(2.2rem,2.8em);
+  .mobile-icon {
+    align-self:auto;
+    padding:0.5em;
+  }
+}//tablet-header-container
+
+//desktop header
