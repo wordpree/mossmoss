@@ -44,3 +44,26 @@
 
   }//mobile-icon
 }
+
+%lists {
+
+  li:nth-child(1){
+    margin-left:0;
+  }
+  li:nth-child(even){
+    background-color: darken($list-bg-color, 1);
+    &:hover {
+      background-color: saturate($list-bg-color, 80);
+    }
+  }
+  li:nth-child(odd){
+    background-color: lighten($list-bg-color,1);
+    &:hover {
+      background-color: saturate($list-bg-color,80);
+    }
+  }
+  li{
+    border-bottom:1px solid $list-bottom-border;
+    display:block;
+  }   
+}

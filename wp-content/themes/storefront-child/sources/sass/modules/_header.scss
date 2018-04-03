@@ -1,4 +1,10 @@
 /*header.scss*/
+//!default
+.site-header-container {
+  .flexbox {
+    // background-color: $header-bg-color;
+    } //flexbox  
+}
 // mobile header
 .mobile-header-container {
   display: flex;
@@ -68,45 +74,39 @@
     margin-top:1em;
     padding:0.5em;
     justify-content:space-between;
-    &>div {
-      &.storefront-primary-navigation{
+    .storefront-primary-navigation{
         margin:0;
         padding: 0.5em;
-        flex:0 0 auto;
-      }//storefront-primary-navigation
+        flex:1 0 auto;
+    }//storefront-primary-navigation
 
-      .main-navigation {
-        width:auto;
-        float:none;
-        margin:0;
-      }
-      button {
-        display: block;
-        float:none;
-      }//button
+    .main-navigation {
+      width:auto;
+      float:none;
+      margin:0;
+    } //main-navigation 
 
-      .handheld-navigation{
-        display:block;
-        width:80%;
-        li:nth-child(1){
-          margin-left:0;
-        }//li
+    button {
+      display: block;
+      float:none;
+    }//button
 
-        li{
-          border-bottom:1px solid #cccccc;
-          display:block;
-        }
+    .handheld-navigation{
+      display:block;
+      width:90%;
+      .nav-menu {
+        padding:0.75em 0.2em;
+      }//nav-menu
 
-      }//handheld-navigation
+      @extend %lists;
+    }//handheld-navigation
 
-    } //div
-
-  }//flexbox
+}//flexbox
   
   @include mobileIcon(2.2rem,2.8em);
   .mobile-icon {
     align-self:auto;
-    padding:0.5em;
+    padding:0.75em;
   }
 }//tablet-header-container
 
