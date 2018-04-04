@@ -101,58 +101,7 @@ i {
   display: block;
 }
 
-/*header.scss*/
-.mobile-header-container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
-  padding: 0.5rem 1rem;
-}
-.mobile-header-container .flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
-  padding: 0.5em;
-}
-.mobile-header-container .site-branding {
-  -ms-flex-item-align: center;
-      align-self: center;
-}
-.mobile-header-container .site-branding .custom-logo {
-  width: 12.5em;
-  height: auto;
-}
-.mobile-header-container .mobile-icon {
-  -ms-flex-item-align: center;
-      align-self: center;
-}
-.mobile-header-container .mobile-icon .icon-user {
-  font-size: 2rem;
-}
-.mobile-header-container .mobile-icon .icon-user:before {
-  content: "";
-}
-.mobile-header-container .mobile-icon .icon-shopping-basket {
-  font-size: 2rem;
-  position: relative;
-}
-.mobile-header-container .mobile-icon .icon-shopping-basket:before {
-  content: "";
-}
-.mobile-header-container .mobile-icon li {
-  display: inline-block;
-}
-.mobile-header-container .mobile-icon li:nth-child(1) {
-  margin-right: 2em;
-}
-.mobile-header-container .mobile-icon .count {
+.site-header-container .mobile-icon .count {
   color: #fff;
   display: block;
   border-radius: 100%;
@@ -165,6 +114,63 @@ i {
   position: absolute;
   top: -25%;
   left: 60%;
+}
+
+/*header.scss*/
+.site-header-container .flexbox {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.site-header-container .mobile-icon {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+.site-header-container .mobile-icon .icon-user:before {
+  content: "";
+}
+.site-header-container .mobile-icon .icon-shopping-basket {
+  position: relative;
+}
+.site-header-container .mobile-icon .icon-shopping-basket:before {
+  content: "";
+}
+.site-header-container .mobile-icon li {
+  display: inline-block;
+}
+
+.mobile-header-container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  padding: 0.5rem 1rem;
+}
+.mobile-header-container .flexbox {
+  padding: 0.5em;
+}
+.mobile-header-container .site-branding {
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+.mobile-header-container .site-branding .custom-logo {
+  width: 12.5em;
+  height: auto;
+}
+.mobile-header-container .mobile-icon .icon-user {
+  font-size: 2rem;
+}
+.mobile-header-container .mobile-icon .icon-shopping-basket {
+  font-size: 2rem;
+}
+.mobile-header-container .mobile-icon li:nth-child(1) {
+  margin-right: 2em;
 }
 .mobile-header-container .storefront-primary-navigation {
   -webkit-box-flex: 0;
@@ -210,14 +216,8 @@ i {
   height: auto;
 }
 .tablet-header-container .flexbox {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
   margin-top: 1em;
   padding: 0.5em;
-  -webkit-box-pack: justify;
-      -ms-flex-pack: justify;
-          justify-content: space-between;
 }
 .tablet-header-container .flexbox .storefront-primary-navigation {
   margin: 0;
@@ -242,42 +242,14 @@ i {
 .tablet-header-container .flexbox .handheld-navigation .nav-menu {
   padding: 0.75em 0.2em;
 }
-.tablet-header-container .mobile-icon {
-  -ms-flex-item-align: center;
-      align-self: center;
-}
 .tablet-header-container .mobile-icon .icon-user {
   font-size: 2.2rem;
 }
-.tablet-header-container .mobile-icon .icon-user:before {
-  content: "";
-}
 .tablet-header-container .mobile-icon .icon-shopping-basket {
   font-size: 2.2rem;
-  position: relative;
-}
-.tablet-header-container .mobile-icon .icon-shopping-basket:before {
-  content: "";
-}
-.tablet-header-container .mobile-icon li {
-  display: inline-block;
 }
 .tablet-header-container .mobile-icon li:nth-child(1) {
   margin-right: 2.8em;
-}
-.tablet-header-container .mobile-icon .count {
-  color: #fff;
-  display: block;
-  border-radius: 100%;
-  width: 1.45em;
-  height: 1.45em;
-  border: 1px solid #fff;
-  background-color: #4c3d3d;
-  text-align: center;
-  font-size: 0.50em;
-  position: absolute;
-  top: -25%;
-  left: 60%;
 }
 .tablet-header-container .mobile-icon {
   -ms-flex-item-align: auto;

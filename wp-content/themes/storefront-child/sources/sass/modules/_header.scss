@@ -2,8 +2,29 @@
 //!default
 .site-header-container {
   .flexbox {
-    // background-color: $header-bg-color;
-    } //flexbox  
+    display:flex;
+    justify-content:space-between;
+  } //flexbox
+
+  .mobile-icon{
+    align-self:center;
+    .icon-user {
+        @include unicode($icon-user);
+    }//icon-user
+
+    .icon-shopping-basket {
+        @include unicode($icon-shopping-basket);
+         position: relative;
+    }//icon-shopping-basket 
+
+    @extend %cart;
+
+    li{
+      display: inline-block;  
+    }//li
+
+  }//mobile-icon
+  
 }
 // mobile header
 .mobile-header-container {
@@ -12,8 +33,6 @@
   padding:0.5rem 1rem;
 
   .flexbox {
-    display: flex;
-    justify-content:space-between;
     padding: 0.5em;
   } //flexbox
   
@@ -70,10 +89,8 @@
   }//site-branding
 
   .flexbox {
-    display:flex;
     margin-top:1em;
     padding:0.5em;
-    justify-content:space-between;
     .storefront-primary-navigation{
         margin:0;
         padding: 0.5em;
