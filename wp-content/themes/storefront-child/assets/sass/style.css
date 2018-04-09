@@ -81,42 +81,7 @@ i {
   box-sizing: border-box;
 }
 
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(1) {
-  margin-left: 0;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(even) {
-  background-color: #f6ebee;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(even):hover {
-  background-color: #ffe8ed;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd) {
-  background-color: #faf3f4;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd):hover {
-  background-color: #ffe8ed;
-}
-.tablet-header-container .flexbox .handheld-navigation li {
-  border-bottom: 1px solid #cccccc;
-  display: block;
-}
-
-.site-header-container .mobile-icon .count {
-  color: #fff;
-  display: block;
-  border-radius: 100%;
-  width: 1.45em;
-  height: 1.45em;
-  border: 1px solid #fff;
-  background-color: #4c3d3d;
-  text-align: center;
-  font-size: 0.50em;
-  position: absolute;
-  top: -25%;
-  left: 60%;
-}
-
-/*header.scss*/
+/******* header.scss *******/
 .site-header-container .flexbox {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -137,6 +102,20 @@ i {
 }
 .site-header-container .mobile-icon .icon-shopping-basket:before {
   content: "";
+}
+.site-header-container .mobile-icon .count {
+  color: #fff;
+  display: block;
+  border-radius: 100%;
+  width: 1.45em;
+  height: 1.45em;
+  border: 1px solid #fff;
+  background-color: #4c3d3d;
+  text-align: center;
+  font-size: 0.50em;
+  position: absolute;
+  top: -25%;
+  left: 60%;
 }
 .site-header-container .mobile-icon li {
   display: inline-block;
@@ -242,6 +221,25 @@ i {
 .tablet-header-container .flexbox .handheld-navigation .nav-menu {
   padding: 0.75em 0.2em;
 }
+.tablet-header-container .flexbox .handheld-navigation li:nth-child(1) {
+  margin-left: 0;
+}
+.tablet-header-container .flexbox .handheld-navigation li:nth-child(even) {
+  background-color: #f6ebee;
+}
+.tablet-header-container .flexbox .handheld-navigation li:nth-child(even):hover {
+  background-color: #ffe8ed;
+}
+.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd) {
+  background-color: #faf3f4;
+}
+.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd):hover {
+  background-color: #ffe8ed;
+}
+.tablet-header-container .flexbox .handheld-navigation li {
+  border-bottom: 1px solid #cccccc;
+  display: block;
+}
 .tablet-header-container .mobile-icon .icon-user {
   font-size: 2.2rem;
 }
@@ -255,4 +253,68 @@ i {
   -ms-flex-item-align: auto;
       align-self: auto;
   padding: 0.75em;
+}
+
+.desktop-header-container .site-header-tool {
+  background: #000;
+  position: fixed;
+  top: 0;
+  z-index: 999;
+  width: 100%;
+  padding: 0.2em 1em;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+}
+.desktop-header-container .site-header-tool .site-search {
+  margin-bottom: 0;
+  -ms-flex-item-align: center;
+      align-self: center;
+}
+.desktop-header-container .site-header-tool .site-search button[type="submit"] {
+  right: 0;
+  bottom: 0;
+  left: auto;
+  clip: auto;
+  background-color: #9D786E;
+}
+.desktop-header-container .site-header-tool .site-search button[type="submit"]:hover {
+  background-color: #af6e5c;
+  color: white;
+}
+.desktop-header-container .site-header-tool .cart-contents {
+  color: #fff;
+}
+.desktop-header-container .site-header-tool .site-header-cart {
+  max-width: 290px;
+  padding-right: 1em;
+}
+.desktop-header-container .storefront-primary-navigation {
+  margin-top: 1.5em;
+}
+.desktop-header-container .storefront-primary-navigation .main-navigation {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  margin-right: 0;
+  width: 100%;
+  padding: 1em;
+}
+.desktop-header-container .storefront-primary-navigation .main-navigation .custom-logo-link {
+  padding: 0;
+}
+.desktop-header-container .storefront-primary-navigation .main-navigation .menu {
+  font-size: 1.3em;
+}
+.desktop-header-container .storefront-primary-navigation .main-navigation .site-branding {
+  margin: 0;
+  -ms-flex-item-align: center;
+      align-self: center;
+  max-width: 25em;
 }

@@ -1,5 +1,5 @@
-/*header.scss*/
-//!default
+/******* header.scss *******/
+//default
 .site-header-container {
   .flexbox {
     display:flex;
@@ -17,7 +17,20 @@
          position: relative;
     }//icon-shopping-basket 
 
-    @extend %cart;
+    .count {
+        color: #fff;
+        display: block;
+        border-radius: 100%;
+        width: 1.45em;
+        height: 1.45em;
+        border:1px solid #fff;
+        background-color: #4c3d3d;
+        text-align: center;
+        font-size: 0.50em;
+        position: absolute;
+        top:-25%;
+        left: 60%;
+    }
 
     li{
       display: inline-block;  
@@ -115,7 +128,26 @@
         padding:0.75em 0.2em;
       }//nav-menu
 
-      @extend %lists;
+      li:nth-child(1){
+        margin-left:0;
+      }
+      li:nth-child(even){
+        background-color: darken($list-bg-color, 1);
+        &:hover {
+          background-color: saturate($list-bg-color, 80);
+        }
+      }
+      li:nth-child(odd){
+        background-color: lighten($list-bg-color,1);
+        &:hover {
+          background-color: saturate($list-bg-color,80);
+        }
+      }
+      li{
+        border-bottom:1px solid $list-bottom-border;
+        display:block;
+      } 
+
     }//handheld-navigation
 
 }//flexbox
@@ -128,3 +160,63 @@
 }//tablet-header-container
 
 //desktop header
+
+.desktop-header-container {
+    .site-header-tool {
+      background: #000;
+      position:fixed;
+      top:0;
+      z-index:999;
+      width:100%;
+      padding:0.2em 1em;
+      display:flex;
+      justify-content:space-between;
+      .site-search {
+        margin-bottom:0;
+        align-self:center;
+        button[type="submit"] {
+         right:0;
+         bottom:0;
+         left:auto;
+         clip:auto;
+         background-color: $btn-bg-color;
+         &:hover {
+          background-color: saturate($btn-bg-color, 15);
+          color:lighten(#fff, 40);
+         }
+        }//button
+
+      }//site-search
+
+      .cart-contents{
+        color:#fff;
+      }//cart-contents
+
+      .site-header-cart{
+          max-width:290px;
+          padding-right:1em;
+        }//site-header-cart
+
+    }//site-header-tool
+    .storefront-primary-navigation {
+      margin-top:1.5em;
+      .main-navigation{
+        display:flex;
+        justify-content:space-between;
+        margin-right:0;
+        width:100%;
+        padding:1em;
+        .custom-logo-link {
+          padding:0;
+        }
+        .menu {
+          font-size:1.3em;
+        }
+        .site-branding{
+          margin:0;
+          align-self:center;
+          max-width:25em;
+        }//site-branding
+      }//main-navigation
+    }//storefront-primary-navigation
+}
