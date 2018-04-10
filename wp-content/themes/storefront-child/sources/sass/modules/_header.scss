@@ -1,11 +1,13 @@
 /******* header.scss *******/
+//extend placeholder
+
 //default
 .site-header-container {
   .flexbox {
     display:flex;
     justify-content:space-between;
   } //flexbox
-
+  @include handheld($nav-bg-color,$nav-border-line,40);
   .mobile-icon{
     align-self:center;
     .icon-user {
@@ -46,9 +48,10 @@
   padding:0.5rem 1rem;
 
   .flexbox {
-    padding: 0.5em;
+    padding: 1em;
+    margin-bottom:0.75em;
   } //flexbox
-  
+
   .site-branding {
     align-self:center;
 
@@ -56,44 +59,85 @@
       width: 12.5em;
       height: auto;
     } //custom-logo
-
   } //site-branding
 
- @include mobileIcon();
-    
+  @include mobileIcon();
+
   .storefront-primary-navigation{
-    flex:0 0 28%;
-
-    .main-navigation{
-      display: flex;
-      flex-direction:column;
-    } //main-navi
-
-  } //storefront-primary-navi
+    background-color: $nav-bg-color;
+  }//storefront-primary-navigation
+  .menu-toggle {
+    float:none;
+  }//menu-toggle
 
   .mobile-site-search{
-    flex:0 0 70%;
-  } //mobile-site-search
+    max-height:0px;
+    overflow:hidden;
+    transition: all,ease,.8s;
+    .widget_product_search{
+      padding:0.8em;
+    }//widget_product_search
+  }//mobile-site-search
 
+  .main-navigation {
+    &.toggled {
+      .mobile-site-search{
+        max-height:10em; 
+      }//main-navigation
 
-  .flexbox + .flexbox {
-    margin-top: 0.75rem;
-  }//flexbox
+      .menu-toggle{
+        &:before {
+          transform: rotate(45deg);  
+        }
+        &:after {
+          transform: rotate(-45deg);
+        }
+      }//menu-toggle
 
+    }//toggled
 
+    .menu-toggle {
+      background-color: $nav-bg-color;
+      border: none;
+      &:before,&:after,& span:before {
+        height: 3px;
+        width: 20px;
+        left: 0.6em;
+        font-size: 16px;
+      }
+      &:before {
+        transform: translateY(-6px);  
+      }
+      &:after {
+        transform: translateY(6px);
+      }
+      &:hover {
+        background-color: none;
+      }
+      span {
+        font-size:1.2em;
+      }  
+    }//menu-toggle
+    .handheld-navigation {
+      li {
+         padding:0.5em 0 0.5em 1em;
+      }//li
+    }//handheld-navigation
+    
+  }//main-navigation
 }//mobile-header-container
 
 //tablet header
 .tablet-header-container {
-  display:flex;
-  flex-direction:column;
-  padding:0.5rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  padding: 0.5rem 1.25rem;
 
   .site-branding {
-     text-align:center;
-     margin:0 auto;
-     margin-bottom:1em;
-     padding:0.5em;
+     text-align: center;
+     margin: 0 auto;
+     margin-bottom: 1em;
+     padding: 0.5em;
 
       .custom-logo {
       width: 15em;
@@ -102,18 +146,18 @@
   }//site-branding
 
   .flexbox {
-    margin-top:1em;
-    padding:0.5em;
+    margin-top: 1em;
+    padding: 0.5em;
     .storefront-primary-navigation{
-        margin:0;
+        margin: 0;
         padding: 0.5em;
-        flex:1 0 auto;
+        flex: 1 0 auto;
     }//storefront-primary-navigation
 
     .main-navigation {
-      width:auto;
-      float:none;
-      margin:0;
+      width: auto;
+      float: none;
+      margin: 0;
     } //main-navigation 
 
     button {
@@ -122,40 +166,22 @@
     }//button
 
     .handheld-navigation{
-      display:block;
-      width:90%;
+      display: block;
+      width: 90%;
       .nav-menu {
-        padding:0.75em 0.2em;
+        padding: 0.75em 0.2em;
       }//nav-menu
-
       li:nth-child(1){
-        margin-left:0;
+        margin-left: 0;
       }
-      li:nth-child(even){
-        background-color: darken($list-bg-color, 1);
-        &:hover {
-          background-color: saturate($list-bg-color, 80);
-        }
-      }
-      li:nth-child(odd){
-        background-color: lighten($list-bg-color,1);
-        &:hover {
-          background-color: saturate($list-bg-color,80);
-        }
-      }
-      li{
-        border-bottom:1px solid $list-bottom-border;
-        display:block;
-      } 
-
     }//handheld-navigation
 
 }//flexbox
   
   @include mobileIcon(2.2rem,2.8em);
   .mobile-icon {
-    align-self:auto;
-    padding:0.75em;
+    align-self: auto;
+    padding: 0.75em;
   }
 }//tablet-header-container
 
@@ -164,58 +190,58 @@
 .desktop-header-container {
     .site-header-tool {
       background: #000;
-      position:fixed;
-      top:0;
-      z-index:999;
-      width:100%;
-      padding:0.2em 1em;
-      display:flex;
+      position: fixed;
+      top: 0;
+      z-index: 999;
+      width: 100%;
+      padding: 0.2em 1em;
+      display: flex;
       justify-content:space-between;
       .site-search {
-        margin-bottom:0;
-        align-self:center;
+        margin-bottom: 0;
+        align-self: center;
         button[type="submit"] {
-         right:0;
-         bottom:0;
-         left:auto;
-         clip:auto;
+         right: 0;
+         bottom: 0;
+         left: auto;
+         clip: auto;
          background-color: $btn-bg-color;
          &:hover {
           background-color: saturate($btn-bg-color, 15);
-          color:lighten(#fff, 40);
+          color: lighten(#fff, 40);
          }
         }//button
 
       }//site-search
 
       .cart-contents{
-        color:#fff;
+        color: #fff;
       }//cart-contents
 
       .site-header-cart{
-          max-width:290px;
-          padding-right:1em;
+          max-width: 290px;
+          padding-right: 1em;
         }//site-header-cart
 
     }//site-header-tool
     .storefront-primary-navigation {
-      margin-top:1.5em;
+      margin-top: 1.5em;
       .main-navigation{
-        display:flex;
+        display: flex;
         justify-content:space-between;
-        margin-right:0;
-        width:100%;
-        padding:1em;
+        margin-right: 0;
+        width: 100%;
+        padding: 1em;
         .custom-logo-link {
-          padding:0;
+          padding: 0;
         }
         .menu {
-          font-size:1.3em;
+          font-size: 1.3em;
         }
         .site-branding{
-          margin:0;
-          align-self:center;
-          max-width:25em;
+          margin: 0;
+          align-self: center;
+          max-width: 25em;
         }//site-branding
       }//main-navigation
     }//storefront-primary-navigation

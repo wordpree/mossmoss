@@ -24,3 +24,32 @@
   }//mobile-icon
 }
 
+@mixin handheld($bg-color,$border-color,$amount) {
+  .handheld-navigation{
+      li:nth-child(even){
+        background-color: darken($bg-color, 1);
+        &:hover {
+          background-color: saturate($bg-color, $amount);
+        }
+      }
+
+      li:nth-child(odd){
+        background-color: lighten($bg-color,1);
+        &:hover {
+          background-color: saturate($bg-color,$amount);
+        }
+      }
+
+      li{
+        border-bottom:1px solid $border-color;
+        display:block;
+        a {
+          color:#fff;
+        }
+        &:nth-child(1) {
+          border-top:1px solid $border-color;
+        }
+      }
+  }
+  
+}

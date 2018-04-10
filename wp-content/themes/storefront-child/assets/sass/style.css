@@ -90,6 +90,28 @@ i {
       -ms-flex-pack: justify;
           justify-content: space-between;
 }
+.site-header-container .handheld-navigation li:nth-child(even) {
+  background-color: #db939b;
+}
+.site-header-container .handheld-navigation li:nth-child(even):hover {
+  background-color: #f87b8a;
+}
+.site-header-container .handheld-navigation li:nth-child(odd) {
+  background-color: #dd9ba3;
+}
+.site-header-container .handheld-navigation li:nth-child(odd):hover {
+  background-color: #f87b8a;
+}
+.site-header-container .handheld-navigation li {
+  border-bottom: 1px solid #444B53;
+  display: block;
+}
+.site-header-container .handheld-navigation li a {
+  color: #fff;
+}
+.site-header-container .handheld-navigation li:nth-child(1) {
+  border-top: 1px solid #444B53;
+}
 .site-header-container .mobile-icon {
   -ms-flex-item-align: center;
       align-self: center;
@@ -132,7 +154,8 @@ i {
   padding: 0.5rem 1rem;
 }
 .mobile-header-container .flexbox {
-  padding: 0.5em;
+  padding: 1em;
+  margin-bottom: 0.75em;
 }
 .mobile-header-container .site-branding {
   -ms-flex-item-align: center;
@@ -152,26 +175,57 @@ i {
   margin-right: 2em;
 }
 .mobile-header-container .storefront-primary-navigation {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 28%;
-          flex: 0 0 28%;
+  background-color: #DC979F;
 }
-.mobile-header-container .storefront-primary-navigation .main-navigation {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-orient: vertical;
-  -webkit-box-direction: normal;
-      -ms-flex-direction: column;
-          flex-direction: column;
+.mobile-header-container .menu-toggle {
+  float: none;
 }
 .mobile-header-container .mobile-site-search {
-  -webkit-box-flex: 0;
-      -ms-flex: 0 0 70%;
-          flex: 0 0 70%;
+  max-height: 0px;
+  overflow: hidden;
+  -webkit-transition: all,ease,.8s;
+  transition: all,ease,.8s;
 }
-.mobile-header-container .flexbox + .flexbox {
-  margin-top: 0.75rem;
+.mobile-header-container .mobile-site-search .widget_product_search {
+  padding: 0.8em;
+}
+.mobile-header-container .main-navigation.toggled .mobile-site-search {
+  max-height: 10em;
+}
+.mobile-header-container .main-navigation.toggled .menu-toggle:before {
+  -webkit-transform: rotate(45deg);
+          transform: rotate(45deg);
+}
+.mobile-header-container .main-navigation.toggled .menu-toggle:after {
+  -webkit-transform: rotate(-45deg);
+          transform: rotate(-45deg);
+}
+.mobile-header-container .main-navigation .menu-toggle {
+  background-color: #DC979F;
+  border: none;
+}
+.mobile-header-container .main-navigation .menu-toggle:before, .mobile-header-container .main-navigation .menu-toggle:after, .mobile-header-container .main-navigation .menu-toggle span:before {
+  height: 3px;
+  width: 20px;
+  left: 0.6em;
+  font-size: 16px;
+}
+.mobile-header-container .main-navigation .menu-toggle:before {
+  -webkit-transform: translateY(-6px);
+          transform: translateY(-6px);
+}
+.mobile-header-container .main-navigation .menu-toggle:after {
+  -webkit-transform: translateY(6px);
+          transform: translateY(6px);
+}
+.mobile-header-container .main-navigation .menu-toggle:hover {
+  background-color: none;
+}
+.mobile-header-container .main-navigation .menu-toggle span {
+  font-size: 1.2em;
+}
+.mobile-header-container .main-navigation .handheld-navigation li {
+  padding: 0.5em 0 0.5em 1em;
 }
 
 .tablet-header-container {
@@ -223,22 +277,6 @@ i {
 }
 .tablet-header-container .flexbox .handheld-navigation li:nth-child(1) {
   margin-left: 0;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(even) {
-  background-color: #f6ebee;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(even):hover {
-  background-color: #ffe8ed;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd) {
-  background-color: #faf3f4;
-}
-.tablet-header-container .flexbox .handheld-navigation li:nth-child(odd):hover {
-  background-color: #ffe8ed;
-}
-.tablet-header-container .flexbox .handheld-navigation li {
-  border-bottom: 1px solid #cccccc;
-  display: block;
 }
 .tablet-header-container .mobile-icon .icon-user {
   font-size: 2.2rem;
