@@ -24,13 +24,10 @@ if ( $storefront_child_is_woocommerce_actived ) {
 		add_action( 'storefront_child_header', 'storefront_child_site_branding',                     30 );
 		add_action( 'storefront_child_header', 'storefront_child_mobile_entry',                      31 );
 		add_action( 'storefront_child_header', 'storefront_child_flexbox_close',                     32 );
-		add_action( 'storefront_child_header', 'storefront_child_flexbox_open',                      48 );
 		add_action( 'storefront_child_header', 'storefront_child_primary_navigation_wrapper',        49 );
 		add_action( 'storefront_child_header', 'storefront_child_primary_navigation_mini_menu',      50 );
 		add_action( 'storefront_child_header', 'storefront_child_primary_navigation_handheld',       51 );
 		add_action( 'storefront_child_header', 'storefront_child_primary_navigation_wrapper_close',  69 );
-		add_action( 'storefront_child_header', 'storefront_child_wc_search',                         70 );
-		add_action( 'storefront_child_header', 'storefront_child_flexbox_close',                     71 );
   		break;
   	case 'tablet':
   	    add_action( 'storefront_child_header', 'storefront_child_site_branding',                     30 );
