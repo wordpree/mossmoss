@@ -33,6 +33,7 @@ Thumbs.db
 *.tmlanguage.cache
 *.tmPreferences.cache
 *.stTheme.cache
+*.phpintel
 
 # ignore log files and databases
 *.log
