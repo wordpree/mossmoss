@@ -36,43 +36,6 @@ add_action('wp_enqueue_scripts','storefront_child_scripts_enqueue',21);
 $storefront_child_is_woocommerce_actived = class_exists( 'WooCommerce' ) ? true : false;
 
 
-
-
-/*register slider post type*/
-function yee__post_type_slider_init(){
-  $labels =array(
-	'name'          => __('Sliders','yee-slider'),
-	'singular_name' => __('Slider','yee-slider'),
-	'menu_name'     => __('Sliders','yee-slider'),
-	'add_new'       => __('Add New','yee-slider'),
-	'add_new_item'  => __('Add New Slider','yee-slider'),
-	'new_item'      => __('New Slider','yee-slider'),
-	'edit_item'     => __('Edit slider','yee-slider'),
-	'view_item'     => __('View Slider','yee-slider'),
-	'all_items'     => __('All Sliders','yee-slider'),
-	'search_items'  => __('Search Sliders','yee-slider'),
-	
- );
-
- $args =array('labels'        => $labels,
-			  'public'        => true,
-			  'publicly_queryable' => true,
-			  'show_ui'            => true,
-			  'show_in_menu'       => true,
-			  'query_var'          => true,
-			  'rewrite'            => array( 'slug' => 'slider' ),
-			  'capability_type'    => 'post',
-			  'has_archive'        => true,
-			  'hierarchical'       => false,
-			  'menu_position' => 5,
-			  'menu_icon'     => 'dashicons-format-gallery',
-			  'supports'      =>array('title','editor','thumbnail','excerpt'),
-			 );
-
- register_post_type('yee_slider',$args);
-}
-add_action('init','yee__post_type_slider_init');
-
 /*register testimonial post type*/
 function yee_post_type_testimonial_init(){
 	$labels =array(
@@ -108,7 +71,6 @@ function my_rewrite_flush() {
     // They are only referenced in the post_type column with a post entry, 
     // when you add a post of this CPT.
     yee_post_type_testimonial_init();
-    yee__post_type_slider_init();
     // ATTENTION: This is *only* done during plugin activation hook in this example!
     // You should *NEVER EVER* do this on every page load!!
     flush_rewrite_rules();
