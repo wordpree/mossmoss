@@ -1,44 +1,52 @@
 <?php 
-if ( ! class_exists( 'fancy_slider_activate' ) ){
 
-	class fancy_slider_activate {
-		public function __construct(){
-			add_action( 'init', array($this,'fancy_slider_custom_post_type_init') );
-			flush_rewrite_rules();
-		}
+/**
+* Class designed here to fulfill functionality after plugin activating
+* @package fancy-slider
+* @subpackage fancy-slider/includes
+* @since  0.1.0
+* @author Hai 
+**/
 
-		public function fancy_slider_custom_post_type_init(){
-			$labels =array(
-			'name'          => __('Sliders','yee-slider'),
-			'singular_name' => __('Slider','yee-slider'),
-			'menu_name'     => __('Sliders','yee-slider'),
-			'add_new'       => __('Add New','yee-slider'),
-			'add_new_item'  => __('Add New Slider','yee-slider'),
-			'new_item'      => __('New Slider','yee-slider'),
-			'edit_item'     => __('Edit slider','yee-slider'),
-			'view_item'     => __('View Slider','yee-slider'),
-			'all_items'     => __('All Sliders','yee-slider'),
-			'search_items'  => __('Search Sliders','yee-slider'),
+/* accessed directly ,exit anyway */
+if ( ! defined( 'ABSPATH' ) ) {
+	exit; 
+}
 
-			);
+if ( ! class_exists( 'Fancy_Slider_Activate' ) ){
 
-			$args =array('labels'        => $labels,
-					  'public'        => true,
-					  'publicly_queryable' => true,
-					  'show_ui'            => true,
-					  'show_in_menu'       => true,
-					  'query_var'          => true,
-					  'rewrite'            => array( 'slug' => 'slider' ),
-					  'capability_type'    => 'post',
-					  'has_archive'        => true,
-					  'hierarchical'       => false,
-					  'menu_position' => 5,
-					  'menu_icon'     => 'dashicons-format-gallery',
-					  'supports'      =>array('title','editor','thumbnail','excerpt'),
-					 );
+	class Fancy_Slider_Activate {
 
-			register_post_type('slider',$args);
-		}
+        /**
+		 * class Fancy_Slider_Admin handle *
+		 *@since 0.1.0
+		 *@var class
+		**/     
+		public $_admin;
+
+        /**
+		 * built-in construct function for passing into class handle*
+		 *@since 0.1.0
+		 *@var class
+		 *@param Fancy_Slider_Admin class handle 
+		**/  
+        public function __construct( $admin ){
+		    $this->_admin = $admin;
+        }
+
+        /**
+		 * called wordpress custom post type init and get permalinks worked *
+		 *@since 0.1.0
+		 *@var function
+		 *@return void
+		**/ 
+        public function activator(){
+
+	        $this->_admin->custom_post_type_interface();
+	        flush_rewrite_rules();
+        }
+
+		
 	}
 
 
