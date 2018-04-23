@@ -29,6 +29,14 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
 	    protected static $_version;
 
         /**
+        * prefix of name identifier  *
+        *@since 0.1.0
+        *@var string
+        *@access protected
+        **/         
+            protected static $_vendor = array('slick');
+
+        /**
         * construct function for obtaining name and version identifiers *
         *@since 0.1.0
         *@var function
@@ -48,7 +56,9 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         *@access private
         **/
 	    private static function public_styles_enqueue(){
+
 	    	wp_enqueue_style( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-public.css', array(), self::$_version, 'all' );
+                wp_enqueue_style( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'css/vendor/slick.css', array(), self::$_version, 'all' );
 	    }
 
         /**
@@ -59,7 +69,8 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         *@access private
         **/
 	    private static function public_scripts_enqueue(){
-	    	wp_enqueue_script( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-public.js', array('jquery'), self::$_version, true);
+	    	wp_enqueue_script( self::$_name, plugin_dir_url( __FILE__ ) . 'js/fancy-slider-public.js', array('jquery'), self::$_version, true);
+                wp_enqueue_script( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'js/vendor/slick.min.js', array('jquery'), self::$_version, true);
 	    }
 	    
         /**
