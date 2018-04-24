@@ -46,8 +46,4 @@ register_deactivation_hook( __FILE__, array( $fancy_slider ,'plugin_deactivate')
 
 /* Hooks a function on to a specific filter action or action */
 $fancy_slider ->plugin_add_action();
-
-
-
-
-
+$fancy_slider ->plugin_get_featured_img();
