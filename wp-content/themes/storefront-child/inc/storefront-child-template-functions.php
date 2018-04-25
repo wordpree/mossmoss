@@ -245,3 +245,19 @@ if ( ! function_exists( 'storefront_child_primary_navigation_handheld' ) ) {
 		);
 	}
 }
+
+if (! function_exists('storefront_child_header_widget_region' ) ) {
+    /**
+	 * Display widget
+	 *
+	 * @since  1.0.0
+	 * @return void
+	 */
+	function storefront_child_header_widget_region(){
+	    if (is_active_sidebar( 'before_main_content' ) ){ ?>
+		    <div class= "header-widget-area" role="complementary">
+		    	<?php dynamic_sidebar('before_main_content');?>
+		    </div>
+	    <?php }
+	}
+}

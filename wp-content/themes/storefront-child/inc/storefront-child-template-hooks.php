@@ -58,7 +58,7 @@ if ( $storefront_child_is_woocommerce_actived ) {
 
 }
 
-
+add_action( 'storefront_child_before_content', 'storefront_child_header_widget_region', 10 );
 /**
  * Storefront Footer
  * @see  storefront_credit()

@@ -50,9 +50,9 @@
 	/**
 	 * Functions hooked in to storefront_before_content
 	 *
-	 * @hooked storefront_header_widget_region - 10
+	 * @hooked storefront_child_header_widget_region - 10
 	 */
-	do_action( 'storefront_before_content' ); 
+	do_action( 'storefront_child_before_content' ); 
 	?>
 
 	<div id="content" class="site-content" tabindex="-1">
