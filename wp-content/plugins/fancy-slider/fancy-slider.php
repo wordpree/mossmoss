@@ -33,6 +33,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 	exit; 
 }
 require_once plugin_dir_path( __FILE__ )   . 'includes/class-fancy-slider.php';
+require_once plugin_dir_path( __FILE__ )   . 'includes/widgets/class-fancy-slider-widget.php';
 
 define ('FANCY_SLIDER_VERSION','0.1.0');
 define ('FANCY_SLIDER_NAME','fancy-slider');
@@ -46,4 +47,3 @@ register_deactivation_hook( __FILE__, array( $fancy_slider ,'plugin_deactivate')
 
 /* Hooks a function on to a specific filter action or action */
 $fancy_slider ->plugin_add_action();
-$fancy_slider ->plugin_get_featured_img();

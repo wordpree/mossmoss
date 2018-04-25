@@ -134,7 +134,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
     	}
 
         /**
-        * feature images from custom posts *
+        * fetch featured images from custom posts *
         *@since 0.1.0
         *@var function
         *@return array
@@ -143,7 +143,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         private static function fancy_slider_featured_img(){
 
             $fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
-            $url = '<div>';
+            $url = '<div class="fancy-slider">';
             foreach ( $fancy_slider_posts as $post ){
                 setup_postdata( $post );
                 $feature_img = get_post_thumbnail_id( $post->ID );
@@ -154,16 +154,16 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             }
             $url .= '</div>';
             wp_reset_postdata();
-            print_r($url) ;
+            echo $url;
         }
 
         /**
-        * nterface to invoke private function - -admin_cpt_feature_img *
+        * nterface to invoke private function - -fancy_slider_featured_img *
         *@since 0.1.0
         *@var function
         *@return void
         **/
-        public function admin_cpt_featured_img_interface(){
+        public static function admin_cpt_featured_img_interface(){
             self::fancy_slider_featured_img();
         }
        

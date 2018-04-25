@@ -143,10 +143,6 @@ if (! class_exists('Fancy_Slider') ){
 		public function plugin_add_filter(){
 
 		}
-
-		public function plugin_get_featured_img(){
-			$this->_admin->admin_cpt_featured_img_interface();
-		}
         
 	}
 }
