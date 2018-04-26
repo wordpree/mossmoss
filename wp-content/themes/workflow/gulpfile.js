@@ -25,19 +25,22 @@ var gulp        = require('gulp'),
     cache       = require('gulp-cache'),
     stats       = require('gulp-stats');
 stats(gulp);
+
 /*
 * setting parth requirements 
 */
-var name        = 'storefront-child';
-var projectRoot = dir.dirname(__dirname) + '/' + name + '/';
-var path        = 
-{
-	style: [projectRoot + 'sources/sass/'  ,projectRoot + 'assets/sass/*.*'  ,projectRoot + 'assets/sass/'  ],
-	js:    [projectRoot + 'sources/js/'    ,projectRoot + 'assets/js/*.*'    ,projectRoot + 'assets/js/'    ],
-	fonts: [projectRoot + 'sources/fonts/' ,projectRoot + 'assets/fonts/*.*' ,projectRoot + 'assets/fonts/' ],
-	img:   [projectRoot + 'sources/images/',projectRoot + 'assets/images/*.*',projectRoot + 'assets/images/']
-};
+var themes_dir = dir.dirname(__dirname);
+var name       = 'storefront-child';
+var theme_dir  = themes_dir + '/' + name + '/';
+var plugin_dir = dir.join( dir.dirname( themes_dir ),'plugins/fancy-slider/' );
 
+var path       = 
+{
+	style: [theme_dir + 'sources/sass/'  ,theme_dir + 'assets/sass/*.*'  ,theme_dir + 'assets/sass/'  ],
+	js:    [theme_dir + 'sources/js/'    ,theme_dir + 'assets/js/*.*'    ,theme_dir + 'assets/js/'    ],
+	fonts: [theme_dir + 'sources/fonts/' ,theme_dir + 'assets/fonts/*.*' ,theme_dir + 'assets/fonts/' ],
+	img:   [theme_dir + 'sources/images/',theme_dir + 'assets/images/*.*',theme_dir + 'assets/images/']
+};
 /*
 * gulp tasks: 
 */
@@ -60,7 +63,7 @@ gulp.task('cleanCache',function(){
 gulp.task('sass',function(){
 	return gulp.src(path.style[0] + 'style.scss')
 	       .pipe(sass({
-	       	   project:projectRoot,
+	       	   project:theme_dir,
              sass:'sources/sass',
              css:'assets/sass',
 	       	   style: 'expanded',
@@ -105,14 +108,15 @@ gulp.task('fonts-reload',['fonts'],function(){
 });
 
 gulp.task('clear',function(){
-	return del.sync([path.style[1],path.js[1],projectRoot + 'assets/maps'],{force:true});
+	return del.sync([path.style[1],path.js[1],theme_dir + 'assets/maps'],{force:true});
 });
 
 gulp.task('watch',['browser-sync'],function(){
     gulp.watch(path.style[0] + '**/*.scss',['css-reload']);
     gulp.watch(path.js[0]    + '*.js'     ,['js-reload']);
     gulp.watch(path.fonts[0] + '*.*'      ,['fonts-reload']);
-    gulp.watch(projectRoot   + '**/*.php').on('change',browserSync.reload);
+    gulp.watch(theme_dir   + '**/*.php' ).on('change',browserSync.reload);
+    gulp.watch(plugin_dir  + '**/*.php' ).on('change',browserSync.reload);
 });
 
 gulp.task('default',['clear','fonts','sass','js','watch']);
