@@ -19,8 +19,8 @@ if ( ! class_exists('Fancy_Slider_Loader') ) {
 		 *@param $tag -- string, $object -- class, $function_to_add -- function, $priority -- int, $args -- int
 		 *@return void
 		**/  
-		public  function action_entry( $tag,$object, $function_to_add, $priority = 10, $args = 1  ) {
-		    add_action( $tag, array( $object,$function_to_add ) , $priority, $args);
+		public  function action_entry( $tag, $function_to_add, $priority = 10, $args = 1  ) {
+		    add_action( $tag, $function_to_add , $priority, $args);
 		}
 
         /**
@@ -30,8 +30,8 @@ if ( ! class_exists('Fancy_Slider_Loader') ) {
 		 *@param $tag -- string, $object -- class, $function_to_add -- function, $priority -- int, $args -- int
 		 *@return void
 		**/  
-		public  function filter_entry( $tag, $object, $function_to_add, $priority = 10, $args = 1  ) {
-			add_filter( $tag, array( $object,$function_to_add ) , $priority, $args);
+		public  function filter_entry( $tag, $function_to_add, $priority = 10, $args = 1  ) {
+			add_filter( $tag, $function_to_add, $priority, $args);
 		}
 	}
 }

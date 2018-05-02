@@ -66,6 +66,15 @@ if (! class_exists('Fancy_Slider') ){
 		protected $_public;
 
 		/**
+		 * the handle of the class Fancy_Slider_Widget *
+		 *@since 0.1.0
+		 *@var class
+		 *@access protected
+		 *@see class-fancy-slider-widget.php
+		**/
+		protected $_widget;
+        public $_fn;
+		/**
 		 * the set of the plugin construct functionality, passing into plugin name and version for identification ,loading dependencies,instantiating classes used for hooking action later *
 		 *@since 0.1.0
 		 *@var function
@@ -76,7 +85,7 @@ if (! class_exists('Fancy_Slider') ){
 		    $this->load_dependency();
 			$this->_admin   = new Fancy_Slider_Admin( $name ,$version  );
 			$this->_public  = new Fancy_Slider_Public( $name ,$version );
-
+			$this->_widget  = new Fancy_Slider_Widget();
 		}
 
 		/**
@@ -92,6 +101,7 @@ if (! class_exists('Fancy_Slider') ){
 			require_once( plugin_dir_path( __FILE__ ) . 'class-fancy-slider-activate.php'         );
 			require_once( plugin_dir_path( __FILE__ ) . 'class-fancy-slider-deactivate.php'       );
 			require_once( plugin_dir_path( __FILE__ ) . 'class-fancy-slider-loader.php'           );
+			require_once( plugin_dir_path( __FILE__ ) . 'widgets/class-fancy-slider-widget.php'           );
 		}
 
 		/**
@@ -127,13 +137,12 @@ if (! class_exists('Fancy_Slider') ){
            	$this->_loader  = new Fancy_Slider_Loader();
 
 			/* hooked custom post function */
-			$this->_loader->action_entry( 'init',$this->_admin , "custom_post_type_interface");
+			$this->_loader->action_entry( 'init',$this->_admin->_handle['cpt_init_interface'] );
 
 			/* hooked js/css  function */
-			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin , "admin_scripts_enqueue_interface");
-			$this->_loader->action_entry( 'wp_enqueue_scripts',$this->_public ,   "public_scripts_interface");
+			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin->_handle['scripts_enqueue_interface'] );
+			$this->_loader->action_entry( 'wp_enqueue_scripts'   ,$this->_public->_handle['scripts_enqueue_interface']);
 		}
-
  		/**
 		 * all filters hooked into wordpress *
 		 *@since 0.1.0

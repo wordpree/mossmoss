@@ -16,14 +16,14 @@ if ( ! defined( 'ABSPATH' ) ) {
 if ( ! class_exists( 'Fancy_Slider_Activate' ) ){
 
 	class Fancy_Slider_Activate {
-
+		
         /**
 		 * class Fancy_Slider_Admin handle *
 		 *@since 0.1.0
 		 *@var class
 		**/     
 		public $_admin;
-
+		
         /**
 		 * built-in construct function for passing into class handle*
 		 *@since 0.1.0
@@ -41,8 +41,7 @@ if ( ! class_exists( 'Fancy_Slider_Activate' ) ){
 		 *@return void
 		**/ 
         public function activator(){
-
-	        $this->_admin->custom_post_type_interface();
+	        $this->_admin->_handle['cpt_init_interface'];
 	        flush_rewrite_rules();
         }
 

@@ -34,7 +34,14 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         *@var string
         *@access protected
         **/         
-            protected static $_vendor = array('slick');
+        protected static $_vendor = array('slick');
+
+        /**
+        * function reference array handle * 
+        *@since 0.1.0
+        *@var array
+        **/
+        public $_handle;
 
         /**
         * construct function for obtaining name and version identifiers *
@@ -46,6 +53,7 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
 	    public function __construct($name ,$version){
 			self::$_name = $name;
 			self::$_version = $version;
+            $this->public_entry();
 	    }
 
         /**
@@ -55,10 +63,10 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         *@return void
         *@access private
         **/
-	    private static function public_styles_enqueue(){
+	    private  function styles_enqueue(){
 
 	    	wp_enqueue_style( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-public.css', array(), self::$_version, 'all' );
-                wp_enqueue_style( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'css/vendor/slick.css', array(), self::$_version, 'all' );
+            wp_enqueue_style( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'css/vendor/slick.css', array(), self::$_version, 'all' );
 	    }
 
         /**
@@ -68,20 +76,29 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         *@return void
         *@access private
         **/
-	    private static function public_scripts_enqueue(){
+	    private  function scripts_enqueue(){
 	    	wp_enqueue_script( self::$_name, plugin_dir_url( __FILE__ ) . 'js/fancy-slider-public.js', array('jquery'), self::$_version, true);
-                wp_enqueue_script( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'js/vendor/slick.min.js', array('jquery'), self::$_version, true);
+            wp_enqueue_script( self::$_vendor[0] . '-' . self::$_name , plugin_dir_url( __FILE__ ) . 'js/vendor/slick.min.js', array('jquery'), self::$_version, true);
 	    }
 	    
-        /**
-        * interface to invoke private function - -enqueue scripts*
+
+         /**
+        * variable function to be used as callable name hooked onto wp actions  *
         *@since 0.1.0
         *@var function
-        *@return void
+        *@return void      
+        *@access protected
         **/
-	    public function public_scripts_interface(){
-		    self::public_styles_enqueue();
-		    self::public_scripts_enqueue();
-	    }
+        protected function public_entry(){
+            $this->_handle = array(
+                'scripts_enqueue_interface' => function(){
+                    $this->styles_enqueue();
+                    $this->scripts_enqueue(); 
+                }
+            );
+        
+        }
+
+
 	}
 }

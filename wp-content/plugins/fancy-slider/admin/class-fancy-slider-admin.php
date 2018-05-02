@@ -34,23 +34,25 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         protected static $_version;
 
         /**
-        * version identifier particpating into wordpress actions *
+        * function reference array handle * 
         *@since 0.1.0
         *@var string
         *@access protected
         **/
-        protected static $_url;
-
+        public $_handle;
+        
         /**
-        * construct function for obtaining name and version identifiers *
+        * construct function for obtaining name ,version identifiers and handle init *
         *@since 0.1.0
         *@var function
         *@return void
         *@param $name,$version
         **/
         public function __construct($name,$version){
+
             self::$_name    = $name;
             self::$_version = $version;
+            $this->admin_entry();
         } 
 
         /**
@@ -60,7 +62,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@return void
         *@access private
         **/
-        private static function custom_post_type_init(){
+        private  function custom_post_type_init(){
             $labels =array(
                 'name'          => __('Sliders','yee-slider'),
                 'singular_name' => __('Slider','yee-slider'),
@@ -97,7 +99,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@return void
         *@access private
         **/
-        private static function admin_scripts_enqueue(){
+        private  function scripts_enqueue(){
             wp_enqueue_script( self::$_name, plugin_dir_url( __FILE__ ) . 'js/fancy-slider-admin.js', array( 'jquery' ),self::$_version , true );
         }
 
@@ -108,64 +110,30 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@return void
         *@access private
         **/
-        private static function admin_styles_enqueue(){
+        private  function styles_enqueue(){
             wp_enqueue_style( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-admin.css', array(), self:: $_version, 'all' );
         }
 
-        /**
-        * interface to invoke private function - -custom post type *
+         /**
+        * variable function to be used as callable name hooked onto wp actions  *
         *@since 0.1.0
         *@var function
-        *@return void
+        *@return void      
+        *@access protected
         **/
-    	public function custom_post_type_interface(){
-    		self::custom_post_type_init();
-    	} 
-
-        /**
-        * interface to invoke private function - -enqueue scripts *
-        *@since 0.1.0
-        *@var function
-        *@return void
-        **/
-    	public function admin_scripts_enqueue_interface(){
-    	    self::admin_styles_enqueue();
-    	    self::admin_scripts_enqueue();    
-    	}
-
-        /**
-        * fetch featured images from custom posts *
-        *@since 0.1.0
-        *@var function
-        *@return array
-        *@access private
-        **/
-        private static function fancy_slider_featured_img(){
-
-            $fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
-            $url = '<div class="fancy-slider">';
-            foreach ( $fancy_slider_posts as $post ){
-                setup_postdata( $post );
-                $feature_img = get_post_thumbnail_id( $post->ID );
-                if ( $feature_img ){
-                    $img = wp_get_attachment_image_src( $feature_img ,'full');
-                    $url .= "<div> <img src= '$img[0]'> </div>";
-                }          
-            }
-            $url .= '</div>';
-            wp_reset_postdata();
-            echo $url;
+        protected function admin_entry(){
+            $this->_handle = array(
+                'cpt_init_interface' => function(){
+                    $this->custom_post_type_init();
+                },
+                'scripts_enqueue_interface' => function(){
+                    $this->styles_enqueue();
+                    $this->scripts_enqueue(); 
+                }
+            );
+        
         }
 
-        /**
-        * nterface to invoke private function - -fancy_slider_featured_img *
-        *@since 0.1.0
-        *@var function
-        *@return void
-        **/
-        public static function admin_cpt_featured_img_interface(){
-            self::fancy_slider_featured_img();
-        }
        
     }
 
