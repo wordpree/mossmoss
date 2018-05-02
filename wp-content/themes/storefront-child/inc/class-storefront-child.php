@@ -2,9 +2,9 @@
 if(!defined('ABSPATH')){
 	exit;
 }
-if ( !class_exists( 'storefront_child_class' ) ){
+if ( !class_exists( 'Storefront_Child_Class' ) ){
 
-	class storefront_child_class {
+	class Storefront_Child_Class {
 		public function __construct(){
 			add_action( 'init', array($this, 'storefront_child_register_menus' ),10 );
 			add_action( 'widgets_init', array( $this, 'storefront_child_widgets_init' ) );
@@ -20,11 +20,12 @@ if ( !class_exists( 'storefront_child_class' ) ){
 	    public function storefront_child_widgets_init(){
 	    	$args = array(
 			    'name' => __('Before Main Content','storefront-child'),
-			    'id'   => 'before_main_content'
+			    'id'   => 'before_main_content',
+			    'description' => 'Widgets added here will be displayed immediately before main content area'
 	    	);
 	    	register_sidebar( $args );
 	    } 
 	}
 }
 
-return new storefront_child_class();
+return new Storefront_Child_Class();
