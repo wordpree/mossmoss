@@ -146,4 +146,14 @@
 // $('.newly-products-wrapper').fancySlider(args);
 
 // }
+(function($){
+	'use strict';
+	$(document).ready(function(){
+		$('.fancy-slider').slick({
+			infinite:true,
+	        autoplay: true,
+	        autoplaySpeed: 2500,
+        });
+	});
+})(jQuery);
 //# sourceMappingURL=../maps/storefront-child-frontpage.js.map
