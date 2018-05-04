@@ -12,6 +12,7 @@
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
+require_once plugin_dir_path( __FILE__ ) . 'view/fancy-slider-settings.php' ;
 
 if( ! class_exists( 'Fancy_Slider_Admin' )) {
 
@@ -114,6 +115,40 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             wp_enqueue_style( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-admin.css', array(), self:: $_version, 'all' );
         }
 
+        /**
+        * function to creat new submenu page under settings panel  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@param add_options_page ($page_tile ,$menu_title,$cability,$menu_slug,$function )
+        *@access private
+        **/
+        private function options_page(){
+            add_options_page( 'Fancy Slider Settings', 'Fancyslider', 'manage_options', 'fancy-slider','fancy_slider_option_page_callback' );
+        } 
+
+        function menu_page_settings_init(){
+            add_settings_section( 'fancy_slider_section_mode', 'Slider Mode Settings', 'fancy_slider_section_callback_mode', 'fancy-slider');
+
+            add_settings_section( 'fancy_slider_section_advanced', 'Slider Advanced Settings', 'fancy_slider_section_callback_advanced', 'fancy-slider');
+
+            add_settings_field( 'fade_mode', 'Fade Item Mode', 'fancy_slider_field_callback_fade', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );
+
+            add_settings_field( 'sync_mode', 'Sync Item Mode', 'fancy_slider_field_callback_sync', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );  
+            
+            add_settings_field( 'single_mode', 'Single Item Mode', 'fancy_slider_field_callback_single', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );
+
+            add_settings_field( 'center_mode', 'Center Item Mode', 'fancy_slider_field_callback_center', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );
+
+            add_settings_field( 'multiple_mode', 'Multiple Item Mode', 'fancy_slider_field_callback_multiple', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );
+
+            add_settings_field( 'atribute_mode', 'Atribute Item Mode', 'fancy_slider_field_callback_atribute', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) ); 
+
+            add_settings_field( 'responsive_mode', 'Responsive Item Mode', 'fancy_slider_field_callback_responsive', 'fancy-slider', 'fancy_slider_section_mode', array( '' ) );
+
+            register_setting( 'fancy-slider_option_gp', 'fancy-slider_options' ,array('type' => 'text') );
+        }
+
          /**
         * variable function to be used as callable name hooked onto wp actions  *
         *@since 0.1.0
@@ -123,12 +158,18 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         protected function admin_entry(){
             $this->_handle = array(
-                'cpt_init_interface' => function(){
+                'cpt_init_hook' => function(){
                     $this->custom_post_type_init();
                 },
-                'scripts_enqueue_interface' => function(){
+                'scripts_enqueue_hook' => function(){
                     $this->styles_enqueue();
                     $this->scripts_enqueue(); 
+                },
+                'options_page_hook' => function(){
+                    $this->options_page();
+                },
+                'menu_page_settings_init_hook' => function(){
+                    $this->menu_page_settings_init();
                 }
             );
         

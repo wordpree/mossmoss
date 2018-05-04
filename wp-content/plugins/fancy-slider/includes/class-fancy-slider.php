@@ -137,11 +137,16 @@ if (! class_exists('Fancy_Slider') ){
            	$this->_loader  = new Fancy_Slider_Loader();
 
 			/* hooked custom post function */
-			$this->_loader->action_entry( 'init',$this->_admin->_handle['cpt_init_interface'] );
+			$this->_loader->action_entry( 'init',$this->_admin->_handle['cpt_init_hook'] );
 
 			/* hooked js/css  function */
-			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin->_handle['scripts_enqueue_interface'] );
-			$this->_loader->action_entry( 'wp_enqueue_scripts'   ,$this->_public->_handle['scripts_enqueue_interface']);
+			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin->_handle['scripts_enqueue_hook']         );
+			$this->_loader->action_entry( 'wp_enqueue_scripts'   ,$this->_public->_handle['scripts_enqueue_hook']        );
+			/*hooked admin menu*/
+			$this->_loader->action_entry( 'admin_menu'           ,$this->_admin->_handle['options_page_hook']            );
+			/*hooked admin settings*/
+			$this->_loader->action_entry( 'admin_init'           ,$this->_admin->_handle['menu_page_settings_init_hook'] );
+			
 		}
  		/**
 		 * all filters hooked into wordpress *

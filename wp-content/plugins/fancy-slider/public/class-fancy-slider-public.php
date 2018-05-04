@@ -91,7 +91,7 @@ if (! class_exists( 'Fancy_Slider_Public' ) ) {
         **/
         protected function public_entry(){
             $this->_handle = array(
-                'scripts_enqueue_interface' => function(){
+                'scripts_enqueue_hook' => function(){
                     $this->styles_enqueue();
                     $this->scripts_enqueue(); 
                 }
