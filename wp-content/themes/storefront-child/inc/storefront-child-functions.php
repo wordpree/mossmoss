@@ -13,23 +13,6 @@
 **                      5.
 */
 
-
-/*enqueue child style*/
-function storefront_child_scripts_enqueue(){
-	wp_enqueue_style('storefront-style',get_template_directory_uri().'/style.css');
-	wp_enqueue_style('storefront-child-style',get_stylesheet_directory_uri().'/assets/sass/style.css',array('storefront-style'),'v4.17');
-	wp_enqueue_style('storefront-child-main-style',get_stylesheet_directory_uri().'/assets/sass/style.css',array(''),'v2.18');
-	wp_enqueue_style('fancyslider-style',get_stylesheet_directory_uri().'/assets/fancyslider.css',array(),'v9.19');
-	
-	wp_enqueue_script('storefront-child-jquery',get_stylesheet_directory_uri().'/assets/js/vendor/jquery-3.2.1.min.js');
-	wp_enqueue_script('fancySlider',
-					  get_stylesheet_directory_uri().'/assets/js/jquery.fancyslider.js',array('jquery'),'v0907',false);
-	
-	wp_enqueue_script('storefront-child-frontpage',get_stylesheet_directory_uri().'/assets/js/storefront-child-frontpage.js',array('jquery'),'v0908',true);
-}
-add_action('wp_enqueue_scripts','storefront_child_scripts_enqueue',21);
-
-
 /*wooCommerce actived or not*
 *@see storefront-child-template-hooks.php
 */
