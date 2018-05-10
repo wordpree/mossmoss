@@ -226,7 +226,7 @@ function sanitize_options($input){
     /* sanitize digital input text */
     foreach ($d_keys as $d_key) {
         if ( isset($input[$d_key]) ){
-            if( preg_match("/^\d+\d+$/", $input[$d_key]) ){
+            if( preg_match("/^\d+\d+$|^\d$/", $input[$d_key]) ){
                 $new[$d_key] = (int)$input[$d_key];
             }else {
                 $new[$d_key] = $default;
