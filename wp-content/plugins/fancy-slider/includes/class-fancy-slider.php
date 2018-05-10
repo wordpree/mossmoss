@@ -86,6 +86,7 @@ if (! class_exists('Fancy_Slider') ){
 			$this->_admin   = new Fancy_Slider_Admin( $name ,$version  );
 			$this->_public  = new Fancy_Slider_Public( $name ,$version );
 			$this->_widget  = new Fancy_Slider_Widget();
+			$this->_loader  = new Fancy_Slider_Loader();
 		}
 
 		/**
@@ -133,9 +134,7 @@ if (! class_exists('Fancy_Slider') ){
 		 *@return void
 		**/ 
 		public function plugin_add_action(){
-            /* instantiated the handle to act hooking functionality*/
-           	$this->_loader  = new Fancy_Slider_Loader();
-
+       
 			/* hooked custom post function */
 			$this->_loader->action_entry( 'init',$this->_admin->_handle['cpt_init_hook'] );
 
@@ -146,8 +145,8 @@ if (! class_exists('Fancy_Slider') ){
 			$this->_loader->action_entry( 'admin_menu'           ,$this->_admin->_handle['options_page_hook']            );
 			/*hooked admin settings*/
 			$this->_loader->action_entry( 'admin_init'           ,$this->_admin->_handle['menu_page_settings_init_hook'] );
-			
 		}
+
  		/**
 		 * all filters hooked into wordpress *
 		 *@since 0.1.0
@@ -155,7 +154,8 @@ if (! class_exists('Fancy_Slider') ){
 		 *@return void
 		**/        
 		public function plugin_add_filter(){
-
+			/* fancy_slider_options localize */
+		    $this->_loader->filter_entry( 'fancy_slider_localize', $this->_admin->_handle['get_options_hook'] );
 		}
         
 	}

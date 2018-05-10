@@ -184,6 +184,18 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         }
 
          /**
+        * function to be used as callable name hooked onto add filter *
+        *@since 0.1.0
+        *@var function
+        *@return array      
+        *@access protected
+        **/
+        protected function get_options(){
+            $fancy_slider_options = get_option( 'fancy_slider_options');
+            return $fancy_slider_options;
+        }
+
+         /**
         * variable function to be used as callable name hooked onto wp actions  *
         *@since 0.1.0
         *@var function
@@ -204,6 +216,9 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                 },
                 'menu_page_settings_init_hook' => function(){
                     $this->menu_page_settings_init();
+                },
+                'get_options_hook' => function(){
+                    return $this->get_options();
                 }
             );
         

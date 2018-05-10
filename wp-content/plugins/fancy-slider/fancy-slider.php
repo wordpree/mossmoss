@@ -45,5 +45,6 @@ $fancy_slider = new Fancy_Slider(FANCY_SLIDER_NAME,FANCY_SLIDER_VERSION);
 register_activation_hook(   __FILE__, array( $fancy_slider ,'plugin_activator' ) );
 register_deactivation_hook( __FILE__, array( $fancy_slider ,'plugin_deactivate') );
 
-/* Hooks a function on to a action */
+/* Hooks a function on to a specific action or filter action */
 $fancy_slider ->plugin_add_action();
+$fancy_slider ->plugin_add_filter();
