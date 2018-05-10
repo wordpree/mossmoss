@@ -28,10 +28,23 @@ function fancy_slider_option_page_callback(){ ?>
     </div>
 <?php }
 
-function fancy_slider_section_callback_mode(){
+/**
+* function to creat basic section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
+function fancy_slider_section_callback_basic(){
 	$text = 'In this section,fancy Slider can be setting up with different mode ,which a specific action would be applied';
     esc_html_e( $text, 'fancy-slider' ); 
 }
+
+/**
+* function to creat advanced section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_section_callback_advanced(){
     $text = 'In this section,fancy Slider can be setting up with different selective components,with all of which a specific action would be applied';
     esc_html_e( $text, 'fancy-slider' ); 
@@ -44,7 +57,7 @@ function fancy_slider_section_callback_advanced(){
 *@return void
 *@param $key -- the key of fancy_slider_options array
 *       $elements -- the available values stored in array to a specific key above
-*       $name  --  the name of options displayed in fields
+*       $name  --  the part name of options displayed in fields
 **/
 function fancy_slider_select_field_callback($key,$elements,$name){
     $options = get_option( 'fancy_slider_options' );
@@ -61,66 +74,132 @@ function fancy_slider_select_field_callback($key,$elements,$name){
          } 
     echo '</select>';
 }
+
+/**
+* function to creat mode section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_mode(){
     $name = array(' MODE',false);
     $elements = array('responsive','sync','center','lazy loading');
     fancy_slider_select_field_callback('mode_type',$elements,$name );
 }
 
+/**
+* function to creat slider quantity section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_sliders_qty(){ 
     $name = array(' ITEM',true);
     $elements = array( 'one','two','three','four','five','six' );
     fancy_slider_select_field_callback('slider_qty',$elements,$name);  
 }
 
+/**
+* function to creat scroll quantity section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_scroll_qty(){
     $name = array(' SCROLL',true);
     $elements = array('one','two','three','four');
     fancy_slider_select_field_callback('scroll_qty',$elements,$name); 
 }
+
+/**
+* function to creat autoplay section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_autoplay(){
     $name = array('',false);
     $elements =array('true','false');
     fancy_slider_select_field_callback('slider_ap',$elements,$name);   
 }
 
+/**
+* function to creat fade section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_fade(){
     $name = array('',false);
     $elements =array('true','false');
     fancy_slider_select_field_callback('slider_fd',$elements,$name);   
 }
 
-
-function fancy_slider_field_callback_trans_spd(){
-    $options = get_option( 'fancy_slider_options' );
-    $trans_spd = esc_attr( $options['trans_spd'] );
-    echo "<input type ='text' name='fancy_slider_options[trans_spd]' value='$trans_spd'>";
-}
-function fancy_slider_field_callback_ap_spd(){
-    $options = get_option( 'fancy_slider_options' );
-    $ap_spd = esc_attr( $options['ap_spd'] );
-    echo "<input type ='text' name='fancy_slider_options[ap_spd]' value='$ap_spd'>";
-}
+/**
+* function to creat dot indicator section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_dot(){
     $name = array('',false);
     $elements =array('true','false');
     fancy_slider_select_field_callback('slider_dot',$elements,$name);   
 }
+
+/**
+* function to creat infinite loop section callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function fancy_slider_field_callback_inf(){
     $name = array('',false);
     $elements =array('true','false');
     fancy_slider_select_field_callback('slider_inf',$elements,$name);   
 }
+
+/**
+* function to creat transition speed text callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
+function fancy_slider_field_callback_trans_spd(){
+    $options = get_option( 'fancy_slider_options' );
+    $trans_spd = esc_attr( $options['trans_spd'] );
+    echo "<input type ='text' name='fancy_slider_options[trans_spd]' value='$trans_spd'>";
+}
+
+/**
+* function to creat autoplay text callback *
+*@since 0.1.0
+*@var function
+*@return void
+**/
+function fancy_slider_field_callback_ap_spd(){
+    $options = get_option( 'fancy_slider_options' );
+    $ap_spd = esc_attr( $options['ap_spd'] );
+    echo "<input type ='text' name='fancy_slider_options[ap_spd]' value='$ap_spd'>";
+}
+
+
+/**
+* function to sanitize fancy_slider_options before inputing into database *
+*@since 0.1.0
+*@var function
+*@return void
+**/
 function sanitize_options($input){
     $new        = array();
-    $mode_type  = array('responsive','sync','center','lazy loading');
+    $mode_type  = array( 'responsive','sync','center','lazy loading' );
     $slider_qty = array( 'one','two','three','four','five','six' );
-    $scroll_qty = array('one','two','three','four');
-    $slider_ap  = array('true','false');
-    $slider_fd  = array('true','false');
-    $slider_dot = array('true','false');  
-    $slider_inf = array('true','false');   
-    $d_keys     = array('ap_spd','trans_spd');
+    $scroll_qty = array( 'one','two','three','four' );
+    $slider_ap  = array( 'true','false' );
+    $slider_fd  = array( 'true','false' );
+    $slider_dot = array( 'true','false' );  
+    $slider_inf = array( 'true','false' );   
+    $d_keys     = array( 'ap_spd','trans_spd' );
     $default    = 1000;
     /* key as fancy_slider_options[key] , value as a set of values, which is whitelist related to the key */
     $options    = array('mode_type'  => $mode_type ,

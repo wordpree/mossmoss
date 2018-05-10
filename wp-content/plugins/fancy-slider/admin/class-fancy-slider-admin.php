@@ -132,12 +132,10 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@since 0.1.0
         *@var function
         *@return void
-        *@param add_settings_section($id, $title, $callback, $page)
-        *       add_settings_field( $id, $title, $callback, $page, $section, $args)
+        *@param 
         *@access private
         **/
         private function menu_page_settings_init(){
-
             $counter = 0;
             $pages = array(
                 'fancy-slider'
@@ -149,7 +147,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             
             $field_params = array(
 
-                'field_basic_params' => array(
+                'section_basic_params' => array(
                     'Slider-Mode-Selection'   => array( 'item_mode','fancy_slider_field_callback_mode'             ),
                     'Sliders-Quantity'        => array( 'slider_qty','fancy_slider_field_callback_sliders_qty'     ),
                     'Scroll-Quantity'         => array( 'scroll_qty','fancy_slider_field_callback_scroll_qty'      ),
@@ -162,8 +160,8 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                     
 
                 ),
-                'field_advanced_params' => array(
-                   
+                'section_advanced_params' => array(
+                   /* to be continued */
                 )
             );
   
@@ -171,15 +169,17 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                
                 foreach ($value as $name => $array) {  
                     $_name = str_replace('-', ' ', $name);
+                    /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
                     add_settings_field( "{$array[0]}", "{$_name}", "{$array[1]}","{$pages[0]}", "{$sections[$counter]}", array( '' ) );
                 }
                 $counter++;
             }
 
-            add_settings_section( "{$sections[0]}", 'Slider Basic Settings', 'fancy_slider_section_callback_mode', 'fancy-slider');
+            /* add_settings_section($id, $title, $callback, $page) */
+            add_settings_section( "{$sections[0]}", 'Slider Basic Settings', 'fancy_slider_section_callback_basic', "{$pages[0]}");
 
-            add_settings_section( "{$sections[1]}", 'Slider Advanced Settings', 'fancy_slider_section_callback_advanced', 'fancy-slider');
-
+            add_settings_section( "{$sections[1]}", 'Slider Advanced Settings', 'fancy_slider_section_callback_advanced', "{$pages[0]}");
+            /* register_setting($option_group_name,$option_name,$sanitize_callback) */
             register_setting( 'fancy_slider_option_gp', 'fancy_slider_options' ,array('type' => 'string','sanitize_callback' => 'sanitize_options') );
         }
 
