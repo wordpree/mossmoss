@@ -66,7 +66,7 @@ function fancy_slider_select_field_callback($key,$elements,$name){
             foreach ( $elements as $element ) { 
                 $selected = selected( $mode_type , $element,false );
                 if ($name[1]){
-                    $suffix = $element === 'one'? '' : 'S';
+                    $suffix = $element === 1 ? '' : 'S';
                 }else{
                     $suffix = '';
                 }               
@@ -95,7 +95,7 @@ function fancy_slider_field_callback_mode(){
 **/
 function fancy_slider_field_callback_sliders_qty(){ 
     $name = array(' ITEM',true);
-    $elements = array( 'one','two','three','four','five','six' );
+    $elements = array( 1,2,3,4,5,6);
     fancy_slider_select_field_callback('slider_qty',$elements,$name);  
 }
 
@@ -107,7 +107,7 @@ function fancy_slider_field_callback_sliders_qty(){
 **/
 function fancy_slider_field_callback_scroll_qty(){
     $name = array(' SCROLL',true);
-    $elements = array('one','two','three','four');
+    $elements = array(1,2,3,4);
     fancy_slider_select_field_callback('scroll_qty',$elements,$name); 
 }
 
@@ -193,14 +193,14 @@ function fancy_slider_field_callback_ap_spd(){
 function sanitize_options($input){
     $new        = array();
     $mode_type  = array( 'responsive','sync','center','lazy loading' );
-    $slider_qty = array( 'one','two','three','four','five','six' );
-    $scroll_qty = array( 'one','two','three','four' );
+    $slider_qty = array( 1,2,3,4,5,6);
+    $scroll_qty = array( 1,2,3,4);
     $slider_ap  = array( 'true','false' );
     $slider_fd  = array( 'true','false' );
     $slider_dot = array( 'true','false' );  
     $slider_inf = array( 'true','false' );   
     $d_keys     = array( 'ap_spd','trans_spd' );
-    $default    = 1000;
+    $default    = 3000;
     /* key as fancy_slider_options[key] , value as a set of values, which is whitelist related to the key */
     $options    = array('mode_type'  => $mode_type ,
                         'slider_qty' => $slider_qty ,
@@ -216,10 +216,10 @@ function sanitize_options($input){
            if ( in_array( $input[$key], $value) ){
                $new[$key] = sanitize_text_field( $input[$key] ); 
            }else{
-               $new[$option] = null;
+               $new[$key] = null;
            }
         }else{
-            $new[$option] = null;
+            $new[$key] = null;
         }
     }
 
