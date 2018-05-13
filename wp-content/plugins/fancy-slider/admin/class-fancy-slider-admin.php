@@ -148,15 +148,15 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             $field_params = array(
 
                 'section_basic_params' => array(
-                    'Slider-Mode-Selection'   => array( 'item_mode','fancy_slider_field_callback_mode'             ),
-                    'Sliders-Quantity'        => array( 'slider_qty','fancy_slider_field_callback_sliders_qty'     ),
-                    'Scroll-Quantity'         => array( 'scroll_qty','fancy_slider_field_callback_scroll_qty'      ),
-                    'Slider-Autoplay'         => array( 'slider_ap','fancy_slider_field_callback_autoplay'         ),
-                    'Slider-Fade-Effect'      => array( 'slider_fade','fancy_slider_field_callback_fade'           ),
-                    'Slider-Dot-Indicator'    => array( 'slider_dot','fancy_slider_field_callback_dot'             ),
-                    'Slider-Infinite-Loop'    => array( 'slider_infinite','fancy_slider_field_callback_inf'        ),
-                    'Slider-Autopaly-Speed'   => array( 'slider_ap_spd','fancy_slider_field_callback_ap_spd'       ),
-                    'Slider-Transition-Speed' => array( 'slider_trans_spd','fancy_slider_field_callback_trans_spd' ),
+                    'Slider-Centre'           => array( 'slider_ctr','fancy_slider_field_callback_center',         'slider_ctr' ),
+                    'Sliders-Quantity'        => array( 'slider_qty','fancy_slider_field_callback_sliders_qty',    'slider_qty' ),
+                    'Scroll-Quantity'         => array( 'scroll_qty','fancy_slider_field_callback_scroll_qty',     'scroll_qty' ),
+                    'Slider-Autoplay'         => array( 'slider_ap','fancy_slider_field_callback_autoplay',        'slider_ap'  ),
+                    'Slider-Fade-Effect'      => array( 'slider_fade','fancy_slider_field_callback_fade',          'slider_fd'  ),
+                    'Slider-Dot-Indicator'    => array( 'slider_dot','fancy_slider_field_callback_dot',            'slider_dot' ),
+                    'Slider-Infinite-Loop'    => array( 'slider_infinite','fancy_slider_field_callback_inf',       'slider_inf' ),
+                    'Slider-Autopaly-Speed'   => array( 'slider_ap_spd','fancy_slider_field_callback_ap_spd',      'ap_spd'     ),
+                    'Slider-Transition-Speed' => array( 'slider_trans_spd','fancy_slider_field_callback_trans_spd','trans_spd'  ),
                     
 
                 ),
@@ -170,7 +170,12 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                 foreach ($value as $name => $array) {  
                     $_name = str_replace('-', ' ', $name);
                     /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
-                    add_settings_field( "{$array[0]}", "{$_name}", "{$array[1]}","{$pages[0]}", "{$sections[$counter]}", array( '' ) );
+                    add_settings_field( "{$array[0]}", 
+                                        "{$_name}", 
+                                        "{$array[1]}",
+                                        "{$pages[0]}", 
+                                        "{$sections[$counter]}", 
+                                        array( 'id'=> $array[2] ) );
                 }
                 $counter++;
             }
@@ -180,7 +185,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
 
             add_settings_section( "{$sections[1]}", 'Slider Advanced Settings', 'fancy_slider_section_callback_advanced', "{$pages[0]}");
             /* register_setting($option_group_name,$option_name,$sanitize_callback) */
-            register_setting( 'fancy_slider_option_gp', 'fancy_slider_options' ,array('type' => 'string','sanitize_callback' => 'sanitize_options') );
+            register_setting( 'fancy_slider_option_gp', 'fancy_slider_options' ,array('sanitize_callback' => 'sanitize_options') );
         }
 
          /**
