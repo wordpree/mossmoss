@@ -47,24 +47,75 @@ function fs_section_callback_basic($args){
 *@var function
 *@return void
 **/
-function fancy_slider_default_opts(){
+function fs_default_opts(){
     return array(
-            'fs_std_number'=> array(
+            'multi_number'=> array(
                 'sli_qty' => '1',
                 'scr_qty' => '1',
                 'ap_spd'  => '3000',
                 'trs_spd' => '300',
-                'pad'     => '50',
+                'ctr_pad' => '50',
             ),
-            'fs_std_checkbox'=> 'arrow',
-            'fs_md_radio' => 'slide'                                       
+            'multi_checkbox'=> array('arrow','infinite'),
+            'radio' => 'slide'                                       
     );
 }
 function fs_sanitize_options($input){
     return $input;
 }
 function fs_fields_callback($args){
+    if ( isset($args) && is_array($args) ){
+        $field = $args['field'];
+    }else{
+        return;
+    }
 
+    $html = '';
+    $option_name = 'fancy_slider_options';
+    $options = get_option( $option_name, fs_default_opts() );
+    $type = $field['type'];
+    $option_args = $field['options'];
+
+    if ( isset( $option_args ) && is_array( $option_args)  ){
+
+        foreach ($option_args as $value => $label) {   //$id $name $in_value $type $label
+
+            $id = esc_attr( $type . '_' . $value );
+            $d_value = $options[$type];
+            $in_value = esc_attr( $value );
+            $label_l = $label_r = $label;
+            $checked = '';
+
+            switch ( $type ) {
+                case 'multi_checkbox':
+                    $name = "$option_name" . "[multi_checkbox][]";
+                    $checked = in_array($value, $d_value ) ? 'checked' : '';
+                    $label_l = '';
+                    break;
+                
+                case 'radio':
+                    $name = "$option_name" . "[radio]";
+                    $checked = checked( $value,$d_value , false );
+                    $label_l = '';
+                    break;
+
+                case 'multi_number':
+                    $name = "$option_name" . "[multi_number][$value]";
+                    $d_value = $options[$type][$value];
+                    $in_value = esc_attr( $d_value );
+                    $label_r = '';
+                    break;
+            }
+
+            $type_temp = explode('_', $type);
+            if ( empty($type_temp) ){ //invalid type ,return
+                return;
+            };
+            
+            $html .= "<li><label for='$id'>" . $label_l . " <input type=" . end($type_temp) . " name='$name' value='$in_value' id='$id' $checked> " .$label_r . "</label></li> ";
+        }
+        echo '<ul>' . $html . '</ul>';
+    }
 }
 /**
 * function to generate field settings *
@@ -82,10 +133,10 @@ function fs_settings_field(){
         'opt'    => 'fancy_slider_options',
         'fields' => array(
             array(
-                'id' => 'multi_checkbox_format',
-                'sub_title' => 'Format Setting',
+                'id' => 'multi_checkbox_format',                 //field register $id
+                'sub_title' => 'Format Setting',                 //field register $title
                 'brief'     =>  'Please tick your slider format',
-                'type'      => 'checkbox',
+                'type'      => 'multi_checkbox',
                 'options'   => array(
                     'autoplay'  => 'Autoplay',
                     'dot'       => 'Dot Indicator',
@@ -101,126 +152,27 @@ function fs_settings_field(){
                 'type'      => 'radio',
                 'options'   => array(
                     'slide'  => 'Slide',
-                    'fade'       => 'Fade'
+                    'fade'   => 'Fade'
                 )
             ),
             array(
                 'id' => 'number_digital',
                 'sub_title' => 'Digital Parameter',
                 'brief'     =>  'Please input your parameter here',
-                'type'      =>  'number'
+                'type'      =>  'multi_number',
+                'options'   => array(
+                    'sli_qty' => 'Display Quantity',
+                    'scr_qty' => 'Scroll Quantity',
+                    'ap_spd'  => 'Autoplay Speed',
+                    'trs_spd' => 'transition Speed',
+                    'ctr_pad' => 'Centre Padding'  
+                )
             )                 
         )
     );
     $settings = apply_filters( 'fancy_slider_settings', $settings );
     return $settings;
 }
-
-/**
-* function to display $type input field display *
-*@since 0.1.0
-*@var function
-*@return void
-*@param $id (string),  key of array fancy_slider_options
-*       $key (string), key of array fancy_slider_options[$id] if it is a array
-*       $label (string), label
-*       $type (string), input type
-**/
-function fs_text_field($id,$label){
-    $options = get_option( 'fancy_slider_options',fancy_slider_default_opts() );
-    $name = "fancy_slider_options[$id]";
-    $value = $options[$id];
-    switch ($id) {
-        case 'fs_std_checkbox':
-            // $options= &$options[$id];
-            // foreach ($label as $key => $value) {
-            //     $name = "fancy_slider_options[$id][$key]";
-            // }
-            foreach ($label as $key => $title) {
-                $checked = checked($value,$key,false);
-                $name = "fancy_slider_options[]";
-                echo "<li>" . "<label>" .
-                    "<input type ='checkbox' name='$name' value='$key' $checked >" . "$title" .
-                 "</label></li>";
-            }
-            break;
-        
-        case 'fs_md_radio':
-            foreach ($label as $key => $title) {
-                $checked = checked($value,$key,false);
-                echo "<li>" . "<label>" .
-                    "<input type ='radio' name='$name' value='$key' $checked >" . "$title" .
-                 "</label></li>";
-            }
-            break;
-    }
-}
-
-/**
-* function to creat select field display*
-*@since 0.1.0
-*@var function
-*@return void
-*@param $id (string),  key of array fancy_slider_options
-*       $key (string), key of array fancy_slider_options[$id] if it is a array
-*       $label (string), label
-**/
-function fs_select_field($id,$key,$label){
-
-    $options = get_option( 'fancy_slider_options',fancy_slider_default_opts() );
-    $name = "fancy_slider_options[$id]";
-    $elements =array('true','false');
-    /*the $key is a array*/
-    if ( is_array($options[$id]) ) {
-        $options= &$options[$id];
-        $name = "fancy_slider_options[$id][$key]";
-        $id = $key;
-    }
-    $value  = isset( $options[$id] ) ? $options[$id] : '';
-    echo "<label for='$name'>$label</label>";  
-    echo "<select name='$name' id='$name'>";
-            foreach ( $elements as $element ) { 
-                $selected = selected( $value , $element,false );        
-                echo "<option value='$element' $selected>" . __( $element ,'fancy-slider') . "</option>";
-         } 
-    echo '</select>';
-}
-
-
-/**
-* number field callback function *
-*@since 0.1.0
-*@var function
-*@return void
-*@param $args (array), args in add_settings _field 
-**/
-function fs_field_callback_text($args){
-    $id = isset($args['id'])? $args['id'] : '';
-    $label = empty($args['label'])?  '' : $args['label'];
-    echo '<fieldset>' . '<ul>';
-    fs_text_field($id,$label);
-    echo '</ul>' . '</fieldset>';
-}
-
-/**
-* select field callback function *
-*@since 0.1.0
-*@var function
-*@return void
-*@param $args (array), args in add_settings _field 
-**/
-function fs_field_callback_select($args){
-    $id = isset($args['id'])? $args['id'] : '';
-    $labels = empty($args['label'])?  '' : $args['label'];
-    echo '<fieldset>';
-    foreach ($labels as $key => $value) {
-        echo '<ul>';
-        fs_select_field($id,$key,$value );
-        echo '</ul>';
-    }
-    echo '</fieldset>';
-}
-
 
 /**
 * function to creat digital sanitize *
