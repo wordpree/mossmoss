@@ -13,7 +13,6 @@ if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
 require_once plugin_dir_path( __FILE__ ) . 'view/fancy-slider-settings.php' ;
-
 if( ! class_exists( 'Fancy_Slider_Admin' )) {
 
     class Fancy_Slider_Admin  {
@@ -136,74 +135,23 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@access private
         **/
         private function menu_page_settings_init(){
-            $counter = 0;
-            $pages = array(
-                'fancy-slider'
-            );
+            $settings = fs_settings_field();
+            if ( is_array( $settings  ) ){
+                foreach ($settings  as $section => $data) {
 
-            $sections = array(
-                'fancy_slider_section_basic',
-                'fancy_slider_section_advanced'
-            );
+                    /* add_settings_section($id, $title, $callback, $page) */
+                    add_settings_section( $section, $data['title'], 'fs_section_callback_' . $section, $data['page']);
 
-            $std_no = array(
-                'id'  => 'fs_std_no',
-                'label' => array(
-                    'sli_qty' => 'Sliders Quantity',
-                    'scr_qty' => 'Scrolls Quantity',
-                    'ap_spd'  => 'Slider Autopaly Speed',
-                    'trs_spd' => 'Slider Transition Speed'
-                )                                   
-            );
-            $std_slt = array(
-                'id' => 'fs_std_slt',
-                'label'=>  array(
-                    'ap' => 'Slider Autoplay',
-                    'fd' => 'Slider Fade Effect',
-                    'dot'=> 'Slider Dot Indicator',
-                    'inf'=> 'Slider Infinite Loop'
-                )
-            );
+                    /* register_setting($option_group_name,$option_name,$sanitize_callback) */
+                    register_setting( 'fancy_slider_option_gp', $data['opt'] ,array('sanitize_callback' => $data['scb']) );
 
-            $ctr_slt = array(
-                'ctr_md' => 'Slider Centre Mode',
-            );
-            $ctr_txt = array(
-                'ctr_pd' => 'Slider Padding'
-            );
-            
-            $field_params = array(
-
-                'section_basic_params' => array(
-                    'Slider-Standard-Settings-1' => array( 'fs_std_no','fs_field_callback_number',$std_no ),
-                    'Slider-Standard-Settings-2' => array( 'fs_std_slt','fs_field_callback_select',$std_slt ),
-                ),
-                'section_advanced_params' => array(
-                   /* to be continued */
-                )
-            );
-  
-            foreach ($field_params as $key => $value ) {
-               
-                foreach ($value as $name => $array) {  
-                    $_name = str_replace('-', ' ', $name);
-                    /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
-                    add_settings_field( "{$array[0]}", 
-                                        "{$_name}", 
-                                        "{$array[1]}",
-                                        "{$pages[0]}", 
-                                        "{$sections[$counter]}", 
-                                        $array[2] );
+                    foreach ( $data['fields'] as $field) {
+                        /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
+                        add_settings_field( $field['id'],$field['sub_title'],$data['fcb'],$data['page'],$section,array( 'field'=>$field ) );
+                    }
                 }
-                $counter++;
+
             }
-
-            /* add_settings_section($id, $title, $callback, $page) */
-            add_settings_section( "{$sections[0]}", 'Slider Basic Settings', 'fs_section_callback_basic', "{$pages[0]}");
-
-            add_settings_section( "{$sections[1]}", 'Slider Advanced Settings', 'fs_section_callback_advanced', "{$pages[0]}");
-            /* register_setting($option_group_name,$option_name,$sanitize_callback) */
-            register_setting( 'fancy_slider_option_gp', 'fancy_slider_options' ,array('sanitize_callback' => 'fs_sanitize_options') );
         }
 
          /**
