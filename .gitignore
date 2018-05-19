@@ -17,6 +17,8 @@ wp-content/themes/twenty*
 #ignore maps folders under sass or js folders
 wp-content/themes/storefront-child/**/maps/
 wp-content/themes/storefront-child/**/*.map 
+wp-content/plugins/**/maps/
+wp-content/plugins/**/*.map
 
 #tracking gitignore and readme files
 !.gitignore
