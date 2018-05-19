@@ -36,13 +36,13 @@ function fs_option_page_callback(){ ?>
 **/
 function fs_section_callback_basic($args){
     $settings = fs_settings_field();
-    $html = '<p>' . $settings[ $args['id'] ]['brief'] . '</p>';
+    $html = '<p>' . $settings[ $args['id'] ]['content'] . '</p>';
     _e( $html, 'fancy-slider' ); 
 }
 
 
 /**
-* function to creat default fancy_slider_options if achieve failed*
+* function to create default fancy_slider_options if achieve failed*
 *@since 0.1.0
 *@var function
 *@return void
@@ -60,9 +60,25 @@ function fs_default_opts(){
             'radio' => 'slide'                                       
     );
 }
+
+/**
+* function to sanitize fancy_slider_options before inputing into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return void
+**/
 function fs_sanitize_options($input){
     return $input;
 }
+
+/**
+* function to create all types of display areas *
+*@since 0.1.0
+*@var function
+*@param (array) $args ,pass by add_settings_field
+*@return void
+**/
 function fs_fields_callback($args){
     if ( isset($args) && is_array($args) ){
         $field = $args['field'];
@@ -76,7 +92,7 @@ function fs_fields_callback($args){
     $type = $field['type'];
     $option_args = $field['options'];
 
-    if ( isset( $option_args ) && is_array( $option_args)  ){
+    if ( isset( $option_args ) && is_array( $option_args)  ){ //option value as array
 
         foreach ($option_args as $value => $label) {   //$id $name $in_value $type $label
 
@@ -113,8 +129,13 @@ function fs_fields_callback($args){
             };
             
             $html .= "<li><label for='$id'>" . $label_l . " <input type=" . end($type_temp) . " name='$name' value='$in_value' id='$id' $checked> " .$label_r . "</label></li> ";
+            if ( end( $option_args ) === $label ){ //apend brief description after field completion
+                $html  = '<ul>' . $html . '</ul>';
+                $html .= "<span>" . $field['brief'] . "</span>";
+            }
+            
         }
-        echo '<ul>' . $html . '</ul>';
+        echo $html;
     }
 }
 /**
@@ -125,17 +146,17 @@ function fs_fields_callback($args){
 **/
 function fs_settings_field(){
     $settings['basic'] = array(
-        'title'  => 'Slider Basic Settings',
-        'brief'  => 'Slider basic settings are listed below',
-        'page'   => 'fancy-slider',
-        'scb'    => 'fs_sanitize_options',
-        'fcb'    => 'fs_fields_callback',
-        'opt'    => 'fancy_slider_options',
-        'fields' => array(
+        'title'    => 'Slider Basic Settings',                   //section title
+        'content'  => 'Slider basic settings are listed below',  //section cb content
+        'page'     => 'fancy-slider',
+        'scb'      => 'fs_sanitize_options',
+        'fcb'      => 'fs_fields_callback',
+        'opt'      => 'fancy_slider_options',
+        'fields'   => array(
             array(
                 'id' => 'multi_checkbox_format',                 //field register $id
                 'sub_title' => 'Format Setting',                 //field register $title
-                'brief'     =>  'Please tick your slider format',
+                'brief'     => 'Please tick your slider format',
                 'type'      => 'multi_checkbox',
                 'options'   => array(
                     'autoplay'  => 'Autoplay',
@@ -148,7 +169,7 @@ function fs_settings_field(){
             array(
                 'id' => 'radio_mode',
                 'sub_title' => 'Mode Selection',
-                'brief'     =>  'Here,slider mode can be selected',
+                'brief'     => 'Here,slider mode can be selected',
                 'type'      => 'radio',
                 'options'   => array(
                     'slide'  => 'Slide',
@@ -158,8 +179,8 @@ function fs_settings_field(){
             array(
                 'id' => 'number_digital',
                 'sub_title' => 'Digital Parameter',
-                'brief'     =>  'Please input your parameter here',
-                'type'      =>  'multi_number',
+                'brief'     => 'Please input your parameter here',
+                'type'      => 'multi_number',
                 'options'   => array(
                     'sli_qty' => 'Display Quantity',
                     'scr_qty' => 'Scroll Quantity',
