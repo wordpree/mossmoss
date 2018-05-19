@@ -9,7 +9,7 @@ wp-content/*
 
 #ignore node modules and cash files
 wp-content/themes/workflow/node_modules 
-wp-content/themes/storefront-child/**/.sass-cache
+*.sass-cache
 
 #ignore specific themes
 wp-content/themes/twenty*
