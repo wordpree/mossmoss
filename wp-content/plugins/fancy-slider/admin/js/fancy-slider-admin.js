@@ -12,4 +12,5 @@
 
 
 
-})( jQuery )
+})( jQuery );
+//# sourceMappingURL=maps/fancy-slider-admin.js.map
