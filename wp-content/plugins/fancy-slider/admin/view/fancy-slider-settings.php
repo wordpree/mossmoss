@@ -40,7 +40,8 @@ function fs_default_opts(){
             'wpfs_format'    => array( 'arrow','inf' ),
             'wpfs_animation' => array( 'slide', 'trans_spd'=>'200', 'trans_cur'=>'ease'), 
             'wpfs_centre'    => array( '', 'padding' => '50' ),   
-            'wpfs_autoplay'  => array( '', 'speed' => '3000'), 
+            'wpfs_autoplay'  => array( '', 'speed' => '3000'),
+            'wpfs_lazyload'  => array( 'progressive' ),
     );
 }
 
@@ -58,18 +59,30 @@ function fs_settings_field(){
         'scb'      => 'fs_sanitize_options',  //sanitize callback function
         'fcb'      => 'fs_fields_callback',   //field callback function
         'fields'   => array(
+
             array(
-                'id' => 'wpfs_format',                 //field register $id , option name
-                'sub_title' => 'Format Setting',        //field register $title
-                'brief'     => 'You can select whatever your slider formats look like',
-                'type'      => array(                   //field input type ,value and its label
-                    'checkbox'=> array(
-                        'dot'    => 'Dot Indicator',
-                        'inf'    => 'Infinite Loop',
-                        'arrow'  => 'Next/Prev Arrows',
-                        'rtl'    => 'Right to Left',
-                        'fonect' => 'Focus On Select'
-                    )
+                'id' => 'wpfs_standard',              //field register $id , option name
+                'sub_title' => 'Standard Parameter',  //field register $title
+                'brief'     => 'Set quantity of sliders to show or to scroll at one time',
+                'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 'sli_qty' => 'Display Quantity','scr_qty' => 'Scroll Quantity' )
+                )
+            ),
+            array(
+                'id' => 'wpfs_lazyload',                 //field register $id , option name
+                'sub_title' => 'Lazy Loading',        //field register $title
+                'brief'     => 'load the image as soon as you slide it or loads one image after another when the page loads',
+                'type'      => array(                  //field input type ,value and its label
+                    'radio' => array('ondemand'  => 'Ondemand','progressive'  => 'Progressive'    ),
+                )
+            ),
+            array(
+                'id' => 'wpfs_centre',                 //field register $id , option name
+                'sub_title' => 'Centre Enable',        //field register $title
+                'brief'     => 'Enables centered view with partial prev/next slides',
+                'type'      => array(                  //field input type ,value and its label
+                    'checkbox' => array('centre'  => 'Centred Mode'   ),
+                    'number'   => array('padding' => 'Centre Padding'),
                 )
             ),
             array(
@@ -79,15 +92,6 @@ function fs_settings_field(){
                 'type'      => array(                    //field input type ,value and its label
                     'checkbox' => array('autoplay' => 'Autoplay Mode'   ),
                     'number'   => array('speed'    => 'Auto Play Speed' ),
-                )
-            ),
-            array(
-                'id' => 'wpfs_centre',                 //field register $id , option name
-                'sub_title' => 'Centre Enable',        //field register $title
-                'brief'     => 'Enables centered view with partial prev/next slides',
-                'type'      => array(                  //field input type ,value and its label
-                    'checkbox' => array('centre'  => 'Centre Mode'   ),
-                    'number'   => array('padding' => 'Centre Padding'),
                 )
             ),
             array(
@@ -101,11 +105,17 @@ function fs_settings_field(){
                 )
             ),
             array(
-                'id' => 'wpfs_standard',              //field register $id , option name
-                'sub_title' => 'Standard Parameter',  //field register $title
-                'brief'     => 'Set quantity of sliders to show or to scroll at one time',
-                'type'      => array(                 //field input type ,value and its label
-                    'number' => array( 'sli_qty' => 'Display Quantity','scr_qty' => 'Scroll Quantity' )
+                'id' => 'wpfs_format',                 //field register $id , option name
+                'sub_title' => 'Format Setting',        //field register $title
+                'brief'     => 'You can select whatever your slider formats look like',
+                'type'      => array(                   //field input type ,value and its label
+                    'checkbox'=> array(
+                        'dot'    => 'Dot Indicator',
+                        'inf'    => 'Infinite Loop',
+                        'arrow'  => 'Next/Prev Arrows',
+                        'rtl'    => 'Right to Left',
+                        'fonect' => 'Focus On Select'
+                    )
                 )
             )                 
         )
@@ -170,6 +180,7 @@ function fs_fields_callback($args){
         foreach ($option as $value => $label) {
 
             $_label = '<span>' . $label . '</span>';
+            $_label_l = '';
             $_id = esc_attr( $option_name . '_' . $value );
             switch ( $_type ) {
                 case 'checkbox':
@@ -186,12 +197,15 @@ function fs_fields_callback($args){
                     $_name    = esc_attr( $option_name . "[$value]" );
                     $_value   = esc_attr( $db_option[$value] );
                     $_checked = '';
+                    $_label_l = $_label;
+                    $_label   = '';
                     break;
             }
-        $html .= "<li><label for='$_id'><input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'> " .$_label."</label></li> ";
+            $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'>" .$_label."</label></li>";
         }
+        $class = str_replace('wpfs_', '', $option_name);
         if ( end( $types ) === $option ){ //apend brief description after field completion
-            $html  = "<ul>" . $html . "</ul>";
+            $html  = "<ul class=$class>" . $html . "</ul>";
             $html .= "<span>" . $field['brief'] . "</span>";
         }
     }
