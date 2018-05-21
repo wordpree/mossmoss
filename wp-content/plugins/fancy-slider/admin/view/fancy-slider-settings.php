@@ -29,6 +29,92 @@ function fs_option_page_callback(){ ?>
 <?php }
 
 /**
+* function to create default fancy_slider_options if achieve failed*
+*@since 0.1.0
+*@var function
+*@return void
+**/
+function fs_default_opts(){
+    return array(
+            'wpfs_standard'  => array( 'sli_qty' => '1','scr_qty' => '1'), 
+            'wpfs_format'    => array( 'arrow','inf' ),
+            'wpfs_animation' => array( 'slide', 'trans_spd'=>'200', 'trans_cur'=>'ease'), 
+            'wpfs_centre'    => array( '', 'padding' => '50' ),   
+            'wpfs_autoplay'  => array( '', 'speed' => '3000'), 
+    );
+}
+
+/**
+* function to generate field settings *
+*@since 0.1.0
+*@var function
+*@return settings array
+**/
+function fs_settings_field(){
+    $settings['basic'] = array(
+        'title'    => 'Slider Basic Settings',                   //section title
+        'content'  => 'Slider basic settings are listed below',  //section cb content
+        'page'     => 'fancy-slider',  //page
+        'scb'      => 'fs_sanitize_options',  //sanitize callback function
+        'fcb'      => 'fs_fields_callback',   //field callback function
+        'fields'   => array(
+            array(
+                'id' => 'wpfs_format',                 //field register $id , option name
+                'sub_title' => 'Format Setting',        //field register $title
+                'brief'     => 'You can select whatever your slider formats look like',
+                'type'      => array(                   //field input type ,value and its label
+                    'checkbox'=> array(
+                        'dot'    => 'Dot Indicator',
+                        'inf'    => 'Infinite Loop',
+                        'arrow'  => 'Next/Prev Arrows',
+                        'rtl'    => 'Right to Left',
+                        'fonect' => 'Focus On Select'
+                    )
+                )
+            ),
+            array(
+                'id' => 'wpfs_autoplay',                 //field register $id , option name
+                'sub_title' => 'Autoplay Enable',        //field register $title
+                'brief'     => 'Enable sliders infinitely play within specific time changing interval',
+                'type'      => array(                    //field input type ,value and its label
+                    'checkbox' => array('autoplay' => 'Autoplay Mode'   ),
+                    'number'   => array('speed'    => 'Auto Play Speed' ),
+                )
+            ),
+            array(
+                'id' => 'wpfs_centre',                 //field register $id , option name
+                'sub_title' => 'Centre Enable',        //field register $title
+                'brief'     => 'Enables centered view with partial prev/next slides',
+                'type'      => array(                  //field input type ,value and its label
+                    'checkbox' => array('centre'  => 'Centre Mode'   ),
+                    'number'   => array('padding' => 'Centre Padding'),
+                )
+            ),
+            array(
+                'id' => 'wpfs_animation',                //field register $id , option name
+                'sub_title' => 'Animation Type',         //field register $title
+                'brief'     => 'Sliders transition in two ways,sliding or fade-in-out',
+                'type'      => array(                    //field input type ,value and its label
+                    'radio'  => array('slide'     => 'Slide','fade' => 'Fade' ),
+                    'number' => array('trans_spd' => 'Transition Speed' ),
+                    'text'   => array('trans_cur' => 'transition Curve' ),
+                )
+            ),
+            array(
+                'id' => 'wpfs_standard',              //field register $id , option name
+                'sub_title' => 'Standard Parameter',  //field register $title
+                'brief'     => 'Set quantity of sliders to show or to scroll at one time',
+                'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 'sli_qty' => 'Display Quantity','scr_qty' => 'Scroll Quantity' )
+                )
+            )                 
+        )
+    );
+    $settings = apply_filters( 'fancy_slider_settings', $settings );
+    return $settings;
+}
+
+/**
 * function to creat basic section callback *
 *@since 0.1.0
 *@var function
@@ -38,27 +124,6 @@ function fs_section_callback_basic($args){
     $settings = fs_settings_field();
     $html = '<p>' . $settings[ $args['id'] ]['content'] . '</p>';
     _e( $html, 'fancy-slider' ); 
-}
-
-
-/**
-* function to create default fancy_slider_options if achieve failed*
-*@since 0.1.0
-*@var function
-*@return void
-**/
-function fs_default_opts(){
-    return array(
-            'multi_number'=> array(
-                'sli_qty' => '1',
-                'scr_qty' => '1',
-                'ap_spd'  => '3000',
-                'trs_spd' => '300',
-                'ctr_pad' => '50',
-            ),
-            'multi_checkbox'=> array('arrow','infinite'),
-            'radio' => 'slide'                                       
-    );
 }
 
 /**
@@ -71,6 +136,7 @@ function fs_default_opts(){
 function fs_sanitize_options($input){
     return $input;
 }
+
 
 /**
 * function to create all types of display areas *
@@ -85,114 +151,51 @@ function fs_fields_callback($args){
     }else{
         return;
     }
+  
+    $html     = '';
+    $_name    = '';
+    $_checked = '';
+    $_type    = '';
+    $_id      = '';
+    $_value   = '';
+    $_label   = '';
+    $option_name = $field['id'];
+    $types = $field['type'];
+    $db_option = get_option( $option_name, fs_default_opts()[$option_name]);
+    
+    
+    foreach ($types as $type => $option) {
 
-    $html = '';
-    $option_name = 'fancy_slider_options';
-    $options = get_option( $option_name, fs_default_opts() );
-    $type = $field['type'];
-    $option_args = $field['options'];
+        $_type = esc_attr( $type );
+        foreach ($option as $value => $label) {
 
-    if ( isset( $option_args ) && is_array( $option_args)  ){ //option value as array
+            $_label = '<span>' . $label . '</span>';
+            $_id = esc_attr( $option_name . '_' . $value );
+            switch ( $_type ) {
+                case 'checkbox':
+                case 'radio':
 
-        foreach ($option_args as $value => $label) {   //$id $name $in_value $type $label
-
-            $id = esc_attr( $type . '_' . $value );
-            $d_value = $options[$type];
-            $in_value = esc_attr( $value );
-            $label_l = $label_r = $label;
-            $checked = '';
-
-            switch ( $type ) {
-                case 'multi_checkbox':
-                    $name = "$option_name" . "[multi_checkbox][]";
-                    $checked = in_array($value, $d_value ) ? 'checked' : '';
-                    $label_l = '';
+                    $_name    = esc_attr( $option_name . '[]' );
+                    $_value   = esc_attr( $value );
+                    $_checked = esc_attr( in_array($value, $db_option ) ? 'checked' : '' );
                     break;
                 
-                case 'radio':
-                    $name = "$option_name" . "[radio]";
-                    $checked = checked( $value,$d_value , false );
-                    $label_l = '';
-                    break;
+                case 'number':
+                case 'text':
 
-                case 'multi_number':
-                    $name = "$option_name" . "[multi_number][$value]";
-                    $d_value = $options[$type][$value];
-                    $in_value = esc_attr( $d_value );
-                    $label_r = '';
+                    $_name    = esc_attr( $option_name . "[$value]" );
+                    $_value   = esc_attr( $db_option[$value] );
+                    $_checked = '';
                     break;
             }
-
-            $type_temp = explode('_', $type);
-            if ( empty($type_temp) ){ //invalid type ,return
-                return;
-            };
-            
-            $html .= "<li><label for='$id'>" . $label_l . " <input type=" . end($type_temp) . " name='$name' value='$in_value' id='$id' $checked> " .$label_r . "</label></li> ";
-            if ( end( $option_args ) === $label ){ //apend brief description after field completion
-                $html  = '<ul>' . $html . '</ul>';
-                $html .= "<span>" . $field['brief'] . "</span>";
-            }
-            
+        $html .= "<li><label for='$_id'><input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'> " .$_label."</label></li> ";
         }
-        echo $html;
+        if ( end( $types ) === $option ){ //apend brief description after field completion
+            $html  = "<ul>" . $html . "</ul>";
+            $html .= "<span>" . $field['brief'] . "</span>";
+        }
     }
-}
-/**
-* function to generate field settings *
-*@since 0.1.0
-*@var function
-*@return settings array
-**/
-function fs_settings_field(){
-    $settings['basic'] = array(
-        'title'    => 'Slider Basic Settings',                   //section title
-        'content'  => 'Slider basic settings are listed below',  //section cb content
-        'page'     => 'fancy-slider',
-        'scb'      => 'fs_sanitize_options',
-        'fcb'      => 'fs_fields_callback',
-        'opt'      => 'fancy_slider_options',
-        'fields'   => array(
-            array(
-                'id' => 'multi_checkbox_format',                 //field register $id
-                'sub_title' => 'Format Setting',                 //field register $title
-                'brief'     => 'Please tick your slider format',
-                'type'      => 'multi_checkbox',
-                'options'   => array(
-                    'autoplay'  => 'Autoplay',
-                    'dot'       => 'Dot Indicator',
-                    'infinite'  => 'Infinite Loop',
-                    'centre'    => 'Centre Mode',
-                    'arrow'     => 'Next/Prev Arrows'
-                )
-            ),
-            array(
-                'id' => 'radio_mode',
-                'sub_title' => 'Mode Selection',
-                'brief'     => 'Here,slider mode can be selected',
-                'type'      => 'radio',
-                'options'   => array(
-                    'slide'  => 'Slide',
-                    'fade'   => 'Fade'
-                )
-            ),
-            array(
-                'id' => 'number_digital',
-                'sub_title' => 'Digital Parameter',
-                'brief'     => 'Please input your parameter here',
-                'type'      => 'multi_number',
-                'options'   => array(
-                    'sli_qty' => 'Display Quantity',
-                    'scr_qty' => 'Scroll Quantity',
-                    'ap_spd'  => 'Autoplay Speed',
-                    'trs_spd' => 'transition Speed',
-                    'ctr_pad' => 'Centre Padding'  
-                )
-            )                 
-        )
-    );
-    $settings = apply_filters( 'fancy_slider_settings', $settings );
-    return $settings;
+    echo $html;
 }
 
 /**
