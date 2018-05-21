@@ -1,1 +1,10 @@
-
+.wrap .form-table li {
+  margin-bottom: 0;
+  display: inline-block;
+}
+.wrap .form-table ul + span {
+  font-style: italic;
+}
+.wrap .form-table li + li {
+  margin-left: 2em;
+}

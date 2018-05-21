@@ -1,0 +1,17 @@
+
+.wrap {
+	
+	.form-table {
+		li {
+			margin-bottom:0;
+			display:inline-block;
+		} //li
+		ul + span {
+			font-style:italic;
+		} //ul+span
+		li + li {
+			margin-left:2em;
+		}
+	} //form-table
+
+} //wrap
