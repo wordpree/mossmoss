@@ -12,6 +12,13 @@
 		li + li {
 			margin-left:2em;
 		}
+		.lazyload {
+			li:last-child{
+				display:block;
+				margin-left:0;
+				margin-top:0.5em;
+			}
+		}
 	} //form-table
 
 } //wrap

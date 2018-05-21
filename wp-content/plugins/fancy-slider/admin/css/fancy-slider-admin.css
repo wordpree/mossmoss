@@ -8,3 +8,8 @@
 .wrap .form-table li + li {
   margin-left: 2em;
 }
+.wrap .form-table .lazyload li:last-child {
+  display: block;
+  margin-left: 0;
+  margin-top: 0.5em;
+}
