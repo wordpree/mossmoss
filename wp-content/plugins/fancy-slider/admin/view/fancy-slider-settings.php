@@ -41,7 +41,7 @@ function fs_default_opts(){
             'wpfs_animation' => array( 'slide', 'trans_spd'=>'200', 'trans_cur'=>'ease'), 
             'wpfs_centre'    => array( '', 'padding' => '50' ),   
             'wpfs_autoplay'  => array( '', 'speed' => '3000'),
-            'wpfs_lazyload'  => array( 'progressive' ),
+            'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
     );
 }
 
@@ -73,7 +73,8 @@ function fs_settings_field(){
                 'sub_title' => 'Lazy Loading',        //field register $title
                 'brief'     => 'load the image as soon as you slide it or loads one image after another when the page loads',
                 'type'      => array(                  //field input type ,value and its label
-                    'radio' => array('ondemand'  => 'Ondemand','progressive'  => 'Progressive'    ),
+                    'radio'    => array('ondemand'  => 'Ondemand','progressive'  => 'Progressive' ),
+                    'textarea' => array('img_name'  => 'lazy loading img name,eg: img1.jpg , img2.png' ),
                 )
             ),
             array(
@@ -169,6 +170,7 @@ function fs_fields_callback($args){
     $_id      = '';
     $_value   = '';
     $_label   = '';
+    $_placehoder = '';
     $option_name = $field['id'];
     $types = $field['type'];
     $db_option = get_option( $option_name, fs_default_opts()[$option_name]);
@@ -200,8 +202,20 @@ function fs_fields_callback($args){
                     $_label_l = $_label;
                     $_label   = '';
                     break;
+
+                case 'textarea':
+                    $_placehoder = $label;
+                    $_name    = esc_attr( $option_name . "[$value]" );
+                    $_value   = esc_attr( $db_option[$value] );
+                    break;
+
             }
-            $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'>" .$_label."</label></li>";
+            if ( $type === 'textarea' ) {
+                $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'>" .$_value. "</textarea></li>";              
+            }else{
+                $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'>" .$_label."</label></li>";
+            }
+            
         }
         $class = str_replace('wpfs_', '', $option_name);
         if ( end( $types ) === $option ){ //apend brief description after field completion
