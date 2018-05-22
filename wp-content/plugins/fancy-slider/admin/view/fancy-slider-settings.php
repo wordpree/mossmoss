@@ -73,8 +73,8 @@ function fs_settings_field(){
                 'sub_title' => 'Lazy Loading',        //field register $title
                 'brief'     => 'load the image as soon as you slide it or loads one image after another when the page loads',
                 'type'      => array(                  //field input type ,value and its label
-                    'radio'    => array('ondemand'  => 'Ondemand','progressive'  => 'Progressive' ),
-                    'textarea' => array('img_name'  => 'lazy loading img name,eg: img1.jpg , img2.png' ),
+                    'radio'    => array('progressive' => 'Progressive','ondemand' => 'Ondemand'),
+                    'textarea' => array('img_name'    => 'lazy loading img name,eg: img1.jpg , img2.png' ),
                 )
             ),
             array(
@@ -181,7 +181,7 @@ function fs_fields_callback($args){
         $_type = esc_attr( $type );
         foreach ($option as $value => $label) {
 
-            $_label = '<span>' . $label . '</span>';
+            $_label   = $label ;
             $_label_l = '';
             $_id = esc_attr( $option_name . '_' . $value );
             switch ( $_type ) {
@@ -190,7 +190,7 @@ function fs_fields_callback($args){
 
                     $_name    = esc_attr( $option_name . '[]' );
                     $_value   = esc_attr( $value );
-                    $_checked = esc_attr( in_array($value, $db_option ) ? 'checked' : '' );
+                    $_checked = checked( in_array($value, $db_option ), true, false );
                     break;
                 
                 case 'number':
@@ -213,7 +213,7 @@ function fs_fields_callback($args){
             if ( $type === 'textarea' ) {
                 $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'>" .$_value. "</textarea></li>";              
             }else{
-                $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked  value='$_value'>" .$_label."</label></li>";
+                $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked value='$_value'>" .$_label."</label></li>";
             }
             
         }
