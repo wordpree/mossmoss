@@ -1,18 +1,5 @@
 (function( $ ){
   'use strict';
-
-   function checkboxDisplay(_class,_id){
-	   var $target = $('ul.'+ _class + ' li:last');
-   	   var prop = $('ul.'+ _class + ' ' +'#'+_id).prop('checked');
-   	   if (prop === true){
-		   $target.show();
-	   }else{
-		   	$target.hide();
-	   }
-	   $('ul.'+ _class + ' li:nth-child(1)').find('input').click(function(){
-		    $target.toggle();
-	   });
-   }
    
    function radioDisplay(_class,_id){
 	   var prop = $('ul.'+ _class + ' ' +'#'+_id).prop('checked');
@@ -21,17 +8,17 @@
 		   $target.hide();
 	   }
 	   $('ul.'+ _class + ' li:nth-child(1)').find('input').click(function(){
-		    $target.hide();
+		    $target.show();
 	   });
 	   $('ul.'+ _class + ' li:nth-child(2)').find('input').click(function(){
-		    $target.show();
+		    $target.hide();
 	   });
    }
 
    $( document ).ready(function(){
 	   radioDisplay('lazyload','wpfs_lazyload_progressive');
-	   checkboxDisplay('centre','wpfs_centre_centre');
-	   checkboxDisplay('autoplay','wpfs_autoplay_autoplay');
+	   radioDisplay('centre','wpfs_centre_disable');
+	   radioDisplay('autoplay','wpfs_autoplay_disable');
 	   radioDisplay('animation','wpfs_animation_slide');
    });
 
