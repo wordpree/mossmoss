@@ -1,6 +1,31 @@
+.wrap .form-table li .invalid::after {
+  position: absolute;
+  content: '';
+  display: block;
+  border-style: solid;
+  border-width: 15px;
+  -webkit-transform: translate(170%);
+          transform: translate(170%);
+  border-color: #BBB transparent transparent transparent;
+}
+
 .wrap .form-table li {
   margin-bottom: 0;
   display: inline-block;
+  position: relative;
+}
+.wrap .form-table li .invalid {
+  visibility: visiable;
+  position: absolute;
+  background-color: #BBB;
+  width: 50%;
+  display: inline-block;
+  padding: 0.3em 0.5em;
+  -webkit-transform: translate(75%, -150%);
+          transform: translate(75%, -150%);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
 }
 .wrap .form-table ul + span {
   font-style: italic;
