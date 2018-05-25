@@ -1,6 +1,7 @@
 (function( $ ){
   'use strict';
    
+   /* hide or show sub input area when a specific item is selected */
    function radioDisplay(_class,_id){
 	   var prop = $('ul.'+ _class + ' ' +'#'+_id).prop('checked');
 	   var $target = $('ul.'+ _class + ' li').slice(2);
@@ -14,6 +15,8 @@
 		    $target.hide();
 	   });
    }
+
+   /* check a number input area valid or not */
    function numberChk(){
 
 		var $inputs = $('input[type="number"]');
@@ -22,16 +25,21 @@
 			$(this).parent('label').before('<span class="invalid">invalid figure</span>');	 
 		});
 
-	   $('.wrap form').on('submit',function(e){
+	    $('.wrap form').on('submit',function(e){
 		   	$inputs.each(function(index) {
-		   		var target = $(this).val();
+		   		var $this = $(this);
+		   		var target = $this.val();
 		   		if (! pat.test( target ) ){
-		   			$(this).focus();
+		   			$this.focus().parent().prev().addClass('activate');
 				    e.preventDefault();
 				    return false;
 			   	}
 		   	});		   	
-	   });
+	    });
+
+	   	$('.wrap form').on('click',function(){
+		    $('span.activate ').blur().removeClass('activate');
+		});
    }
    $( document ).ready(function(){
 	   radioDisplay('lazyload','wpfs_lazyload_progressive');

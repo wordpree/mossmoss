@@ -1,3 +1,4 @@
+/* fancySlider settings page style */
 .wrap .form-table li .invalid::after {
   position: absolute;
   content: '';
@@ -6,7 +7,7 @@
   border-width: 15px;
   -webkit-transform: translate(170%);
           transform: translate(170%);
-  border-color: #BBB transparent transparent transparent;
+  border-color: #DADADA transparent transparent transparent;
 }
 
 .wrap .form-table li {
@@ -15,17 +16,22 @@
   position: relative;
 }
 .wrap .form-table li .invalid {
-  visibility: visiable;
+  visibility: hidden;
   position: absolute;
-  background-color: #BBB;
+  background-color: #DADADA;
   width: 50%;
   display: inline-block;
   padding: 0.3em 0.5em;
   -webkit-transform: translate(75%, -150%);
           transform: translate(75%, -150%);
-  color: #fff;
+  color: #000;
   text-align: center;
   border-radius: 5px;
+  -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+          box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.wrap .form-table li .activate {
+  visibility: visible;
 }
 .wrap .form-table ul + span {
   font-style: italic;
