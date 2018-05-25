@@ -1,3 +1,15 @@
+/* fancySlider settings page style */
+%after {
+	&::after{
+	  position:absolute;
+	  content:'';
+	  display:block;
+	  border-style: solid;
+	  border-width:15px;
+      transform:translate(170%);
+	  border-color:#DADADA transparent transparent transparent;
+	} //popup arrow shap
+}
 
 .wrap {
 	
@@ -5,6 +17,24 @@
 		li {
 			margin-bottom:0;
 			display:inline-block;
+			position:relative;
+            .invalid{
+            	visibility:hidden;
+            	position:absolute;
+            	background-color:#DADADA;
+            	width:50%;
+            	display:inline-block;
+            	padding:0.3em 0.5em;
+            	transform: translate(75%, -150%);
+            	color:#000;
+            	text-align:center;
+            	border-radius:5px;
+            	box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2);
+            	@extend %after;
+            } //invalid popup text area
+            .activate{
+				visibility:visible;
+            } //activate
 		} //li
 		ul + span {
 			font-style:italic;
