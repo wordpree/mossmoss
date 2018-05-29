@@ -161,8 +161,13 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@return array      
         *@access protected
         **/
-        protected function get_options(){
-            $fancy_slider_options = get_option( 'fancy_slider_options');
+        public function get_options(){
+            $fancy_slider_options;
+            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format');
+            foreach ( $options as $value ) {
+                $key = str_replace('wpfs_', '', $value);
+                $fancy_slider_options[$key] = get_option( $value );
+            }
             return $fancy_slider_options;
         }
 
