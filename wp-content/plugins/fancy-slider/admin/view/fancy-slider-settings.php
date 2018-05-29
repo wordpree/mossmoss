@@ -147,7 +147,7 @@ function fs_section_callback_basic($args){
 *@since 0.1.0
 *@var function
 *@param (string) $d_value 
-*@return void
+*@return boolean
 **/
 function fs_sanitize_digital($d_value){  
         if ( isset($d_value) ){
@@ -162,7 +162,7 @@ function fs_sanitize_digital($d_value){
 *@since 0.1.0
 *@var function
 *@param (array) $input
-*@return void
+*@return array
 **/
 
 function fs_standard_sanitize($input){
@@ -177,6 +177,13 @@ function fs_standard_sanitize($input){
     return $temp;
 }
 
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
 function fs_lazyload_sanitize($input){
     $temp = $input;
     if ( isset($input[0]) ){
@@ -192,6 +199,13 @@ function fs_lazyload_sanitize($input){
     return $temp;
 }
 
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
 function fs_centre_sanitize($input){
     $temp = $input;
 
@@ -209,6 +223,13 @@ function fs_centre_sanitize($input){
     return $temp;
 }
 
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
 function fs_animation_sanitize($input){
     $temp = $input;
     if ( isset($input[0]) ){
@@ -229,6 +250,13 @@ function fs_animation_sanitize($input){
     return $temp;
 }
 
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
 function fs_format_sanitize($input){
     $temp = $input;
     foreach ( $input as $key=>$value ){
@@ -240,6 +268,14 @@ function fs_format_sanitize($input){
     }
     return $temp;
 }
+
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
 function fs_autoplay_sanitize($input){
     $temp = $input;
     if ( isset($input[0]) ){
@@ -300,18 +336,13 @@ function fs_fields_callback($args){
                 
                 case 'number':
                 case 'text':
-
+                case 'textarea':
                     $_name    = esc_attr( $option_name . "[$value]" );
                     $_value   = esc_attr( $db_option[$value] );
                     $_checked = '';
                     $_label_l = $_label;
                     $_label   = '';
-                    break;
-
-                case 'textarea':
                     $_placehoder = $label;
-                    $_name    = esc_attr( $option_name . "[$value]" );
-                    $_value   = esc_attr( $db_option[$value] );
                     break;
 
             }
