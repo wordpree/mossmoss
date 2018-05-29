@@ -22,7 +22,7 @@
 		var $inputs = $('input[type="number"]');
 		var pat = /^\d+$/;
 		$inputs.each(function(index) {
-			$(this).parent('label').before('<span class="invalid">invalid figure</span>');	 
+			$(this).before('<span class="invalid">invalid figure</span>');	 
 		});
 
 	    $('.wrap form').on('submit',function(e){
@@ -30,14 +30,14 @@
 		   		var $this = $(this);
 		   		var target = $this.val();
 		   		if (! pat.test( target ) ){
-		   			$this.focus().parent().prev().addClass('activate');
+		   			$this.focus().prev().addClass('activate');
 				    e.preventDefault();
 				    return false;
 			   	}
 		   	});		   	
 	    });
 
-	   	$('.wrap form').on('click',function(){
+	   	$('.wrap form').on('click keydown',function(){
 		    $('span.activate ').blur().removeClass('activate');
 		});
    }
