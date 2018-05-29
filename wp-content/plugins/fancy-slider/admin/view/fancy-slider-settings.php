@@ -65,7 +65,7 @@ function fs_settings_field(){
                 'sub_title' => 'Standard Parameter',  //field register $title
                 'brief'     => 'Set quantity of sliders to show or to scroll at one time',
                 'type'      => array(                 //field input type ,value and its label
-                    'number' => array( 'sli_qty' => 'Display Quantity','scr_qty' => 'Scroll Quantity' )
+                    'number' => array( 'sli_qty' => 'Slider Quantity','scr_qty' => 'Scroll Quantity' )
                 )
             ),
             array(
@@ -286,7 +286,7 @@ function fs_fields_callback($args){
         $_type = esc_attr( $type );
         foreach ($option as $value => $label) {
 
-            $_label   = $label ;
+            $_label   = '<span>' . $label .'</span>';
             $_label_l = '';
             $_id = esc_attr( $option_name . '_' . $value );
             switch ( $_type ) {
@@ -316,9 +316,9 @@ function fs_fields_callback($args){
 
             }
             if ( $type === 'textarea' ) {
-                $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'>" .$_value. "</textarea></li>";              
+                $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'> " .$_value. "</textarea></li> ";              
             }else{
-                $html .= "<li><label for='$_id'>" .$_label_l. "<input type='$_type'  name='$_name'  id='$_id' $_checked value='$_value'>" .$_label."</label></li>";
+                $html .= "<li><label for='$_id'>" .$_label_l. " <input type='$_type'  name='$_name'  id='$_id' $_checked value='$_value'> " .$_label. "</label></li> ";
             }
             
         }
