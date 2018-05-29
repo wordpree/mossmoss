@@ -1,5 +1,25 @@
 
 /* fancySlider settings page style */
+
+$breakpoints: (
+	'large' : '(min-width:1024px)',
+	'medium': '(min-width:960px)',
+	'small' : '(min-width:480px)',
+	'e-small': '(min-width:320px)',
+);
+
+@mixin respond-to($handle){
+
+	@if map-has-key($breakpoints,$handle) {
+	    $value:map-get($breakpoints,$handle);
+	    @media only screen and #{$value} {
+		    @content;
+	    }
+	} @else {
+	  @warn 'Unknow `#{$handle}` in $breakpoint.';
+	}
+}
+
 %after {
 	&::after{
 	  position:absolute;
@@ -7,49 +27,47 @@
 	  display:block;
 	  border-style: solid;
 	  border-width:15px;
-      transform:translate(170%);
-	  border-color:#DADADA transparent transparent transparent;
+      transform:translate(70%);
+	  border-color:rgba(218,218,218,0.8) transparent transparent transparent;
 	} //popup arrow shap
 }
 
+* {
+	box-sizing:border-box;	
+}
+
 .wrap {
-	
 	.form-table {
+		position:relative;
 		li {
-			margin-bottom:0;
-			display:inline-block;
-			position:relative;
+			// display:inline-block;
             .invalid{
             	visibility:hidden;
             	position:absolute;
-            	background-color:#DADADA;
-            	width:50%;
+            	background-color:rgba(218,218,218,0.8);
             	display:inline-block;
-            	padding:0.3em 0.5em;
-            	transform: translate(75%, -150%);
+            	padding:0.3em 1em;
+            	transform: translate(0%, -150%);
             	color:#000;
             	text-align:center;
             	border-radius:5px;
             	box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2);
             	@extend %after;
             } //invalid popup text area
+
             .activate{
 				visibility:visible;
             } //activate
+
+            input{
+            	max-width:50%;
+            	display:inline-block;
+            }//input
 		} //li
+
 		ul + span {
 			font-style:italic;
 		} //ul+span
-		li + li {
-			margin-left:2em;
-		}
-		.lazyload {
-			li:last-child{
-				display:block;
-				margin-left:0;
-				margin-top:0.5em;
-			}
-		}
 	} //form-table
 
 } //wrap

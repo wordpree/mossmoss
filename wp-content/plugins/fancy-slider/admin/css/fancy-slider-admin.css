@@ -5,25 +5,27 @@
   display: block;
   border-style: solid;
   border-width: 15px;
-  -webkit-transform: translate(170%);
-          transform: translate(170%);
-  border-color: #DADADA transparent transparent transparent;
+  -webkit-transform: translate(70%);
+          transform: translate(70%);
+  border-color: rgba(218, 218, 218, 0.8) transparent transparent transparent;
 }
 
-.wrap .form-table li {
-  margin-bottom: 0;
-  display: inline-block;
+* {
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+.wrap .form-table {
   position: relative;
 }
 .wrap .form-table li .invalid {
   visibility: hidden;
   position: absolute;
-  background-color: #DADADA;
-  width: 50%;
+  background-color: rgba(218, 218, 218, 0.8);
   display: inline-block;
-  padding: 0.3em 0.5em;
-  -webkit-transform: translate(75%, -150%);
-          transform: translate(75%, -150%);
+  padding: 0.3em 1em;
+  -webkit-transform: translate(0%, -150%);
+          transform: translate(0%, -150%);
   color: #000;
   text-align: center;
   border-radius: 5px;
@@ -33,14 +35,10 @@
 .wrap .form-table li .activate {
   visibility: visible;
 }
+.wrap .form-table li input {
+  max-width: 50%;
+  display: inline-block;
+}
 .wrap .form-table ul + span {
   font-style: italic;
-}
-.wrap .form-table li + li {
-  margin-left: 2em;
-}
-.wrap .form-table .lazyload li:last-child {
-  display: block;
-  margin-left: 0;
-  margin-top: 0.5em;
 }
