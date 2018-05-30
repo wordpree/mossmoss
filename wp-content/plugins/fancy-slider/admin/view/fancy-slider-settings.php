@@ -37,8 +37,8 @@ function fs_option_page_callback(){ ?>
 function fs_default_opts(){
     return array(
             'wpfs_standard'  => array( 'sli_qty' => '1','scr_qty' => '1'), 
-            'wpfs_format'    => array( 'arrow','inf' ),
-            'wpfs_animation' => array( 'slide', 'trans_spd'=>'200', 'trans_cur'=>'ease'), 
+            'wpfs_format'    => array( 'arrows','infinite' ),
+            'wpfs_animation' => array( 'slide', 'speed'=>'200', 'css_ease'=>'ease'), 
             'wpfs_centre'    => array( 'disable', 'padding' => '50' ),   
             'wpfs_autoplay'  => array( 'disable', 'speed' => '3000'),
             'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
@@ -105,8 +105,8 @@ function fs_settings_field(){
                 'brief'     => 'Sliders transition in two ways,sliding or fade-in-out',
                 'type'      => array(                    //field input type ,value and its label
                     'radio'  => array('fade' => 'Fade','slide'     => 'Slide'),
-                    'number' => array('trans_spd' => 'Transition Speed' ),
-                    'text'   => array('trans_cur' => 'Transition Curve' ),
+                    'number' => array('speed' => 'Transition Speed' ),
+                    'text'   => array('css_ease' => 'Transition Effect' ),
                 )
             ),
             array(
@@ -116,11 +116,11 @@ function fs_settings_field(){
                 'brief'     => 'You can select whatever your slider formats look like',
                 'type'      => array(                   //field input type ,value and its label
                     'checkbox'=> array(
-                        'dot'    => 'Dot Indicator',
-                        'inf'    => 'Infinite Loop',
-                        'arrow'  => 'Next/Prev Arrows',
-                        'rtl'    => 'Right to Left',
-                        'fonect' => 'Focus On Select'
+                        'dots'          => 'Dot Indicator',
+                        'infinite'      => 'Infinite Loop',
+                        'arrows'        => 'Next/Prev Arrows',
+                        'rtl'           => 'Right to Left',
+                        'focusOnSelect' => 'Focus On Select'
                     )
                 )
             )                 
@@ -237,15 +237,15 @@ function fs_animation_sanitize($input){
     }else{
         $temp[0] = null;
     }
-    if ( isset($input['trans_spd']) ){
-        $temp['trans_spd'] = fs_sanitize_digital( $input['trans_spd'] ) ? $input['trans_spd'] : null;
+    if ( isset($input['speed']) ){
+        $temp['speed'] = fs_sanitize_digital( $input['speed'] ) ? $input['speed'] : null;
     }else{
-        $temp['trans_spd'] = null;
+        $temp['speed'] = null;
     }
-    if ( isset($input['trans_cur']) ){
-        $temp['trans_cur'] = sanitize_text_field( $input['trans_cur'] ) ;
+    if ( isset($input['css_ease']) ){
+        $temp['css_ease'] = sanitize_text_field( $input['css_ease'] ) ;
     }else{
-        $temp['trans_cur'] = null;
+        $temp['css_ease'] = null;
     }
     return $temp;
 }
@@ -261,7 +261,7 @@ function fs_format_sanitize($input){
     $temp = $input;
     foreach ( $input as $key=>$value ){
         if ( isset($input[$key]) ){
-            $temp[$key] = in_array($value, array('dot','inf','arrow','rtl','fonect') ) ? $value : null;
+            $temp[$key] = in_array($value, array('dots','infinite','arrows','rtl','focusOnSelect') ) ? $value : null;
         }else{
             $temp[$key] = null;
         }
