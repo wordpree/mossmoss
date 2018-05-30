@@ -144,15 +144,81 @@
 // 	duration:2000
 // 	};
 // $('.newly-products-wrapper').fancySlider(args);
-
 // }
 (function($){
 	'use strict';
-	$(document).ready(function(){
-		$('.fancy-slider').slick({
+
+	function fancySliderSettings(){
+
+		var opt = {};
+		var fancySliderOpts = {};
+		var defaultOpts = {
+			autoplaySpeed:3000,
+			slidesToScroll:1,
+			centerMode:false,
+			cssEase:'ease',
+			centerPadding:'50px',
+			lazyLoad:'ondemand',
+			focusOnSelect:false,
+			slidesToShow:1,	
+			autoplay:false,
 			infinite:true,
-	        autoplay: true,
-	        autoplaySpeed: 2500,
-        });
+			arrows:true,
+			rtl:false,
+			speed:300,
+			dots:false,
+			fade:false
+		};
+		var name;
+		var haystack = ['dots','infinite','arrows','rtl','focusOnSelect'];
+        var search =[],i = 0;
+		for ( name in fancy_slider_opts) {
+			switch ( name ) {
+				case 'animation':
+				    fancySliderOpts.fade    = (fancy_slider_opts[name][0] === 'fade') ? true : false;
+					fancySliderOpts.speed   = parseInt( fancy_slider_opts[name].speed );
+					fancySliderOpts.cssEase = fancy_slider_opts[name].css_ease;
+					break;
+
+				case 'autoplay':
+				    fancySliderOpts.autoplay      = (fancy_slider_opts[name][0] === 'enable') ? true : false;
+				    fancySliderOpts.autoplaySpeed = parseInt( fancy_slider_opts[name].speed );
+					break;
+
+				case  'centre':
+					fancySliderOpts.centerMode    = (fancy_slider_opts[name][0] === 'enable') ? true : false;
+				    fancySliderOpts.centerPadding =  fancy_slider_opts[name].padding + 'px';
+					break;
+
+				case 'lazyload':
+					fancySliderOpts.lazyLoad = fancy_slider_opts[name][0];
+					//lazyLoad image name 
+					break;
+
+				case 'format':
+				    search = fancy_slider_opts[name];
+				    for ( i = 0; i < search.length; i++) {
+						    if ( haystack.indexOf( search[i] ) >= 0 ) {
+							    fancySliderOpts[search[i]] = true;
+						    }
+				    }			    
+					break;
+
+				case 'standard':
+					fancySliderOpts.slidesToShow   =  parseInt( fancy_slider_opts[name].sli_qty ) ;
+					fancySliderOpts.slidesToScroll =  parseInt( fancy_slider_opts[name].scr_qty ) ;
+					break;
+			}
+		}
+		
+		opt = $.extend({},defaultOpts,fancySliderOpts);
+		console.log(opt);
+		return opt;
+		
+	}
+	
+	$(document).ready(function(){
+		var settings = fancySliderSettings();
+		 $('.fancy-slider').slick(settings);
 	});
 })(jQuery);

@@ -1,4 +1,14 @@
 <?php 
+
+/**
+ * class  Storefront_Child_Class,all related to storefront child theme functionalities *
+ *@since 0.1.0
+ *@var class
+ *@package storefront-child
+ *@subpackage storefront-child/inc
+ *@author Hai
+**/
+
 if(!defined('ABSPATH')){
 	exit;
 }
