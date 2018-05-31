@@ -147,7 +147,7 @@
 // }
 (function($){
 	'use strict';
-
+ 
 	function fancySliderSettings(){
 
 		var opt = {};
@@ -200,6 +200,11 @@
 				    for ( i = 0; i < search.length; i++) {
 						    if ( haystack.indexOf( search[i] ) >= 0 ) {
 							    fancySliderOpts[search[i]] = true;
+							    if ( search[i] === 'rtl' ){
+							    	$('.fancy-slider').attr({
+							    		dir: 'rtl'
+							    	});
+							    }
 						    }
 				    }			    
 					break;
