@@ -82,7 +82,7 @@ function fs_settings_field(){
                 'id' => 'wpfs_centre',                 //field register $id , option name
                 'cb' => 'fs_centre_sanitize',        // register setting callback
                 'sub_title' => 'Centre View Style',        //field register $title
-                'brief'     => 'Enables centered view with partial prev/next slides',
+                'brief'     => 'Enables centered view with partial prev/next slides.Use with odd numbered slidesToShow counts.',
                 'type'      => array(                  //field input type ,value and its label
                     'radio'    => array('enable'  => 'Enable Centre View' , 'disable'  => 'Disable Centre View' ),
                     'number'   => array('padding' => 'Centre Padding'),
