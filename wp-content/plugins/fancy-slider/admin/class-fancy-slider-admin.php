@@ -64,16 +64,16 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         private  function custom_post_type_init(){
             $labels =array(
-                'name'          => __('Sliders','yee-slider'),
-                'singular_name' => __('Slider','yee-slider'),
-                'menu_name'     => __('Sliders','yee-slider'),
-                'add_new'       => __('Add New','yee-slider'),
-                'add_new_item'  => __('Add New Slider','yee-slider'),
-                'new_item'      => __('New Slider','yee-slider'),
-                'edit_item'     => __('Edit slider','yee-slider'),
-                'view_item'     => __('View Slider','yee-slider'),
-                'all_items'     => __('All Sliders','yee-slider'),
-                'search_items'  => __('Search Sliders','yee-slider'),         
+                'name'          => __('Sliders','fancy-slider'),
+                'singular_name' => __('Slider','fancy-slider'),
+                'menu_name'     => __('Sliders','fancy-slider'),
+                'add_new'       => __('Add New','fancy-slider'),
+                'add_new_item'  => __('Add New Slider','fancy-slider'),
+                'new_item'      => __('New Slider','fancy-slider'),
+                'edit_item'     => __('Edit slider','fancy-slider'),
+                'view_item'     => __('View Slider','fancy-slider'),
+                'all_items'     => __('All Sliders','fancy-slider'),
+                'search_items'  => __('Search Sliders','fancy-slider'),         
                 );    
             $args =array( 'labels'          => $labels,
             		  'public'             => true,
@@ -90,6 +90,37 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             		  'supports'      => array('title','editor','thumbnail','excerpt'),
             		);         
             register_post_type('fancy_slider',$args);
+        }
+
+        /**
+        * function to register a new custom toxonomy for fancy_slider  *
+        * there's filter callback issues if parse_request or pre_get_posts is on process, see 'register_taxonomy_for_object_type()'
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access private
+        **/
+        function custom_taxonomy_init(){
+            $labels = array(
+                'name'         => __('Types',       'fancy-slider'),
+                'sigular_name' => __('Type',        'fancy-slider'),
+                'search_items' => __('Search Types','fancy-slider'),
+                'all_items'    => __('All Types',   'fancy-slider'),
+                'edit_item'    => __('Edit Type',   'fancy-slider'),
+                'view_item'    => __('View Type',   'fancy-slider'),
+                'add_new_item' => __('Add New Type','fancy-slider'),
+                'new_item_name'=> __('New Type',    'fancy-slider')
+            );
+            $args = array(
+                'labels' => $labels,
+                'public' => true,
+                'hierarchical' => false,
+                'rewrite'      => array( 'slug' => 'mode' ),
+                'update_count_callback' => '_update_post_term_count',
+            );
+            register_taxonomy( 'slider_sync', 'fancy_slider', $args );
+            global $wp_rewrite;
+            $wp_rewrite->flush_rules(false);
         }
 
         /**
@@ -182,6 +213,9 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             $this->_handle = array(
                 'cpt_init_hook' => function(){
                     $this->custom_post_type_init();
+                },
+                'tax_init_hook' => function(){
+                    $this->custom_taxonomy_init();
                 },
                 'scripts_enqueue_hook' => function(){
                     $this->styles_enqueue();
