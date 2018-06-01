@@ -30,19 +30,24 @@ class Fancy_Slider_Widget extends WP_Widget {
 	 *@var function
 	**/
 	public function widget($args, $instance){
-		$fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
-		$url = '<div class="fancy-slider">';
-		foreach ( $fancy_slider_posts as $post ){
-		    setup_postdata( $post );
-		    $feature_img = get_post_thumbnail_id( $post->ID );
-		    if ( $feature_img ){
-		        $img = wp_get_attachment_image_src( $feature_img ,'full');
-		        $url .= "<div> <img src= '$img[0]'> </div>";
-		    }          
+		
+		if ( is_front_page() ){
+			
+			$fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
+			$url = '<div class="fancy-slider">';
+			foreach ( $fancy_slider_posts as $post ){
+			    setup_postdata( $post );
+			    $feature_img = get_post_thumbnail_id( $post->ID );
+			    if ( $feature_img ){
+			        $img = wp_get_attachment_image_src( $feature_img ,'full');
+			        $url .= "<div> <img src= '$img[0]'> </div>";
+			    }          
+			}
+			$url .= '</div>';
+			wp_reset_postdata();
+			echo $url;
 		}
-		$url .= '</div>';
-		wp_reset_postdata();
-		echo $url;
+		
 	}
 
     /**
