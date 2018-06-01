@@ -194,8 +194,7 @@
 					fancySliderOpts.lazyLoad = fancy_slider_opts[name][0];
 					lazyImage = fancy_slider_opts[name].img_name.split(',');
 					for (var j = 0; j < lazyImage.length; j++) {
-						var temp = lazyImage[j];
-						var $target =$("img[src$="+"'"+temp+"'"+"]");
+						var $target =$("img[src$="+"'"+lazyImage[j]+"'"+"]");
 					    $target.attr({
 					    	'data-lazy': $target.attr('src')
 					    }).removeAttr('src');				
@@ -224,9 +223,8 @@
 		}
 		
 		opt = $.extend({},defaultOpts,fancySliderOpts);
-		console.log(opt);
-		return opt;
 		
+		return opt;		
 	}
 	
 	$(document).ready(function(){
