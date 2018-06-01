@@ -35,7 +35,10 @@ $dots-map: (
     position:absolute,
 	right:0,
 	bottom:0,
-	li : ( display:inline-block,),
+	li : ( 
+		display:inline-block,
+		border-left:1px solid #FFF,
+		),
 );
 
 @mixin print($maps) {
