@@ -45,7 +45,6 @@
 	   radioDisplay('lazyload','wpfs_lazyload_progressive');
 	   radioDisplay('centre','wpfs_centre_disable');
 	   radioDisplay('autoplay','wpfs_autoplay_disable');
-	   radioDisplay('animation','wpfs_animation_slide');
 	   numberChk();   
    });
 
