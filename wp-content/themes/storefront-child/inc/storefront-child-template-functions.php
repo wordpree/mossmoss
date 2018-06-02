@@ -233,7 +233,7 @@ if ( ! function_exists( 'storefront_child_primary_navigation_handheld' ) ) {
 	 * @return void
 	 */
 	function storefront_child_primary_navigation_handheld() {
-		if(multiDeviceCheck() === 'mobile'){
+		if( $device  === 'mobile' ){
 			storefront_child_wc_search();
 		}
 		

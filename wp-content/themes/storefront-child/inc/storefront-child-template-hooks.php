@@ -15,10 +15,10 @@
 
 add_action( 'storefront_child_header', 'storefront_skip_links',                                      0 );
 // add_action( 'storefront_child_header', 'storefront_secondary_navigation',                            30 );
-
+$device = function_exists('multi_device_check') ? multi_device_check() : null;
 
 if ( $storefront_child_is_woocommerce_actived ) {
-  switch (multiDeviceCheck()) {
+  switch ( $device ) {
   	case 'mobile':
   	add_action( 'storefront_child_header', 'storefront_child_flexbox_open',                      29 );
 		add_action( 'storefront_child_header', 'storefront_child_site_branding',                     30 );

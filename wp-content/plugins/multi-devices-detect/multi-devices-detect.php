@@ -15,16 +15,15 @@
 ?>
 
 <?php 
-  if (! defined('ABSPATH')){	
-  	exit;
-  }
+if (! defined('ABSPATH')){	
+    exit;
+}
 
-  require_once plugin_dir_path( __FILE__ ) . 'inc/Mobile_Detect.php';
+require_once plugin_dir_path( __FILE__ ) . 'inc/Mobile_Detect.php';
 
-  $muliDevicesDetect = new Mobile_Detect;
 
-function multiDeviceCheck(){
-  global $muliDevicesDetect;
-  $deviceType =  $muliDevicesDetect->isMobile() ? ( $muliDevicesDetect->isTablet() ? 'tablet' : 'mobile' ) : 'desktop';
-  return $deviceType;
+function multi_device_check(){
+    $mobile_detect = new Mobile_Detect();
+    $device_type =  $mobile_detect->isMobile() ? ( $mobile_detect->isTablet() ? 'tablet' : 'mobile' ) : 'desktop';
+    return $device_type;
 }
