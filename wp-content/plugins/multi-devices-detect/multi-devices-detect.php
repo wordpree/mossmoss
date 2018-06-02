@@ -1,7 +1,7 @@
 <?php 
   /*
    * Plugin Name: Multiple Devices Detect
-   * Plugin URI: 
+   * Plugin URI: https://www.webite.me
    * Description: It is a plugin to detect the types of devices when visiting website and is based on a lightweight PHP class:Mobile_Detect 
    * Version: 1.0.0
    * Author: Hai Jun Wang

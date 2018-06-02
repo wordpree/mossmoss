@@ -20,7 +20,7 @@
 
 <div id="page" class="hfeed site slide-out">
 	<?php do_action( 'storefront_before_header' ); ?>
-
+   <?php $device = function_exists('multi_device_check') ? multi_device_check() : null;?>
 	<header id="masthead" class="site-header" role="banner" style="<?php storefront_header_styles(); ?>">
 		<div class="site-header-container <?php echo $device . '-header-container';?>">
 		    	<?php
