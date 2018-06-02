@@ -41,7 +41,7 @@ if ( ! class_exists( 'Fancy_Slider_Activate' ) ){
 		 *@return void
 		**/ 
         public function activator(){
-	        $this->_admin->_handle['cpt_init_interface'];
+	        $this->_admin->_handle['cpt_init_hook'];
 	        flush_rewrite_rules();
         }
 
