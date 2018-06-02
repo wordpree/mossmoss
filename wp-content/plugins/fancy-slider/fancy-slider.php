@@ -34,7 +34,6 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 require_once plugin_dir_path( __FILE__ )   . 'includes/class-fancy-slider.php';
 require_once plugin_dir_path( __FILE__ )   . 'includes/widgets/class-fancy-slider-widget.php';
-require_once plugin_dir_path( __FILE__ )   . 'admin/11.php';
 
 define ('FANCY_SLIDER_VERSION','0.1.0');
 define ('FANCY_SLIDER_NAME','fancy-slider');

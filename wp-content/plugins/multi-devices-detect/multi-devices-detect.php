@@ -12,9 +12,6 @@
    * Domain Path:
   */
 
-?>
-
-<?php 
 if (! defined('ABSPATH')){	
     exit;
 }
@@ -27,3 +24,5 @@ function multi_device_check(){
     $device_type =  $mobile_detect->isMobile() ? ( $mobile_detect->isTablet() ? 'tablet' : 'mobile' ) : 'desktop';
     return $device_type;
 }
+
+require_once plugin_dir_path( __FILE__ )   . 'settings.php';

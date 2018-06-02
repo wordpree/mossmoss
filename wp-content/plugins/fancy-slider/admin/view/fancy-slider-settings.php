@@ -9,7 +9,7 @@
  */
 
 if ( ! ( defined('ABSPATH') ) ){
-	die('sorry! you cannot access directly');
+    exit;
 }
 
 /**
