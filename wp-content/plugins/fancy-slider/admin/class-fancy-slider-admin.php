@@ -198,6 +198,14 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             foreach ( $options as $value ) {
                 $key = str_replace('wpfs_', '', $value);
                 $fancy_slider_options[$key] = get_option( $value );
+                if ( taxonomy_exists( 'slider_sync' ) ) {
+                    $tax_count= wp_count_posts( 'slider_sync' )->publish;
+                    $cpt_count= wp_count_posts( 'slider_slider' )->publish;
+                    if ( $tax_count === $cpt_count ) {
+
+                    }
+                }
+                
             }
             return $fancy_slider_options;
         }

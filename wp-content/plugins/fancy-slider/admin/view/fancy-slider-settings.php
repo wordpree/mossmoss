@@ -42,6 +42,7 @@ function fs_default_opts(){
             'wpfs_centre'    => array( 'disable', 'padding' => '50' ),   
             'wpfs_autoplay'  => array( 'disable', 'speed' => '3000'),
             'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
+            'wpfs_sync'      => array( 'disable','asNavFor1'=>'','asNavFor2'=>''),
     );
 }
 
@@ -99,8 +100,8 @@ function fs_settings_field(){
                 )
             ),
             array(
-                'id' => 'wpfs_animation',                //field register $id , option name
-                'cb' => 'fs_animation_sanitize',       // register setting callback
+                'id' => 'wpfs_animation',                 //field register $id , option name
+                'cb' => 'fs_animation_sanitize',         // register setting callback
                 'sub_title' => 'Animation Type',         //field register $title
                 'brief'     => 'Sliders transition in two ways,sliding or fade-in-out',
                 'type'      => array(                    //field input type ,value and its label
@@ -110,8 +111,18 @@ function fs_settings_field(){
                 )
             ),
             array(
+                'id' => 'wpfs_sync',                   //field register $id , option name
+                'cb' => 'fs_sync_sanitize',            // register setting callback
+                'sub_title' => 'Syncing Mode',         //field register $title
+                'brief'     => 'Enables syncing of multiple sliders',
+                'type'      => array(                    //field input type ,value and its label
+                    'radio'  => array('enable' => 'Enable Slider Syncing' , 'disable'  => 'Disable Slider Syncing' ),
+                    'text'   => array('asNavFor1' => 'Slider Sync Element','asNavFor2' => 'Slider Base Element' ),
+                )
+            ),
+            array(
                 'id' => 'wpfs_format',                  //field register $id , option name
-                'cb' => 'fs_format_sanitize',         // register setting callback
+                'cb' => 'fs_format_sanitize',           // register setting callback
                 'sub_title' => 'Format Setting',        //field register $title
                 'brief'     => 'You can select whatever your slider formats look like',
                 'type'      => array(                   //field input type ,value and its label
@@ -257,14 +268,37 @@ function fs_animation_sanitize($input){
 *@param (array) $input
 *@return array
 **/
-function fs_format_sanitize($input){
+function fs_format_sanitize($input) {
     $temp = $input;
-    foreach ( $input as $key=>$value ){
-        if ( isset($input[$key]) ){
+    foreach ( $input as $key=>$value ) {
+        if ( isset($input[$key]) ) {
             $temp[$key] = in_array($value, array('dots','infinite','arrows','rtl','focusOnSelect') ) ? $value : null;
         }else{
             $temp[$key] = null;
         }
+    }
+    return $temp;
+}
+
+/**
+* function to sanitize options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
+function fs_sync_sanitize($input) {
+    $temp = $input;
+    if ( isset( $input ) ) {
+        foreach ($input as $key => $value) {
+            if ( is_int( $key ) ) {
+                $temp[$key] = in_array($value, array('disable','enable') ) ? $value : null;
+            }else{
+                $temp[$key] = sanitize_text_field( $value );
+            }                
+        }
+    }else{
+        $temp = null;
     }
     return $temp;
 }
@@ -300,6 +334,7 @@ function fs_autoplay_sanitize($input){
 function fs_fields_callback($args){
     if ( isset($args) && is_array($args) ){
         $field = $args['field'];
+
     }else{
         return;
     }
