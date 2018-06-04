@@ -93,37 +93,6 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         }
 
         /**
-        * function to register a new custom toxonomy for fancy_slider  *
-        * there's filter callback issues if parse_request or pre_get_posts is on process, see 'register_taxonomy_for_object_type()'
-        *@since 0.1.0
-        *@var function
-        *@return void
-        *@access private
-        **/
-        private function custom_taxonomy_init(){
-            $labels = array(
-                'name'         => __('Types',       'fancy-slider'),
-                'sigular_name' => __('Type',        'fancy-slider'),
-                'search_items' => __('Search Types','fancy-slider'),
-                'all_items'    => __('All Types',   'fancy-slider'),
-                'edit_item'    => __('Edit Type',   'fancy-slider'),
-                'view_item'    => __('View Type',   'fancy-slider'),
-                'add_new_item' => __('Add New Type','fancy-slider'),
-                'new_item_name'=> __('New Type',    'fancy-slider')
-            );
-            $args = array(
-                'labels' => $labels,
-                'public' => true,
-                'hierarchical' => false,
-                'rewrite'      => array( 'slug' => 'mode' ),
-                'update_count_callback' => '_update_post_term_count',
-            );
-            register_taxonomy( 'slider_sync', 'fancy_slider', $args );
-            global $wp_rewrite;
-            $wp_rewrite->flush_rules(false);
-        }
-
-        /**
         * function to enqueue new scripts  *
         *@since 0.1.0
         *@var function
@@ -186,26 +155,6 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         }
 
         /**
-        * function to be check validation of slider syncing *
-        *@since 0.1.0
-        *@var function
-        *@return array      
-        *@access private
-        **/
-        // private function sync_validate(){
-        //     $id = array('slider_sync','fancy_slider');
-        //     $count = array();
-        //     foreach ($id as $value) {
-        //         if ( taxonomy_exists( $value) ) {
-        //             $count[]= wp_count_posts( $value )->publish;
-        //         }else{
-        //             return false;
-        //         }
-        //     }
-        //     return $count[0] === $count[1] ? true : false;           
-        // }
-
-        /**
         * function to be used as callable name hooked onto add filter *
         *@since 0.1.0
         *@var function
@@ -234,9 +183,6 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             $this->_handle = array(
                 'cpt_init_hook' => function(){
                     $this->custom_post_type_init();
-                },
-                'tax_init_hook' => function(){
-                    $this->custom_taxonomy_init();
                 },
                 'scripts_enqueue_hook' => function(){
                     $this->styles_enqueue();

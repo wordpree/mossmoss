@@ -137,9 +137,6 @@ if (! class_exists('Fancy_Slider') ){
        
 			/* hooked custom post function */
 			$this->_loader->action_entry( 'init',$this->_admin->_handle['cpt_init_hook'] );
-
-			/* hooked custom taxonomy */
-			$this->_loader->action_entry( 'init',$this->_admin->_handle['tax_init_hook'] );
 			
 			/* hooked js/css  function */
 			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin->_handle['scripts_enqueue_hook']         );
