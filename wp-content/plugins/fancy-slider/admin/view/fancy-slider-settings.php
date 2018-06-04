@@ -42,7 +42,7 @@ function fs_default_opts(){
             'wpfs_centre'    => array( 'disable', 'padding' => '50' ),   
             'wpfs_autoplay'  => array( 'disable', 'speed' => '3000'),
             'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
-            'wpfs_sync'      => array( 'disable','asNavFor1'=>'','asNavFor2'=>''),
+            'wpfs_sync'      => array( 'disable','asNavFor'=>''),
     );
 }
 
@@ -117,7 +117,7 @@ function fs_settings_field(){
                 'brief'     => 'Enables syncing of multiple sliders',
                 'type'      => array(                    //field input type ,value and its label
                     'radio'  => array('enable' => 'Enable Slider Syncing' , 'disable'  => 'Disable Slider Syncing' ),
-                    'text'   => array('asNavFor1' => 'Slider Sync Element','asNavFor2' => 'Slider Base Element' ),
+                    'text'   => array('asNavFor' => 'Slider Sync Element' ),
                 )
             ),
             array(

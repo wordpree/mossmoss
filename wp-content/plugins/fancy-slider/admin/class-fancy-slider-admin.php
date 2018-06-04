@@ -100,7 +100,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@return void
         *@access private
         **/
-        function custom_taxonomy_init(){
+        private function custom_taxonomy_init(){
             $labels = array(
                 'name'         => __('Types',       'fancy-slider'),
                 'sigular_name' => __('Type',        'fancy-slider'),
@@ -185,27 +185,40 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             }
         }
 
-         /**
+        /**
+        * function to be check validation of slider syncing *
+        *@since 0.1.0
+        *@var function
+        *@return array      
+        *@access private
+        **/
+        // private function sync_validate(){
+        //     $id = array('slider_sync','fancy_slider');
+        //     $count = array();
+        //     foreach ($id as $value) {
+        //         if ( taxonomy_exists( $value) ) {
+        //             $count[]= wp_count_posts( $value )->publish;
+        //         }else{
+        //             return false;
+        //         }
+        //     }
+        //     return $count[0] === $count[1] ? true : false;           
+        // }
+
+        /**
         * function to be used as callable name hooked onto add filter *
         *@since 0.1.0
         *@var function
         *@return array      
-        *@access protected
+        *@access private
         **/
-        public function get_options(){
+        private function get_options(){
             $fancy_slider_options;
-            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format');
+            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format','wpfs_sync');
+            
             foreach ( $options as $value ) {
                 $key = str_replace('wpfs_', '', $value);
-                $fancy_slider_options[$key] = get_option( $value );
-                if ( taxonomy_exists( 'slider_sync' ) ) {
-                    $tax_count= wp_count_posts( 'slider_sync' )->publish;
-                    $cpt_count= wp_count_posts( 'slider_slider' )->publish;
-                    if ( $tax_count === $cpt_count ) {
-
-                    }
-                }
-                
+                $fancy_slider_options[$key] = get_option( $value );                
             }
             return $fancy_slider_options;
         }
