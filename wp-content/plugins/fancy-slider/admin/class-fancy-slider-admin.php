@@ -147,7 +147,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                         /* register_setting($option_group_name,$option_name,$sanitize_callback) */
                         register_setting( $option_group ,$option_name ,array('sanitize_callback' => $field['cb']) );
                         /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
-                        add_settings_field( $field['id'],$field['sub_title'],$data['fcb'],$data['page'],$section,array( 'field'=>$field ) );
+                        add_settings_field( $field['id'],$field['sub_title'],$data['fcb'],$data['page'],$section,array( 'field'=>$field,'section'=>$section ) );
                     }
                 }
 

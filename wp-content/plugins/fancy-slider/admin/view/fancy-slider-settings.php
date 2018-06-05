@@ -37,14 +37,14 @@ function fs_option_page_callback(){ ?>
                 ?>
             </nav>
             <?php 
-                $tab = array('basic'=>'fancy_slider_basic_gp','advanced'=>'fancy_slider_ad_gp');
-                    $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'basic';
-                    foreach ($tab as $key => $value) {
-                        if ( $active_tab === $key ) {
-                            settings_fields( $value );
-                        }     
-                    }
-                do_settings_sections( 'fancy-slider' ); 
+                $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'basic';
+                if ( $active_tab === 'basic' ) {
+                    settings_fields( 'fancy_slider_basic_gp' );
+                    do_settings_sections( 'fancy-slider' ); 
+                }else{
+                    settings_fields( 'fancy_slider_ad_gp' );
+                    do_settings_sections( 'options-general.php?page=fancy-slider&tab=advanced' );
+                }
                 submit_button(); 
             ?>
         </form>
@@ -58,15 +58,22 @@ function fs_option_page_callback(){ ?>
 *@return void
 **/
 function fs_default_opts(){
-    return array(
-            'wpfs_standard'  => array( 'sli_qty' => '1','scr_qty' => '1'), 
-            'wpfs_format'    => array( 'arrows','infinite' ),
-            'wpfs_animation' => array( 'slide', 'speed'=>'200', 'css_ease'=>'ease'), 
-            'wpfs_centre'    => array( 'disable', 'padding' => '50' ),   
-            'wpfs_autoplay'  => array( 'disable', 'speed' => '3000'),
-            'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
-            'wpfs_sync'      => array( 'disable','asNavFor'=>''),
+    $opt['basic'] = array(
+        'wpfs_standard'  => array( 'sli_qty' => '1','scr_qty' => '1'), 
+        'wpfs_format'    => array( 'arrows','infinite' ),
+        'wpfs_animation' => array( 'slide', 'speed'=>'200', 'css_ease'=>'ease'), 
+        'wpfs_centre'    => array( 'disable', 'padding' => '50' ),   
+        'wpfs_autoplay'  => array( 'disable', 'speed' => '3000'),
+        'wpfs_lazyload'  => array( 'ondemand','img_name'=>'' ),
+        'wpfs_sync'      => array( 'disable','asNavFor'=>''),
     );
+    $opt['advanced'] = array(
+        'wpfs_bp_xl'=> array( 'bp'=>'1024','sli_qty' => '4','scr_qty' => '4','arrows','infinite','dots' ),
+        'wpfs_bp_l' => array( 'bp'=>'960','sli_qty' => '3','scr_qty' => '3','arrows','infinite','dots' ),
+        'wpfs_bp_m' => array( 'bp'=>'600','sli_qty' => '2','scr_qty' => '2','arrows','infinite' ),
+        'wpfs_bp_s' => array( 'bp'=>'480','sli_qty' => '1','scr_qty' => '1','infinite' ),
+    );
+    return $opt;
 }
 
 /**
@@ -80,7 +87,7 @@ function fs_settings_field(){
         'title'    => 'Slider Basic Settings',                   //section title
         'content'  => 'Slider basic settings are listed below',  //section cb content
         'page'     => 'fancy-slider',  //page
-        'fcb'      => 'fs_basic_fields_callback',   //field callback function
+        'fcb'      => 'fs_fields_callback',   //field callback function
         'option_group' => 'fancy_slider_basic_gp',  //option group name
         'fields'   => array(
 
@@ -162,21 +169,84 @@ function fs_settings_field(){
         )
     );
     $settings['advanced'] = array(
-        'title'    => 'Slider Advanced Settings',                   //section title
-        'content'  => 'Slider advanced settings are listed below',  //section cb content
-        'page'     => 'fancy-slider',  //page
-        'fcb'      => 'fs_advanced_fields_callback',   //field callback function
+        'title'        => 'Slider Responsive Settings',                   //section title
+        'content'      => 'Slider options can be set responsively in accordance to breakpoint',  //section cb content
+        'page'         => 'options-general.php?page=fancy-slider&tab=advanced',  //page
+        'fcb'          => 'fs_fields_callback',   //field callback function
         'option_group' => 'fancy_slider_ad_gp',  //option group name
         'fields'   => array(
             array(
-                'id' => 'wpfs_standard_1',              //field register $id , option name
-                'cb' => 'fs_standard_sanitize_1',     // register setting callback
-                'sub_title' => 'Standard Parameter 1',  //field register $title
-                'brief'     => 'Set quantity of sliders to show or to scroll at one time',
+                'id'        => 'wpfs_bp_xl',              //field register $id , option name
+                'cb'        => 'fs_advanced_sanitize_xl',     // register setting callback
+                'sub_title' => 'Breakpoint Extra Large',  //field register $title
+                'brief'     => '',
                 'type'      => array(                 //field input type ,value and its label
-                    'number' => array( 'sli_qty' => 'Slider Quantity','scr_qty' => 'Scroll Quantity' )
-                )
-            )
+                    'number' => array( 
+                       'bp'   => 'Set Breakpoint Extra Large',
+                       'sli_qty' => 'Slider Quantity',
+                       'scr_qty' => 'Scroll Quantity' 
+                    ),
+                    'checkbox' => array(
+                       'dots'     => 'Dot Indicator',
+                       'infinite' => 'Infinite Loop',
+                       'arrows'   => 'Next/Prev Arrows',
+                    ),
+                ),
+            ),
+            array(
+                'id' => 'wpfs_bp_l',              //field register $id , option name
+                'cb' => 'fs_advanced_sanitize_l',     // register setting callback
+                'sub_title' => 'Breakpoint Large',  //field register $title
+                'brief'     => '',
+                'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 
+                       'bp'   => 'Set Breakpoint Large',
+                       'sli_qty' => 'Slider Quantity',
+                       'scr_qty' => 'Scroll Quantity' 
+                    ),
+                    'checkbox' => array(
+                       'dots'     => 'Dot Indicator',
+                       'infinite' => 'Infinite Loop',
+                       'arrows'   => 'Next/Prev Arrows',
+                    ),
+                ),
+            ),
+            array(
+                'id' => 'wpfs_bp_m',              //field register $id , option name
+                'cb' => 'fs_advanced_sanitize_m',     // register setting callback
+                'sub_title' => 'Breakpoint Medium',  //field register $title
+                'brief'     => '',
+                'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 
+                       'bp'   => 'Set Breakpoint Medium',
+                       'sli_qty' => 'Slider Quantity',
+                       'scr_qty' => 'Scroll Quantity' 
+                    ),
+                    'checkbox' => array(
+                       'dots'     => 'Dot Indicator',
+                       'infinite' => 'Infinite Loop',
+                       'arrows'   => 'Next/Prev Arrows',
+                    ),
+                ),
+            ),
+            array(
+                    'id'        => 'wpfs_bp_s',              //field register $id , option name
+                    'cb'        => 'fs_advanced_sanitize_s',     // register setting callback
+                    'sub_title' => 'Breakpoint Small',  //field register $title
+                    'brief'     => '',
+                    'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 
+                       'bp'      => 'Set Breakpoint Small',
+                       'sli_qty' => 'Slider Quantity',
+                       'scr_qty' => 'Scroll Quantity' 
+                    ),
+                    'checkbox' => array(
+                       'dots'     => 'Dot Indicator',
+                       'infinite' => 'Infinite Loop',
+                       'arrows'   => 'Next/Prev Arrows',
+                    ),
+                ),
+            ),
         )
     );
     $settings = apply_filters( 'fancy_slider_settings', $settings );
@@ -215,8 +285,17 @@ function fs_sanitize_digital($d_value){
             return false;
         }    
 }
-function fs_standard_sanitize_1(){
-
+function fs_advanced_sanitize_xl($input){
+        return $input;
+}
+function fs_advanced_sanitize_l($input){
+        return $input;
+}
+function fs_advanced_sanitize_m($input){
+        return $input;
+}
+function fs_advanced_sanitize_s($input){
+        return $input;
 }
 /**
 * function to sanitize options before inserting into database *
@@ -376,26 +455,16 @@ function fs_autoplay_sanitize($input){
 }
 
 /**
-* function to create all types of advanced display areas *
-*@since 0.1.0
-*@var function
-*@param (array) $args ,pass by add_settings_field
-*@return void
-**/
-function fs_advanced_fields_callback($args){
-
-}
-
-/**
 * function to create all types of basic display areas *
 *@since 0.1.0
 *@var function
 *@param (array) $args ,pass by add_settings_field
 *@return void
 **/
-function fs_basic_fields_callback($args){
+function fs_fields_callback($args){
     if ( isset($args) && is_array($args) ){
         $field = $args['field'];
+        $section = $args['section'];
 
     }else{
         return;
@@ -411,8 +480,8 @@ function fs_basic_fields_callback($args){
     $_placehoder = '';
     $option_name = $field['id'];
     $types = $field['type'];
-    $db_option = get_option( $option_name, fs_default_opts()[$option_name]);
-    $db_option = empty( $db_option ) ? fs_default_opts()[$option_name] : $db_option;
+    $db_option = get_option( $option_name, fs_default_opts()[$section][$option_name]);
+    $db_option = empty( $db_option ) ? fs_default_opts()[$section][$option_name] : $db_option;
  
     foreach ($types as $type => $option) {
 
@@ -444,7 +513,7 @@ function fs_basic_fields_callback($args){
 
             }
             if ( $type === 'textarea' ) {
-                $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'> " .$_value. "</textarea></li> ";              
+                $html .= "<li><textarea rows=4 cols=24 placeholder='$label' name='$_name'  id='$_id'>" .$_value. "</textarea></li>";              
             }else{
                 $html .= "<li><label for='$_id'>" .$_label_l. " <input type='$_type'  name='$_name'  id='$_id' $_checked value='$_value'> " .$_label. "</label></li> ";
             }
