@@ -249,7 +249,7 @@
 					break;
 			}
 		}
-		opt = $.extend({},defaultOpts,fancySliderOpts);
+		opt = $.extend(true,{},defaultOpts,fancySliderOpts);
 		return opt;		
 	}
 	
