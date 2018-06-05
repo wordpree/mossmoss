@@ -141,11 +141,11 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
 
                     /* add_settings_section($id, $title, $callback, $page) */
                     add_settings_section( $section, $data['title'], 'fs_section_callback_' . $section, $data['page']);
-
+                    $option_group = $data['option_group'];
                     foreach ( $data['fields'] as $field) {
-                        $option_name =  $field['id'];
+                        $option_name =  $field['id'];                       
                         /* register_setting($option_group_name,$option_name,$sanitize_callback) */
-                        register_setting( 'fancy_slider_option_gp', $option_name ,array('sanitize_callback' => $field['cb']) );
+                        register_setting( $option_group ,$option_name ,array('sanitize_callback' => $field['cb']) );
                         /*  add_settings_field( $id, $title, $callback, $page, $section, $args) */
                         add_settings_field( $field['id'],$field['sub_title'],$data['fcb'],$data['page'],$section,array( 'field'=>$field ) );
                     }
@@ -163,8 +163,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         private function get_options(){
             $fancy_slider_options;
-            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format','wpfs_sync');
-            
+            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format','wpfs_sync');          
             foreach ( $options as $value ) {
                 $key = str_replace('wpfs_', '', $value);
                 $fancy_slider_options[$key] = get_option( $value );                

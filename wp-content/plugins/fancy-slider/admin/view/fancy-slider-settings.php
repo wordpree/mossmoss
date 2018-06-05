@@ -21,9 +21,32 @@ if ( ! ( defined('ABSPATH') ) ){
 function fs_option_page_callback(){ ?>
     <div class="wrap">
         <form action="options.php" method="POST">
-            <?php settings_fields( 'fancy_slider_option_gp' ); ?>
-            <?php do_settings_sections( 'fancy-slider' ); ?>
-            <?php submit_button(); ?>
+            <nav class='nav-tab-wrapper'>
+                <?php
+                    $tab = array('basic','advanced');
+                    foreach ($tab as $value) {
+                        $path = '/options-general.php?page=fancy-slider&tab=' . $value;
+                        $active = '';
+                        if (isset( $_GET['tab'] )) {
+                                $active = ( $_GET['tab'] === $value ) ? 'nav-tab-active ': '';  
+                        }else{
+                            $active = ( $value === 'basic' ) ? 'nav-tab-active': '';
+                        }?>                          
+                        <a href=<?php echo admin_url($path); ?> class="nav-tab <?php echo $active;?>"><?php echo ucfirst($value).' Settings' ?></a>
+                    <?php }
+                ?>
+            </nav>
+            <?php 
+                $tab = array('basic'=>'fancy_slider_basic_gp','advanced'=>'fancy_slider_ad_gp');
+                    $active_tab = isset( $_GET['tab'] ) ? $_GET['tab'] : 'basic';
+                    foreach ($tab as $key => $value) {
+                        if ( $active_tab === $key ) {
+                            settings_fields( $value );
+                        }     
+                    }
+                do_settings_sections( 'fancy-slider' ); 
+                submit_button(); 
+            ?>
         </form>
     </div>
 <?php }
@@ -57,7 +80,8 @@ function fs_settings_field(){
         'title'    => 'Slider Basic Settings',                   //section title
         'content'  => 'Slider basic settings are listed below',  //section cb content
         'page'     => 'fancy-slider',  //page
-        'fcb'      => 'fs_fields_callback',   //field callback function
+        'fcb'      => 'fs_basic_fields_callback',   //field callback function
+        'option_group' => 'fancy_slider_basic_gp',  //option group name
         'fields'   => array(
 
             array(
@@ -137,6 +161,24 @@ function fs_settings_field(){
             )                 
         )
     );
+    $settings['advanced'] = array(
+        'title'    => 'Slider Advanced Settings',                   //section title
+        'content'  => 'Slider advanced settings are listed below',  //section cb content
+        'page'     => 'fancy-slider',  //page
+        'fcb'      => 'fs_advanced_fields_callback',   //field callback function
+        'option_group' => 'fancy_slider_ad_gp',  //option group name
+        'fields'   => array(
+            array(
+                'id' => 'wpfs_standard_1',              //field register $id , option name
+                'cb' => 'fs_standard_sanitize_1',     // register setting callback
+                'sub_title' => 'Standard Parameter 1',  //field register $title
+                'brief'     => 'Set quantity of sliders to show or to scroll at one time',
+                'type'      => array(                 //field input type ,value and its label
+                    'number' => array( 'sli_qty' => 'Slider Quantity','scr_qty' => 'Scroll Quantity' )
+                )
+            )
+        )
+    );
     $settings = apply_filters( 'fancy_slider_settings', $settings );
     return $settings;
 }
@@ -148,6 +190,12 @@ function fs_settings_field(){
 *@return void
 **/
 function fs_section_callback_basic($args){
+    $settings = fs_settings_field();
+    $html = '<p>' . $settings[ $args['id'] ]['content'] . '</p>';
+    _e( $html, 'fancy-slider' ); 
+}
+
+function fs_section_callback_advanced($args){
     $settings = fs_settings_field();
     $html = '<p>' . $settings[ $args['id'] ]['content'] . '</p>';
     _e( $html, 'fancy-slider' ); 
@@ -167,7 +215,9 @@ function fs_sanitize_digital($d_value){
             return false;
         }    
 }
+function fs_standard_sanitize_1(){
 
+}
 /**
 * function to sanitize options before inserting into database *
 *@since 0.1.0
@@ -324,14 +374,26 @@ function fs_autoplay_sanitize($input){
     }
     return $temp;
 }
+
 /**
-* function to create all types of display areas *
+* function to create all types of advanced display areas *
 *@since 0.1.0
 *@var function
 *@param (array) $args ,pass by add_settings_field
 *@return void
 **/
-function fs_fields_callback($args){
+function fs_advanced_fields_callback($args){
+
+}
+
+/**
+* function to create all types of basic display areas *
+*@since 0.1.0
+*@var function
+*@param (array) $args ,pass by add_settings_field
+*@return void
+**/
+function fs_basic_fields_callback($args){
     if ( isset($args) && is_array($args) ){
         $field = $args['field'];
 
