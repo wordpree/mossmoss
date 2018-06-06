@@ -93,7 +93,7 @@ function fs_settings_field(){
 
             array(
                 'id' => 'wpfs_standard',              //field register $id , option name
-                'cb' => 'fs_standard_sanitize',     // register setting callback
+                'scb' => 'fs_standard_sanitize',     // register setting callback
                 'sub_title' => 'Standard Parameter',  //field register $title
                 'brief'     => 'Set quantity of sliders to show or to scroll at one time',
                 'type'      => array(                 //field input type ,value and its label
@@ -102,7 +102,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_lazyload',                 //field register $id , option name
-                'cb' => 'fs_lazyload_sanitize',        // register setting callback
+                'scb' => 'fs_lazyload_sanitize',        // register setting callback
                 'sub_title' => 'Lazy Loading',           //field register $title
                 'brief'     => 'load the image as soon as you slide it or loads one image after another when the page loads',
                 'type'      => array(                    //field input type ,value and its label
@@ -112,7 +112,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_centre',                 //field register $id , option name
-                'cb' => 'fs_centre_sanitize',        // register setting callback
+                'scb' => 'fs_centre_sanitize',        // register setting callback
                 'sub_title' => 'Centre View Style',        //field register $title
                 'brief'     => 'Enables centered view with partial prev/next slides.Use with odd numbered slidesToShow counts.',
                 'type'      => array(                  //field input type ,value and its label
@@ -122,7 +122,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_autoplay',                 //field register $id , option name
-                'cb' => 'fs_autoplay_sanitize',        // register setting callback
+                'scb' => 'fs_autoplay_sanitize',        // register setting callback
                 'sub_title' => 'Autoplay Style',        //field register $title
                 'brief'     => 'Enable sliders infinitely play within specific time changing interval',
                 'type'      => array(                    //field input type ,value and its label
@@ -132,7 +132,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_animation',                 //field register $id , option name
-                'cb' => 'fs_animation_sanitize',         // register setting callback
+                'scb' => 'fs_animation_sanitize',         // register setting callback
                 'sub_title' => 'Animation Type',         //field register $title
                 'brief'     => 'Sliders transition in two ways,sliding or fade-in-out',
                 'type'      => array(                    //field input type ,value and its label
@@ -143,7 +143,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_sync',                   //field register $id , option name
-                'cb' => 'fs_sync_sanitize',            // register setting callback
+                'scb' => 'fs_sync_sanitize',            // register setting callback
                 'sub_title' => 'Syncing Mode',         //field register $title
                 'brief'     => 'Enables syncing of multiple sliders',
                 'type'      => array(                    //field input type ,value and its label
@@ -153,7 +153,7 @@ function fs_settings_field(){
             ),
             array(
                 'id' => 'wpfs_format',                  //field register $id , option name
-                'cb' => 'fs_format_sanitize',           // register setting callback
+                'scb' => 'fs_format_sanitize',           // register setting callback
                 'sub_title' => 'Format Setting',        //field register $title
                 'brief'     => 'You can select whatever your slider formats look like',
                 'type'      => array(                   //field input type ,value and its label
@@ -177,10 +177,10 @@ function fs_settings_field(){
         'fields'   => array(
             array(
                 'id'        => 'wpfs_bp_xl',              //field register $id , option name
-                'cb'        => 'fs_advanced_sanitize_xl',     // register setting callback
                 'sub_title' => 'Breakpoint Extra Large',  //field register $title
+                'scb'       => 'fs_advanced_sanitize', //options sanitize function
                 'brief'     => '',
-                'type'      => array(                 //field input type ,value and its label
+                'type'      => array(                     //field input type ,value and its label
                     'number' => array( 
                        'bp'   => 'Set Breakpoint Extra Large',
                        'sli_qty' => 'Slider Quantity',
@@ -195,9 +195,9 @@ function fs_settings_field(){
                 ),
             ),
             array(
-                'id' => 'wpfs_bp_l',              //field register $id , option name
-                'cb' => 'fs_advanced_sanitize_l',     // register setting callback
-                'sub_title' => 'Breakpoint Large',  //field register $title
+                'id' => 'wpfs_bp_l',                  //field register $id , option name
+                'sub_title' => 'Breakpoint Large',    //field register $title
+                'scb'       => 'fs_advanced_sanitize', //options sanitize function
                 'brief'     => '',
                 'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
@@ -214,9 +214,9 @@ function fs_settings_field(){
                 ),
             ),
             array(
-                'id' => 'wpfs_bp_m',              //field register $id , option name
-                'cb' => 'fs_advanced_sanitize_m',     // register setting callback
+                'id' => 'wpfs_bp_m',                 //field register $id , option name
                 'sub_title' => 'Breakpoint Medium',  //field register $title
+                'scb'       => 'fs_advanced_sanitize', //options sanitize function
                 'brief'     => '',
                 'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
@@ -233,15 +233,15 @@ function fs_settings_field(){
                 ),
             ),
             array(
-                    'id'        => 'wpfs_bp_s',              //field register $id , option name
-                    'cb'        => 'fs_advanced_sanitize_s',     // register setting callback
-                    'sub_title' => 'Breakpoint Small',  //field register $title
+                    'id'        => 'wpfs_bp_s',           //field register $id , option name
+                    'sub_title' => 'Breakpoint Small',    //field register $title
+                    'scb'       => 'fs_advanced_sanitize', //options sanitize function
                     'brief'     => '',
                     'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
                        'bp'      => 'Set Breakpoint Small',
                        'sli_qty' => 'Slider Quantity',
-                       'scr_qty' => 'Scroll Quantity' 
+                       'scr_qty' => 'Scroll Quantity', 
                     ),
                     'checkbox' => array(
                        'dots'     => 'Dot Indicator',
@@ -289,18 +289,27 @@ function fs_sanitize_digital($d_value){
             return false;
         }    
 }
-function fs_advanced_sanitize_xl($input){
-        return $input;
+
+/**
+* function to sanitize responsive section options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
+function fs_advanced_sanitize($input){
+    $temp = $input;
+    $list = array('arrows','infinite','unslick','dots');
+    foreach ($input as $key => $value) {
+        if ( is_int($key) ) {
+            $temp[$key] = in_array($value, $list) ? $value : null;
+        }else{
+            $temp[$key] = fs_sanitize_digital($value) ? $value : null;
+        }
+    }  
+    return $temp;
 }
-function fs_advanced_sanitize_l($input){
-        return $input;
-}
-function fs_advanced_sanitize_m($input){
-        return $input;
-}
-function fs_advanced_sanitize_s($input){
-        return $input;
-}
+
 /**
 * function to sanitize options before inserting into database *
 *@since 0.1.0
