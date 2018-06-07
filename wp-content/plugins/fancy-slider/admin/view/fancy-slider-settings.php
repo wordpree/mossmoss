@@ -68,6 +68,7 @@ function fs_default_opts(){
         'wpfs_sync'      => array( 'disable','asNavFor'=>''),
     );
     $opt['advanced'] = array(
+        'wpfs_bp_ac'=> array( 'disable' ),
         'wpfs_bp_xl'=> array( 'bp'=>'1024','sli_qty' => '4','scr_qty' => '4','arrows','infinite','dots' ),
         'wpfs_bp_l' => array( 'bp'=>'960','sli_qty' => '3','scr_qty' => '3','arrows','infinite','dots' ),
         'wpfs_bp_m' => array( 'bp'=>'600','sli_qty' => '2','scr_qty' => '2','arrows','infinite' ),
@@ -136,7 +137,7 @@ function fs_settings_field(){
                 'sub_title' => 'Animation Type',         //field register $title
                 'brief'     => 'Sliders transition in two ways,sliding or fade-in-out',
                 'type'      => array(                    //field input type ,value and its label
-                    'radio'  => array('fade' => 'Fade','slide'     => 'Slide'),
+                    'radio'  => array('fade' => 'Fade','slide' => 'Slide'),
                     'number' => array('speed' => 'Transition Speed' ),
                     'text'   => array('css_ease' => 'Transition Effect' ),
                 )
@@ -176,13 +177,22 @@ function fs_settings_field(){
         'option_group' => 'fancy_slider_ad_gp',  //option group name
         'fields'   => array(
             array(
+                'id'        => 'wpfs_bp_ac',              //field register $id , option name
+                'sub_title' => 'Responsive Mode Option',  //field register $title
+                'scb'       => 'fs_advanced_ac_sanitize',    //options sanitize function
+                'brief'     => 'Activate or deactivate responsive mode',
+                'type'      => array(                     //field input type ,value and its label
+                    'radio' => array( 'disable'  => 'Disable Responsive Option', 'enable' => 'Enable Responsive Option' )
+                )
+            ),
+            array(
                 'id'        => 'wpfs_bp_xl',              //field register $id , option name
                 'sub_title' => 'Breakpoint Extra Large',  //field register $title
-                'scb'       => 'fs_advanced_sanitize', //options sanitize function
+                'scb'       => 'fs_advanced_bp_sanitize',    //options sanitize function
                 'brief'     => '',
                 'type'      => array(                     //field input type ,value and its label
                     'number' => array( 
-                       'bp'   => 'Set Breakpoint Extra Large',
+                       'bp'      => 'Set Breakpoint',
                        'sli_qty' => 'Slider Quantity',
                        'scr_qty' => 'Scroll Quantity' 
                     ),
@@ -197,11 +207,11 @@ function fs_settings_field(){
             array(
                 'id' => 'wpfs_bp_l',                  //field register $id , option name
                 'sub_title' => 'Breakpoint Large',    //field register $title
-                'scb'       => 'fs_advanced_sanitize', //options sanitize function
+                'scb'       => 'fs_advanced_bp_sanitize', //options sanitize function
                 'brief'     => '',
                 'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
-                       'bp'   => 'Set Breakpoint Large',
+                       'bp'      => 'Set Breakpoint',
                        'sli_qty' => 'Slider Quantity',
                        'scr_qty' => 'Scroll Quantity' 
                     ),
@@ -216,11 +226,11 @@ function fs_settings_field(){
             array(
                 'id' => 'wpfs_bp_m',                 //field register $id , option name
                 'sub_title' => 'Breakpoint Medium',  //field register $title
-                'scb'       => 'fs_advanced_sanitize', //options sanitize function
+                'scb'       => 'fs_advanced_bp_sanitize', //options sanitize function
                 'brief'     => '',
                 'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
-                       'bp'   => 'Set Breakpoint Medium',
+                       'bp'      => 'Set Breakpoint',
                        'sli_qty' => 'Slider Quantity',
                        'scr_qty' => 'Scroll Quantity' 
                     ),
@@ -235,11 +245,11 @@ function fs_settings_field(){
             array(
                     'id'        => 'wpfs_bp_s',           //field register $id , option name
                     'sub_title' => 'Breakpoint Small',    //field register $title
-                    'scb'       => 'fs_advanced_sanitize', //options sanitize function
+                    'scb'       => 'fs_advanced_bp_sanitize', //options sanitize function
                     'brief'     => '',
                     'type'      => array(                 //field input type ,value and its label
                     'number' => array( 
-                       'bp'      => 'Set Breakpoint Small',
+                       'bp'      => 'Set Breakpoint',
                        'sli_qty' => 'Slider Quantity',
                        'scr_qty' => 'Scroll Quantity', 
                     ),
@@ -297,7 +307,23 @@ function fs_sanitize_digital($d_value){
 *@param (array) $input
 *@return array
 **/
-function fs_advanced_sanitize($input){
+function fs_advanced_ac_sanitize($input){
+    $temp = $input;
+    $list = array('enable','disable');
+    foreach ($input as $key => $value) { 
+        $temp[$key] = in_array($value, $list) ? $value : null;
+    }  
+    return $temp;
+}
+
+/**
+* function to sanitize responsive section options before inserting into database *
+*@since 0.1.0
+*@var function
+*@param (array) $input
+*@return array
+**/
+function fs_advanced_bp_sanitize($input){
     $temp = $input;
     $list = array('arrows','infinite','unslick','dots');
     foreach ($input as $key => $value) {

@@ -163,7 +163,20 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         private function get_options(){
             $fancy_slider_options;
-            $options = array('wpfs_standard','wpfs_lazyload','wpfs_centre','wpfs_autoplay','wpfs_animation','wpfs_format','wpfs_sync');          
+            $options = array(
+                'wpfs_standard',
+                'wpfs_lazyload',
+                'wpfs_centre',
+                'wpfs_autoplay',
+                'wpfs_animation',
+                'wpfs_format',
+                'wpfs_sync',
+                'wpfs_bp_xl',
+                'wpfs_bp_l',
+                'wpfs_bp_m',
+                'wpfs_bp_s',
+                'wpfs_bp_ac',
+            );
             foreach ( $options as $value ) {
                 $key = str_replace('wpfs_', '', $value);
                 $fancy_slider_options[$key] = get_option( $value );                
