@@ -148,59 +148,52 @@
 (function($){
 	'use strict';
 	function fancySliderSettings(){
-
-		var opt = {};
-		var fancySliderOpts = {};
+		var haystack,search ;
+		var para = { bpActivate:false,uninstall:false };
+		var opts = {};
+		var normalOpts = {};
+	    var resOpts = {};
+	    var syncOpts = {};
 		var defaultOpts = {
-				autoplaySpeed:3000,
-				slidesToScroll:1,
-				centerMode:false,
-				cssEase:'ease',
-				centerPadding:'50px',
-				lazyLoad:'ondemand',
-				focusOnSelect:false,
-				slidesToShow:1,	
-				autoplay:false,
-				infinite:true,
-				arrows:true,
-				rtl:false,
 				speed:300,
+				slidesToShow:1,
+				slidesToScroll:1,
+				autoplaySpeed:3000,
+				cssEase:'ease',
+				lazyLoad:'ondemand',
+				centerPadding:'50px',
+				rtl:false,
 				dots:false,
-				fade:false,	
-			    syncOpts : {
-			    	slidesToShow: 1,
-				    slidesToScroll: 1,
-				    arrows: false,
-				    fade: true,
-				    asNavFor: '.fancy-slider'
-				}
-			};
-
-		var name;
-		var haystack = ['dots','infinite','arrows','rtl','focusOnSelect'];
-        var search = [],i = 0,lazyImage = [];
-		for ( name in fancy_slider_opts) {
-			switch ( name ) {
+				fade:false,
+				arrows:false,
+				autoplay:false,
+				infinite:false,
+				centerMode:false,
+				focusOnSelect:false,
+		};
+		Object.keys( fancy_slider_opts ).forEach( function (ele){
+		    switch ( ele ) {
 				case 'animation':
-				    fancySliderOpts.fade    = (fancy_slider_opts[name][0] === 'fade') ? true : false;
-					fancySliderOpts.speed   = parseInt( fancy_slider_opts[name].speed );
-					fancySliderOpts.cssEase = fancy_slider_opts[name].css_ease;
+				    normalOpts.fade    = (fancy_slider_opts[ele][0] === 'fade') ? true : false;
+					normalOpts.speed   = parseInt( fancy_slider_opts[ele].speed );
+					normalOpts.cssEase = fancy_slider_opts[ele].css_ease;
 					break;
 
 				case 'autoplay':
-				    fancySliderOpts.autoplay      = (fancy_slider_opts[name][0] === 'enable') ? true : false;
-				    fancySliderOpts.autoplaySpeed = parseInt( fancy_slider_opts[name].speed );
+				    normalOpts.autoplay      = (fancy_slider_opts[ele][0] === 'enable') ? true : false;
+				    normalOpts.autoplaySpeed = parseInt( fancy_slider_opts[ele].speed );
 					break;
 
 				case  'centre':
-					fancySliderOpts.centerMode    = (fancy_slider_opts[name][0] === 'enable') ? true : false;
-				    fancySliderOpts.centerPadding =  fancy_slider_opts[name].padding + 'px';
+					normalOpts.centerMode    = (fancy_slider_opts[ele][0] === 'enable') ? true : false;
+				    normalOpts.centerPadding =  fancy_slider_opts[ele].padding + 'px';
 					break;
 
 				case 'lazyload':
-					fancySliderOpts.lazyLoad = fancy_slider_opts[name][0];
-					if ( fancySliderOpts.lazyLoad === "ondemand" ) {
-						lazyImage = fancy_slider_opts[name].img_name.split(',');
+					normalOpts.lazyLoad = fancy_slider_opts[ele][0];
+					var lazyImage = [];
+					if ( normalOpts.lazyLoad === "ondemand" ) {
+						lazyImage = fancy_slider_opts[ele].img_name.split(',');
 					    for (var j = 0; j < lazyImage.length; j++) {
 							var $target =$("img[src$="+"'"+lazyImage[j]+"'"+"]");
 						    $target.attr({
@@ -211,10 +204,11 @@
 					break;
 
 				case 'format':
-				    search = fancy_slider_opts[name];
-				    for ( i = 0; i < search.length; i++) {
+				    haystack = ['dots','infinite','arrows','rtl','focusOnSelect'];
+				    search = fancy_slider_opts[ele];
+				    for ( var i = 0; i < search.length; i++) {
 						    if ( haystack.indexOf( search[i] ) >= 0 ) {
-							    fancySliderOpts[search[i]] = true;
+							    normalOpts[search[i]] = true;
 							    if ( search[i] === 'rtl' ){
 							    	$('.fancy-slider').attr({
 							    		dir: 'rtl'
@@ -225,40 +219,89 @@
 					break;
 
 				case 'standard':
-					fancySliderOpts.slidesToShow   =  parseInt( fancy_slider_opts[name].sli_qty ) ;
-					fancySliderOpts.slidesToScroll =  parseInt( fancy_slider_opts[name].scr_qty ) ;
+					normalOpts.slidesToShow   =  parseInt( fancy_slider_opts[ele].sli_qty ) ;
+					normalOpts.slidesToScroll =  parseInt( fancy_slider_opts[ele].scr_qty ) ;
 					break;
 
 				case 'sync':
-				    if (fancy_slider_opts[name][0] === 'enable') {
-				    	fancySliderOpts.asNavFor =  '.'+fancy_slider_opts[name].asNavFor;
+				    if (fancy_slider_opts[ele][0] === 'enable') {
+				    	normalOpts.asNavFor =  '.'+fancy_slider_opts[ele].asNavFor;
 				    	$('.fancy-slider').clone().
 				    	insertBefore('.fancy-slider').
-				    	addClass(fancy_slider_opts[name].asNavFor).
+				    	addClass(fancy_slider_opts[ele].asNavFor).
 				    	removeClass('fancy-slider');
-
-					    fancySliderOpts.syncOpts = {
+					    syncOpts = {
 					    	slidesToShow: 1,
 						    slidesToScroll: 1,
 						    arrows: false,
 						    fade: true,
 						    asNavFor: '.fancy-slider'
-						    //to be add later for custom sync settings
+						    //specific settings to be added later
 					    };
 				    }
 					break;
-			}
-		}
-		opt = $.extend(true,{},defaultOpts,fancySliderOpts);
-		return opt;		
-	}
-	
-	$(document).ready(function(){
 
+                case 'bp_ac':
+                    para.bpActivate = (fancy_slider_opts[ele][0] === 'enable') ? true:false;
+                    break;
+
+				case 'bp_xl':
+				case 'bp_l':
+				case 'bp_m':
+				case 'bp_s':
+				    if ( para.bpActivate ){
+				    	haystack = ['arrows','infinite','dots'];
+					    search = Object.keys( fancy_slider_opts[ele] ).map(function(e){
+						    return fancy_slider_opts[ele][e];
+					    }).slice(0, -3);
+	                    resOpts[ele] = {
+					        breakpoint: parseInt( fancy_slider_opts[ele].bp ),
+					        settings: {
+						        slidesToShow: parseInt( fancy_slider_opts[ele].sli_qty ),
+						        slidersToScroll:parseInt( fancy_slider_opts[ele].scr_qty ),
+						        dots: false,
+						        arrows:false,
+						    }
+	                    };
+	                    for (var k = 0; k < search.length; k++) {
+	                    	para.uninstall = ( search[k] === 'unslick' ) ? true : false;
+	                    	if (haystack.indexOf( search[k] ) >=0 ){
+	                    		resOpts[ele].settings[search[k]] = true;	
+	                    	}
+	                    }
+	                    if ( para.uninstall ) {
+	                    	resOpts[ele].settings = 'unslick';
+	                    }
+				    }
+				    break;
+			}
+		});
+		opts = $.extend(true,{},defaultOpts,normalOpts);
+	    return [opts,resOpts,syncOpts,para];
+	}
+
+	$(document).ready(function(){
+        var responsiveOpts ={};
 		var settings = fancySliderSettings();
-		$('.fancy-slider').slick(settings);
-		if ( typeof(settings.asNavFor) !== 'undefined' ){
-			$(settings.asNavFor).slick(settings.syncOpts);
+		var opts = settings[0];
+
+        /* responsive mode on */
+		if ( settings[3].bpActivate ){
+			responsiveOpts = {
+	        	responsive:[
+				    settings[1].bp_xl,
+				    settings[1].bp_l,
+				    settings[1].bp_m,
+				    settings[1].bp_s,
+				]
+			};
+	        opts = $.extend( {},settings[0],responsiveOpts );
+		}
+        $('.fancy-slider').slick(opts);
+
+        /* syncing mode on */
+		if ( typeof(settings[0].asNavFor) !== 'undefined' ){
+			$(settings[0].asNavFor).slick(settings[2]);
 		}
 	    
 	});
