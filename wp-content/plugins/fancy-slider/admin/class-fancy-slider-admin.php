@@ -171,11 +171,11 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                 'wpfs_animation',
                 'wpfs_format',
                 'wpfs_sync',
+                'wpfs_bp_ac',
                 'wpfs_bp_xl',
                 'wpfs_bp_l',
                 'wpfs_bp_m',
-                'wpfs_bp_s',
-                'wpfs_bp_ac',
+                'wpfs_bp_s',              
             );
             foreach ( $options as $value ) {
                 $key = str_replace('wpfs_', '', $value);
