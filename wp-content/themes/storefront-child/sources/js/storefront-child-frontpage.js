@@ -52,12 +52,12 @@
 // 	}
 // 	$cart.on({
 // 		mouseenter:function(){
-// 		    $(this).find('.widget_shopping_cart_content').slideDown('slow',function(){
+// 		    $(self).find('.widget_shopping_cart_content').slideDown('slow',function(){
 			
 // 			});
 // 		},
 // 		mouseleave:function(){
-// 		    $(this).find('.widget_shopping_cart_content').slideUp('slow',function(){	
+// 		    $(self).find('.widget_shopping_cart_content').slideUp('slow',function(){	
 		
 // 			});
 // 		}
@@ -107,9 +107,9 @@
 // 	'use strict';
 // 	var winScroll =$(window).scrollTop();
 // 	$('.testimonial').each(function(){
-// 		var testimonialPos=$(this).offset().top;
+// 		var testimonialPos=$(self).offset().top;
 // 		if(winScroll>testimonialPos-300){
-// 			$(this).animate({'opacity':1},1000);
+// 			$(self).animate({'opacity':1},1000);
 // 		}
 // 	});
 	
@@ -147,20 +147,20 @@
 // }
 (function($){
 	'use strict';
-	function fancySliderSettings(){
-		var haystack,search ;
-		var para = { bpActivate:false,uninstall:false };
-		var opts = {};
-		var normalOpts = {};
-	    var resOpts = {};
-	    var syncOpts = {};
-		var defaultOpts = {
+    var normalOpts = {},
+	    resOpts    = {},
+	    syncOpts   = {},
+	    para       = {};
+
+	var settingsInit = {
+		_noramlOpts: function(){
+			return {
 				speed:300,
 				slidesToShow:1,
 				slidesToScroll:1,
 				autoplaySpeed:3000,
 				cssEase:'ease',
-				lazyLoad:'ondemand',
+				lazyLoad:'progressive',
 				centerPadding:'50px',
 				rtl:false,
 				dots:false,
@@ -170,129 +170,206 @@
 				infinite:false,
 				centerMode:false,
 				focusOnSelect:false,
-		};
-		Object.keys( fancy_slider_opts ).forEach( function (ele){
-		    switch ( ele ) {
-				case 'animation':
-				    normalOpts.fade    = (fancy_slider_opts[ele][0] === 'fade') ? true : false;
-					normalOpts.speed   = parseInt( fancy_slider_opts[ele].speed );
-					normalOpts.cssEase = fancy_slider_opts[ele].css_ease;
-					break;
+		    };
+		},
 
-				case 'autoplay':
-				    normalOpts.autoplay      = (fancy_slider_opts[ele][0] === 'enable') ? true : false;
-				    normalOpts.autoplaySpeed = parseInt( fancy_slider_opts[ele].speed );
-					break;
+		_stateCtr: function(){
+			return { 
+				bpActivate:false,
+				uninstall:false,
+				syncActivate:false
+			};
+		},
 
-				case  'centre':
-					normalOpts.centerMode    = (fancy_slider_opts[ele][0] === 'enable') ? true : false;
-				    normalOpts.centerPadding =  fancy_slider_opts[ele].padding + 'px';
-					break;
+		_syncOpts: function(){
+			return {
+		    	slidesToShow: 1,
+			    slidesToScroll: 1,
+			    arrows: false,
+			    fade: true,
+			    asNavFor: '.fancy-slider'
+		    };
+		},
 
-				case 'lazyload':
-					normalOpts.lazyLoad = fancy_slider_opts[ele][0];
-					var lazyImage = [];
-					if ( normalOpts.lazyLoad === "ondemand" ) {
-						lazyImage = fancy_slider_opts[ele].img_name.split(',');
-					    for (var j = 0; j < lazyImage.length; j++) {
-							var $target =$("img[src$="+"'"+lazyImage[j]+"'"+"]");
-						    $target.attr({
-						    	'data-lazy': $target.attr('src')
-						    }).removeAttr('src');				
-					    }
-					}					
-					break;
-
-				case 'format':
-				    haystack = ['dots','infinite','arrows','rtl','focusOnSelect'];
-				    search = fancy_slider_opts[ele];
-				    for ( var i = 0; i < search.length; i++) {
-						    if ( haystack.indexOf( search[i] ) >= 0 ) {
-							    normalOpts[search[i]] = true;
-							    if ( search[i] === 'rtl' ){
-							    	$('.fancy-slider').attr({
-							    		dir: 'rtl'
-							    	});
-							    }
-						    }
-				    }			    
-					break;
-
-				case 'standard':
-					normalOpts.slidesToShow   =  parseInt( fancy_slider_opts[ele].sli_qty ) ;
-					normalOpts.slidesToScroll =  parseInt( fancy_slider_opts[ele].scr_qty ) ;
-					break;
-
-				case 'sync':
-				    if (fancy_slider_opts[ele][0] === 'enable') {
-				    	normalOpts.asNavFor =  '.'+fancy_slider_opts[ele].asNavFor;
-				    	$('.fancy-slider').clone().
-				    	insertBefore('.fancy-slider').
-				    	addClass(fancy_slider_opts[ele].asNavFor).
-				    	removeClass('fancy-slider');
-					    syncOpts = {
-					    	slidesToShow: 1,
-						    slidesToScroll: 1,
-						    arrows: false,
-						    fade: true,
-						    asNavFor: '.fancy-slider'
-						    //specific settings to be added later
-					    };
-				    }
-					break;
-
-                case 'bp_ac':
-                    para.bpActivate = (fancy_slider_opts[ele][0] === 'enable') ? true:false;
-                    break;
-
-				case 'bp_xl':
-				case 'bp_l':
-				case 'bp_m':
-				case 'bp_s':
-				    if ( para.bpActivate ){
-				    	haystack = ['arrows','infinite','dots'];
-					    search = Object.keys( fancy_slider_opts[ele] ).map(function(e){
-						    return fancy_slider_opts[ele][e];
-					    }).slice(0, -3);
-	                    resOpts[ele] = {
-					        breakpoint: parseInt( fancy_slider_opts[ele].bp ),
-					        settings: {
-						        slidesToShow: parseInt( fancy_slider_opts[ele].sli_qty ),
-						        slidersToScroll:parseInt( fancy_slider_opts[ele].scr_qty ),
-						        dots: false,
-						        arrows:false,
-						    }
-	                    };
-	                    for (var k = 0; k < search.length; k++) {
-	                    	para.uninstall = ( search[k] === 'unslick' ) ? true : false;
-	                    	if (haystack.indexOf( search[k] ) >=0 ){
-	                    		resOpts[ele].settings[search[k]] = true;	
-	                    	}
-	                    }
-	                    if ( para.uninstall ) {
-	                    	resOpts[ele].settings = 'unslick';
-	                    }
-				    }
-				    break;
+		_resOpts: function(){
+			var bp = {xl:1024,l:960,m:768,s:460};
+			var dftResOpts ={};
+			for ( var property in bp ) {
+				dftResOpts[property]={};
+				dftResOpts[property].breakpoint = bp[property];
+				dftResOpts[property].settings = {
+				    slidesToShow: 1,
+				    slidersToScroll:1,
+				    infinite: false,
+				    arrows: false,
+				    dots: false
+				};
 			}
-		});
-		opts = $.extend(true,{},defaultOpts,normalOpts);
-	    return [opts,resOpts,syncOpts,para];
-	}
+            return dftResOpts;
+		}
+	};
+
+	var settingsGet = {
+
+		_radio:function(refer,target){
+	    	return (fancy_slider_opts[refer][0] === target) ? true : false;
+	    },
+
+	    _text:function(refer,suffix){
+	    	return fancy_slider_opts[refer][suffix] ;
+	    },
+
+	    _checkbox:function(haystack,search,obj){
+	    	for ( var i = 0; i < search.length; i++) {
+	    		if ( search[i] === 'rtl' ){
+			    	$('.fancy-slider').attr({
+			    		dir: 'rtl'
+			    	});
+				}
+				if ( search[i] === 'unslick' ) {
+					para.uninstall = true;
+				}
+			    if ( haystack.indexOf( search[i] ) >= 0 ) {
+				    obj[ search[i] ] = true;			    
+			    }
+			}
+	    },
+
+	    _number:function(refer,suffix){
+	    	return parseInt( fancy_slider_opts[refer][suffix] );
+	    },
+
+	    _textarea:function(state,refer){
+	    	if ( state ) {
+				var lazyImage = fancy_slider_opts[refer].img_name.split(',');
+			    for (var j = 0; j < lazyImage.length; j++) {
+					var $target =$("img[src$="+"'"+lazyImage[j]+"'"+"]");
+				    $target.attr({
+				    	'data-lazy': $target.attr('src')
+				    }).removeAttr('src');				
+			    }
+			}
+	    },
+
+		_setResOpts: function(ele,bp,slider,scroll){
+            resOpts[ele] = {
+			    breakpoint: bp,
+				settings: {
+				    slidesToShow: slider,
+				    slidersToScroll:scroll,
+				}
+			};
+		},
+
+		_getOpts : function(){
+			var haystack   = [],
+	            search     = [],
+			    self = this;
+			Object.keys( fancy_slider_opts ).forEach( function (ele){
+			    switch ( ele ) {
+					case 'animation':
+					    normalOpts.fade    = self._radio( ele,'fade');
+						normalOpts.speed   = self._number(ele,'speed');
+						normalOpts.cssEase = self._text(ele,'css_ease');
+						break;
+
+					case 'autoplay':
+					    normalOpts.autoplay      = self._radio( ele,'enable' );
+					    normalOpts.autoplaySpeed = self._number(ele,'speed');
+						break;
+
+					case  'centre':
+						normalOpts.centerMode    = self._radio( ele,'enable' );
+					    normalOpts.centerPadding = self._number(ele,'padding') + 'px';
+						break;
+
+					case 'lazyload':
+						normalOpts.lazyLoad = self._radio( ele,'ondemand' );
+	                    self._textarea( normalOpts.lazyLoad,ele );					
+						break;
+
+					case 'format':
+					    haystack = ['dots','infinite','arrows','rtl','focusOnSelect'];
+					    search = fancy_slider_opts[ele];
+					    self._checkbox(haystack,search,normalOpts);			    
+						break;
+
+					case 'standard':
+						normalOpts.slidesToShow   =  self._number( ele,'sli_qty' );
+						normalOpts.slidesToScroll =  self._number( ele,'scr_qty' );
+						break;
+
+					case 'sync':
+					    para.syncActivate = self._radio( ele,'enable' );
+					    if ( para.syncActivate ) {
+					    	var synClass = self._text( ele,'asNavFor' );
+					    	normalOpts.asNavFor = '.' + synClass;
+					    	$( '.fancy-slider' ).clone().
+					    	insertBefore( '.fancy-slider' ).
+					    	addClass( synClass ).
+					    	removeClass( 'fancy-slider' );
+					    }
+						break;
+
+	                case 'bp_ac':
+	                    para.bpActivate = self._radio( ele,'enable' );
+	                    break;
+
+					case 'bp_xl':
+					case 'bp_l':
+					case 'bp_m':
+					case 'bp_s':
+					    if ( para.bpActivate ){
+					    	haystack = ['arrows','infinite','dots'];
+						    search = Object.keys( fancy_slider_opts[ele] ).map(function(e){
+							    return fancy_slider_opts[ele][e];
+						    }).slice(0, -3);
+						    var name = ele.replace('bp_', '');
+						    self._setResOpts( name,self._number(ele,'bp'),self._number(ele,'sli_qty'),self._number(ele,'scr_qty') );
+		                    self._checkbox( haystack,search,resOpts[name].settings );
+		                    if ( para.uninstall ) {
+		                    	resOpts[name].settings = 'unslick';
+		                    }
+					    }
+					    break;
+				}
+		    });
+	    }
+	};
+
+	var optsReturn = {
+		_run:function(){
+		    settingsGet._getOpts();
+		},
+		_settingsProcess : function(){
+			var normalRtn  = {},
+	            resRtn     = {},
+	            paraRtn    = {},
+	            syncRtn    = {};
+			normalRtn = $.extend( {},settingsInit._noramlOpts(),normalOpts );
+			paraRtn   = $.extend( {},settingsInit._stateCtr(),para );
+			syncRtn   = $.extend( {},settingsInit._syncOpts(),syncOpts );
+			resRtn    = $.extend( true,{},settingsInit._resOpts(),resOpts );
+			return [normalRtn,resRtn,syncRtn,paraRtn];
+		}    
+	};
 
 	$(document).ready(function(){
         var responsiveOpts ={};
-		var settings = fancySliderSettings();
-		var opts = settings[0];
+		var settings;
+		var opts;
 
+        optsReturn._run();
+        settings = optsReturn._settingsProcess();
+        opts = settings[0];
         /* responsive mode on */
 		if ( settings[3].bpActivate ){
 			responsiveOpts = {
 	        	responsive:[
-				    settings[1].bp_xl,
-				    settings[1].bp_l,
-				    settings[1].bp_m,
-				    settings[1].bp_s,
+				    settings[1].xl,
+				    settings[1].l,
+				    settings[1].m,
+				    settings[1].s,
 				]
 			};
 	        opts = $.extend( {},settings[0],responsiveOpts );
@@ -300,7 +377,7 @@
         $('.fancy-slider').slick(opts);
 
         /* syncing mode on */
-		if ( typeof(settings[0].asNavFor) !== 'undefined' ){
+		if ( settings[3].syncActivate  ){
 			$(settings[0].asNavFor).slick(settings[2]);
 		}
 	    
