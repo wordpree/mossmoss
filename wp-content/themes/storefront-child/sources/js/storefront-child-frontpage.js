@@ -150,7 +150,8 @@
     var normalOpts = {},
 	    resOpts    = {},
 	    syncOpts   = {},
-	    para       = {};
+	    para       = {},
+        opts       = {};
 
 	var settingsInit = {
 		_noramlOpts: function(){
@@ -338,48 +339,36 @@
 	};
 
 	var optsReturn = {
-		_run:function(){
-		    settingsGet._getOpts();
-		},
+
 		_settingsProcess : function(){
-			var normalRtn  = {},
-	            resRtn     = {},
-	            paraRtn    = {},
-	            syncRtn    = {};
-			normalRtn = $.extend( {},settingsInit._noramlOpts(),normalOpts );
-			paraRtn   = $.extend( {},settingsInit._stateCtr(),para );
-			syncRtn   = $.extend( {},settingsInit._syncOpts(),syncOpts );
-			resRtn    = $.extend( true,{},settingsInit._resOpts(),resOpts );
-			return [normalRtn,resRtn,syncRtn,paraRtn];
+			
+			var  responsiveOpts = {};
+            settingsGet._getOpts();
+			normalOpts = $.extend( {},settingsInit._noramlOpts(),normalOpts );
+			para       = $.extend( {},settingsInit._stateCtr(),para );
+			syncOpts   = $.extend( {},settingsInit._syncOpts(),syncOpts );
+			resOpts    = $.extend( true,{},settingsInit._resOpts(),resOpts );
+			if ( para.bpActivate ){
+				responsiveOpts = {
+		        	responsive:[
+					    resOpts.xl,
+					    resOpts.l,
+					    resOpts.m,
+					    resOpts.s,
+					]
+				};
+		        opts = $.extend( {},normalOpts,responsiveOpts );
+			}
 		}    
 	};
 
 	$(document).ready(function(){
-        var responsiveOpts ={};
-		var settings;
-		var opts;
-
-        optsReturn._run();
-        settings = optsReturn._settingsProcess();
-        opts = settings[0];
-        /* responsive mode on */
-		if ( settings[3].bpActivate ){
-			responsiveOpts = {
-	        	responsive:[
-				    settings[1].xl,
-				    settings[1].l,
-				    settings[1].m,
-				    settings[1].s,
-				]
-			};
-	        opts = $.extend( {},settings[0],responsiveOpts );
-		}
+        optsReturn._settingsProcess();
         $('.fancy-slider').slick(opts);
 
         /* syncing mode on */
-		if ( settings[3].syncActivate  ){
-			$(settings[0].asNavFor).slick(settings[2]);
-		}
-	    
+		if ( para.syncActivate  ){
+			$(normalOpts.asNavFor).slick(syncOpts);
+		}    
 	});
 })(jQuery);
