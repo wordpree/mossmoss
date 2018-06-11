@@ -180,7 +180,7 @@
 				syncActivate:false
 			};
 		},
-
+        /* customized syncing settings aren't supported now*/
 		_syncOpts: function(){
 			return {
 		    	slidesToShow: 1,
@@ -284,7 +284,7 @@
 						break;
 
 					case 'lazyload':
-						normalOpts.lazyLoad = self._radio( ele,'ondemand' );
+						normalOpts.lazyLoad = self._radio( ele,'ondemand' ) ? 'ondemand':'progressive';
 	                    self._textarea( normalOpts.lazyLoad,ele );					
 						break;
 
