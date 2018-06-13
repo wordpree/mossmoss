@@ -8,6 +8,29 @@ $breakpoints: (
 	'e-small': '(min-width:320px)',
 );
 
+$invalid-map: (
+	visibility:hidden,
+    position:absolute,
+    background-color:rgba(218,218,218,0.8),
+    display:inline-block,
+    padding:0.3em 1em,
+    transform: translate(0%, -150%),
+    color:#000,
+    text-align:center,
+    border-radius:5px,
+    box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2),
+);
+
+$invalid-after-map: (
+    position:absolute,
+	content:'',
+	display:block,
+	border-style: solid,
+	border-width:15px,
+    transform:translate(70%),
+	border-color:rgba(218,218,218,0.8) transparent transparent transparent,
+);
+
 @mixin respond-to($handle){
 
 	@if map-has-key($breakpoints,$handle) {
@@ -20,17 +43,20 @@ $breakpoints: (
 	}
 }
 
-%after {
-	&::after{
-	  position:absolute;
-	  content:'';
-	  display:block;
-	  border-style: solid;
-	  border-width:15px;
-      transform:translate(70%);
-	  border-color:rgba(218,218,218,0.8) transparent transparent transparent;
-	} //popup arrow shap
+@mixin print($handle){
+	@each $key,$value in $handle {
+		@if type-of($value) == 'map' {
+		    #{$value} {
+			    @each $key-in,$value-in in $value {
+			    	#{$key-in}:$value-in;
+			    }
+		    }
+		} @else {
+		    #{$key}:$value;
+		}
+	}
 }
+
 
 * {
 	box-sizing:border-box;	
@@ -42,17 +68,10 @@ $breakpoints: (
 		li {
 			// display:inline-block;
             .invalid{
-            	visibility:hidden;
-            	position:absolute;
-            	background-color:rgba(218,218,218,0.8);
-            	display:inline-block;
-            	padding:0.3em 1em;
-            	transform: translate(0%, -150%);
-            	color:#000;
-            	text-align:center;
-            	border-radius:5px;
-            	box-shadow:0 2px 4px 0 rgba(0, 0, 0, 0.2);
-            	@extend %after;
+            	@include print($invalid-map);
+            	&::after {
+            		@include print($invalid-after-map);
+            	}//after,popup arrow shap
             } //invalid popup text area
 
             .activate{

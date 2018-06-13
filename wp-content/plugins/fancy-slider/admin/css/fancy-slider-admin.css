@@ -1,15 +1,4 @@
 /* fancySlider settings page style */
-.wrap .form-table li .invalid::after {
-  position: absolute;
-  content: '';
-  display: block;
-  border-style: solid;
-  border-width: 15px;
-  -webkit-transform: translate(70%);
-          transform: translate(70%);
-  border-color: rgba(218, 218, 218, 0.8) transparent transparent transparent;
-}
-
 * {
   -webkit-box-sizing: border-box;
           box-sizing: border-box;
@@ -31,6 +20,16 @@
   border-radius: 5px;
   -webkit-box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
           box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.2);
+}
+.wrap .form-table li .invalid::after {
+  position: absolute;
+  content: "";
+  display: block;
+  border-style: solid;
+  border-width: 15px;
+  -webkit-transform: translate(70%);
+          transform: translate(70%);
+  border-color: rgba(218, 218, 218, 0.8) transparent transparent transparent;
 }
 .wrap .form-table li .activate {
   visibility: visible;
