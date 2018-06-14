@@ -5,25 +5,6 @@
 	}
 }
 
-@mixin mobileIcon($fontSize:2rem,$margin:2em){
-  .mobile-icon {
-    
-    .icon-user {
-      font-size: $fontSize;
-    } //icon-user
-
-    .icon-shopping-basket {
-       font-size: $fontSize;
-      
-    } //icon-shopping-basket
- 
-    li:nth-child(1){
-      margin-right: $margin;
-    }//li 
-
-  }//mobile-icon
-}
-
 @mixin handheld($bg-color,$border-color,$amount) {
   .handheld-navigation{
       li:nth-child(even){
@@ -52,4 +33,18 @@
       }
   }
   
+}
+
+@mixin print($map) {
+  @each $key,$value in $map {
+    @if type-of($value) == 'map' {
+      #{$key} {
+        @each $key-in,$value-in in $value {
+          #{$key-in}:$value-in;
+        }
+      }
+    } @else {
+      #{$key}:$value;
+    }
+  }
 }

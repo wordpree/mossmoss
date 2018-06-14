@@ -12,3 +12,195 @@ $list-bottom-border:#cccccc;
 $btn-bg-color:#9D786E;
 $nav-border-line:#444B53;
 $nav-bg-color:#DC979F;
+
+
+//maps
+
+$mobile-header__cart--count: (
+  color: #fff,
+  display: block,
+  border-radius: 100%,
+  width: 1.45em,
+  height: 1.45em,
+  border:1px solid #fff,
+  background-color: #4c3d3d,
+  text-align: center,
+  font-size: 0.50em,
+  position: absolute,
+  top:-25%,
+  left: 60%,
+);
+
+$mobile-header__container: (
+  display: flex,
+  flex-direction:column,
+  padding:0.5rem 1rem,
+);
+
+$mobile-header__flexbox: (
+  padding: 1em,
+  margin-bottom:0.75em,
+  '.site-branding': (
+    align-self:center,
+  ),
+  '.custom-logo': (
+      width: 12.5em,
+      height: auto,
+  ),
+  '.icon-user': (
+      font-size: 2rem,
+  ),
+  '.icon-shopping-basket': (
+      font-size: 2rem,   
+  ), 
+  '.mobile-icon li:nth-child(1)': (
+    margin-right: 2em,
+  ),
+);
+
+$mobile-header__nav--search: (
+
+  max-height: 0px,
+  overflow: hidden,
+  transition: all ease .8s,
+  '.widget_product_search': (
+    padding: 0.8em,
+  ),
+);
+
+$mobile-header_nav--tobetoggle: (
+
+  float: none,
+  background-color: $nav-bg-color,
+  border: none,
+  '&:before,&:after,& span:before': (
+    height: 3px,
+    width: 20px,
+    left: 0.6em,
+    font-size: 16px,
+  ),
+  '&:before': (
+    transform: translateY(-6px),
+  ),
+  '&:after': (
+    transform: translateY(6px),
+  ),
+  span: (
+    font-size:1.2em,
+  ),
+);
+
+$mobile-header__nav--toggled: (
+  
+  '.mobile-site-search': (
+    max-height: 10em,
+  ),
+  '.menu-toggle::before': (
+    transform: rotate(45deg), 
+  ),
+  '.menu-toggle::after': (
+    transform: rotate(-45deg),
+  ),
+);
+
+$tablet-header__branding: (
+
+  text-align: center,
+  margin: 0 auto,
+  margin-bottom: 1em,
+  padding: 0.5em,
+  '.custom-logo': (
+    width: 15em,
+    height: auto,
+  ),
+);
+
+$tablet-header__flexbox: (
+
+  margin-top: 1em,
+  padding: 0.5em,
+  '.storefront-primary-navigation': (
+    margin: 0,
+    padding: 0.5em,
+    flex: 1 0 auto,
+  ),
+  '.main-navigation': (
+      width: auto,
+      float: none,
+      margin: 0,
+  ),
+  button: (
+      display: block,
+      float: none,
+  ),
+  '.handheld-navigation': (
+      display: block,
+      width: 90%,
+  ),
+  '.nav-menu': (
+        padding: 0.75em 0.2em,
+  ),
+  'li:nth-child(1)': (
+        margin-left: 0,
+  ),
+  '.mobile-icon': (
+    align-self: auto,
+    padding: 0.75em,
+  ),
+  '.icon-user': (
+      font-size: 2.2rem,
+  ),
+  '.icon-shopping-basket': (
+       font-size: 2.2rem,    
+  ),
+ 
+  '.mobile-icon li:nth-child(1)': (
+      margin-right: 2.8em,
+  ),
+);
+
+$desktop-header__tool: (
+
+      background: #000,
+      position: fixed,
+      top: 0,
+      z-index: 999,
+      width: 100%,
+      padding: 0.2em 1em,
+      display: flex,
+      justify-content: space-between,
+      '.site-search': (
+        margin-bottom: 0,
+        align-self: center,
+      ),
+      '.cart-contents': (
+        color: #fff,
+      ),
+      '.site-header-cart': (
+          max-width: 290px,
+          padding-right: 1em,
+      ), 
+);
+
+$desktop-header__nav: (
+
+      margin-top: 1.5em,
+      '.main-navigation': (
+        display: flex,
+        justify-content: space-between,
+        margin-right: 0,
+        width: 100%,
+        padding: 1em,
+      ),
+      '.custom-logo-link': (
+        padding: 0,
+      ),
+      '.menu': (
+        font-size: 1.3em,
+      ),
+      '.site-branding': (
+        margin: 0,
+        align-self: center,
+        max-width: 25em,
+      ),
+);
