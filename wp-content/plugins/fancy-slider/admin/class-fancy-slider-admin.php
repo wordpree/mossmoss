@@ -93,6 +93,81 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         }
 
         /**
+        * function to act as shortcoade callback *
+        *@since 0.1.0
+        *@var function
+        *@return html string
+        *@access public
+        *set to private will cause warning : Attempting to parse a shortcode without a valid callback: fancy_slider_short 
+        **/
+        public function short_code_callback($attr){
+            
+                $fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
+                $url = '<div class="fancy-slider">';
+                foreach ( $fancy_slider_posts as $post ){
+                    setup_postdata( $post );
+                    $feature_img = get_post_thumbnail_id( $post->ID );
+                    if ( $feature_img ){
+                        $img = wp_get_attachment_image_src( $feature_img ,'full');
+                        $url .= "<div> <img src=" . esc_attr( $img[0] ) . "> </div>";
+                    }          
+                }
+                $url .= '</div>';
+                wp_reset_postdata();
+                return $url;
+        }
+
+        /**
+        * function to register shortcode  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access private
+        **/
+        private function short_code_register(){
+            add_shortcode( 'fancy_slider_short', array( $this,'short_code_callback' ) );
+        }
+
+        /**
+        * function to init new button  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access private
+        **/
+        public function mce_button_init($button){
+            array_push($button, 'fancy_slider_button');
+            return $button;
+        }
+
+        /**
+        * function to load js file  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access private
+        **/
+        public function mce_button_js_init($plugin_array){
+            $plugin_array['fancySlider'] = plugins_url( 'js/tinymce/fancy-slider-button.js', __FILE__ );
+            return $plugin_array;
+        }
+
+        /**
+        * function to register tinymce  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access private
+        **/
+        private function tinymce_button_register(){
+            if ( current_user_can( 'edit_pages' ) && current_user_can( 'edit_pages' ) ) {
+                add_filter( 'mce_buttons', array($this,'mce_button_init') );
+                add_filter( 'mce_external_plugins',array($this,'mce_button_js_init') );
+            }
+            
+        }
+
+        /**
         * function to enqueue new scripts  *
         *@since 0.1.0
         *@var function
@@ -208,6 +283,12 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                 },
                 'get_options_hook' => function(){
                     return $this->get_options();
+                },
+                'short_code_register_hook' => function(){
+                    $this->short_code_register();
+                },
+                'tinymce_button_register_hook' => function(){
+                    $this->tinymce_button_register();
                 }
             );
         

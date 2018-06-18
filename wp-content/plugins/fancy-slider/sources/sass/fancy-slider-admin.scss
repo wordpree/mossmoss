@@ -90,3 +90,13 @@ $invalid-after-map: (
 	} //form-table
 
 } //wrap
+
+//tiny mce
+.wp-editor-container {
+	.mce-i-fancy_slider_button {
+		&::before{
+			content: ' \25A4';
+		}
+	} //mce-i-fancy_slider_button
+	
+} //wp-editor-container

@@ -147,6 +147,12 @@ if (! class_exists('Fancy_Slider') ){
 			
 			/*hooked admin settings*/
 			$this->_loader->action_entry( 'admin_init'           ,$this->_admin->_handle['menu_page_settings_init_hook'] );
+            
+            /*hooked short code ,delay its process till wp has been initialized*/
+			$this->_loader->action_entry( 'init'                 ,$this->_admin->_handle['short_code_register_hook']      );
+
+			/* hooked tinymce button */
+			$this->_loader->action_entry( 'admin_init'            ,$this->_admin->_handle['tinymce_button_register_hook'] );
 		}
 
  		/**
@@ -157,7 +163,7 @@ if (! class_exists('Fancy_Slider') ){
 		**/        
 		public function plugin_add_filter(){
 			/* fancy_slider_options localize */
-		    $this->_loader->filter_entry( 'fancy_slider_localize', $this->_admin->_handle['get_options_hook'] );
+		    $this->_loader->filter_entry( 'fancy_slider_localize', $this->_admin->_handle['get_options_hook']     );
 		}
         
 	}

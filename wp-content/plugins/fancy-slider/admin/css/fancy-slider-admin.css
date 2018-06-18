@@ -41,3 +41,7 @@
 .wrap .form-table ul + span {
   font-style: italic;
 }
+
+.wp-editor-container .mce-i-fancy_slider_button::before {
+  content: ' \25A4';
+}
