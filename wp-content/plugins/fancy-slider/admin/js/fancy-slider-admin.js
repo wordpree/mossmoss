@@ -41,12 +41,67 @@
 		    $('span.activate ').blur().removeClass('activate');
 		});
    }
+
+   function dialog(){
+	    $('#dialog').dialog({
+	    	autoOpen:false,
+	    	modal: true,
+	    	resizable: false,
+			width: '60%',
+			height: 550,
+			draggable: false,
+			show: true,
+			position: {
+				my: "center",
+				at: "center"
+			},
+			maxHeight: 800,
+			maxWidth :1024,
+	    });
+	    $('.dialog a').click(function(e){
+			e.preventDefault();
+			$('#dialog').dialog('open');     
+	    });
+   }
+
+   function wpMedia(){
+	   	var img_frame;
+	   $('.fs-image-upload').click(function(e){
+		    e.preventDefault();
+		    if (img_frame) {
+		    	img_frame.open();
+		    	return;
+		    }
+		    img_frame = wp.media.frames.img_frame = wp.media({
+			    title: 'select image(s)',
+			    button: {
+			    	text: 'Create',
+			    },
+			    library: {
+                    type : 'image',
+                },
+			    multiple:true
+		    });
+		    img_frame.on('select',function(){
+		    	var attachment;
+		    	var attachments = img_frame.state().get('selection');
+		    	attachments.map(function(currentVal){
+				    attachment = currentVal.toJSON();
+				    var src = attachment.sizes.thumbnail.url || attachment.url ;
+				    $('.fs-image-preview ul.thumbnail').append('<li class="image"><img src="' + src + '"></li>');
+		    	});
+		    });
+		    img_frame.open();
+	   });
+   }
    $( document ).ready(function(){
 	   radioDisplay('lazyload','wpfs_lazyload_progressive');
 	   radioDisplay('centre','wpfs_centre_disable');
 	   radioDisplay('sync','wpfs_sync_disable');
 	   radioDisplay('autoplay','wpfs_autoplay_disable');
-	   numberChk();   
+	   numberChk();
+	   dialog();
+	   wpMedia();
    });
 
    $( window ).load(function(){
