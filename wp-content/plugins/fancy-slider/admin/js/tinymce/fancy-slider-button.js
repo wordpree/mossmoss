@@ -7,7 +7,7 @@
                */
                ed.addButton( 'fancy_slider_button', {
                     title : 'Fancy Slider',
-                    image : false,
+                    image : url+'/icon/slider-icon.svg',
                     onclick : function() {
                          ed.selection.setContent('[fancy_slider_short]');
                     }
