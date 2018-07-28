@@ -8,7 +8,6 @@
  *@subpackage fancy-slider/admin
  *@author Hai
 **/
-
 if ( ! defined( 'ABSPATH' ) ) {
     exit;
 }
@@ -66,9 +65,9 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             $labels =array(
                 'name'          => __('Sliders','fancy-slider'),
                 'singular_name' => __('Slider','fancy-slider'),
-                'menu_name'     => __('Sliders','fancy-slider'),
-                'add_new'       => __('Add New','fancy-slider'),
-                'add_new_item'  => __('Add New Slider','fancy-slider'),
+                'menu_name'     => __('Fancy Sliders','fancy-slider'),
+                'add_new'       => __('Create Slider','fancy-slider'),
+                'add_new_item'  => __('Creat New Slider','fancy-slider'),
                 'new_item'      => __('New Slider','fancy-slider'),
                 'edit_item'     => __('Edit slider','fancy-slider'),
                 'view_item'     => __('View Slider','fancy-slider'),
@@ -76,7 +75,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
                 'search_items'  => __('Search Sliders','fancy-slider'),         
                 );    
             $args =array( 'labels'          => $labels,
-            		  'public'             => true,
+            		  'public'             => false,
             		  'publicly_queryable' => true,
             		  'show_ui'            => true,
             		  'show_in_menu'       => true,
@@ -85,9 +84,9 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             		  'capability_type'    => 'post',
             		  'has_archive'        => true,
             		  'hierarchical'       => false,
-            		  'menu_position' => 5,
             		  'menu_icon'     => 'dashicons-format-gallery',
-            		  'supports'      => array('title','editor','thumbnail','excerpt'),
+            		  'supports'      => array('title'),
+                      'menu_position' => 80,
             		);         
             register_post_type('fancy_slider',$args);
         }
@@ -100,10 +99,11 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         *@access public
         *set to private will cause warning : Attempting to parse a shortcode without a valid callback: fancy_slider_short 
         **/
-        public function short_code_callback($attr){
-            
+        public function short_code_callback($atts){
+                $pairs = array('class' => 'fancy-slider-sc');
+                $atts = shortcode_atts( $pairs, $atts );
                 $fancy_slider_posts = get_posts( array( 'post_type' =>'fancy_slider' ) );
-                $url = '<div class="fancy-slider">';
+                $url = '<div class='.$pairs['class'].'>';
                 foreach ( $fancy_slider_posts as $post ){
                     setup_postdata( $post );
                     $feature_img = get_post_thumbnail_id( $post->ID );
@@ -132,7 +132,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         * function to init new button  *
         *@since 0.1.0
         *@var function
-        *@return void
+        *@return array
         *@access private
         **/
         public function mce_button_init($button){
@@ -144,7 +144,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         * function to load js file  *
         *@since 0.1.0
         *@var function
-        *@return void
+        *@return array
         *@access private
         **/
         public function mce_button_js_init($plugin_array){
@@ -167,6 +167,22 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
             
         }
 
+         /**
+        * function to create custom cap in wp role  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@access public
+        **/
+        public function create_cap(){
+           $admin_role  = get_role( 'administrator' );
+           $editor_role = get_role( 'editor' );
+           $admin_role->add_cap('access_fancyslider');
+           $editor_role->add_cap('create_fancyslider');         
+           $editor_role->add_cap('delete_fancyslider');
+           $editor_role->add_cap('publish_fancyslider');
+        } 
+        
         /**
         * function to enqueue new scripts  *
         *@since 0.1.0
@@ -176,6 +192,7 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         private  function scripts_enqueue(){
             wp_enqueue_script( self::$_name, plugin_dir_url( __FILE__ ) . 'js/fancy-slider-admin.js', array( 'jquery' ),self::$_version , true );
+            wp_enqueue_script( 'jquery-ui-dialog' );
         }
 
         /**
@@ -187,18 +204,55 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         private  function styles_enqueue(){
             wp_enqueue_style( self::$_name, plugin_dir_url( __FILE__ ) . 'css/fancy-slider-admin.css', array(), self:: $_version, 'all' );
+            wp_enqueue_style( self::$_name . 'jq-ui', plugin_dir_url( __FILE__ ) . 'css/jquery-ui.min.css', array(), self:: $_version, 'all' );
         }
+        
 
         /**
-        * function to creat new submenu page under settings panel  *
+        * function to enqueue media scripts  *
         *@since 0.1.0
         *@var function
         *@return void
-        *@param add_options_page ($page_tile ,$menu_title,$cability,$menu_slug,$function )
         *@access private
         **/
-        private function options_page(){
-            add_options_page( 'Fancy Slider Settings', 'Fancyslider', 'manage_options', 'fancy-slider','fs_option_page_callback' );
+        private function media_enqueue(){
+           wp_enqueue_media();
+        } 
+
+        /**
+        * function to creat new menu page within dash panel  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@param add_menu_page ($page_title, $menu_title, $capability, $menu_slug, $function, $icon_url, null )
+        *@access private
+        **/
+        private function menu_page(){
+            add_menu_page( 'Fancy Slider', 'Fancy Slider', 'manage_options', 'fancy-slider', 'fs_menu_page_cb', 'dashicons-format-gallery', null );
+        } 
+
+        /**
+        * function to creat new submenu page within dash panel  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@param $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callable
+        *@access private
+        **/
+        private function submenu_page_all(){
+            add_submenu_page( 'fancy-slider','All Sliders', 'All Sliders', 'manage_options', 'fancy-slider', '' );
+        } 
+
+        /**
+        * function to creat new submenu page within dash panel  *
+        *@since 0.1.0
+        *@var function
+        *@return void
+        *@param $parent_slug, $page_title, $menu_title, $capability, $menu_slug, $callable
+        *@access private
+        **/
+        private function submenu_page_create(){
+            add_submenu_page( 'fancy-slider','Create Slider', 'Create Slider', 'manage_options', 'fancy-slider-create', 'submenu_page_cb' );
         } 
 
         /**
@@ -268,15 +322,24 @@ if( ! class_exists( 'Fancy_Slider_Admin' )) {
         **/
         protected function admin_entry(){
             $this->_handle = array(
+
                 'cpt_init_hook' => function(){
                     $this->custom_post_type_init();
                 },
-                'scripts_enqueue_hook' => function(){
-                    $this->styles_enqueue();
-                    $this->scripts_enqueue(); 
+                'scripts_enqueue_hook' => function($hook){
+                    if( $hook === 'toplevel_page_fancy-slider' || $hook === 'fancy-slider_page_fancy-slider-create') {
+                        $this->styles_enqueue();
+                        $this->scripts_enqueue(); 
+                        $this->media_enqueue();
+                    }                  
                 },
-                'options_page_hook' => function(){
-                    $this->options_page();
+                'menu_page_hook' => function(){
+                    $this->menu_page();
+                    $this->submenu_page_all();
+                    $this->submenu_page_create();
+                },
+                'sub_menu_page_hook' => function(){
+                    $this->sub_menu_page();
                 },
                 'menu_page_settings_init_hook' => function(){
                     $this->menu_page_settings_init();
