@@ -142,8 +142,8 @@ if (! class_exists('Fancy_Slider') ){
 			$this->_loader->action_entry( 'admin_enqueue_scripts',$this->_admin->_handle['scripts_enqueue_hook']         );
 			$this->_loader->action_entry( 'wp_enqueue_scripts'   ,$this->_public->_handle['scripts_enqueue_hook']        );
 
-			/*hooked admin menu*/
-			$this->_loader->action_entry( 'admin_menu'           ,$this->_admin->_handle['options_page_hook']            );
+			/*hooked  menu page*/
+			$this->_loader->action_entry( 'admin_menu'           ,$this->_admin->_handle['menu_page_hook'],9               );
 			
 			/*hooked admin settings*/
 			$this->_loader->action_entry( 'admin_init'           ,$this->_admin->_handle['menu_page_settings_init_hook'] );
@@ -163,7 +163,7 @@ if (! class_exists('Fancy_Slider') ){
 		**/        
 		public function plugin_add_filter(){
 			/* fancy_slider_options localize */
-		    $this->_loader->filter_entry( 'fancy_slider_localize', $this->_admin->_handle['get_options_hook']     );
+		    $this->_loader->filter_entry( 'fancy_slider_localize', $this->_admin->_handle['get_options_hook'] );
 		}
         
 	}
